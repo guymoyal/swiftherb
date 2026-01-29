@@ -1,7 +1,12 @@
 # Wrangler ignore file - excludes files from Pages deployment
 
-# Next.js cache files (too large for Cloudflare Pages)
-.next/cache/
+# Next.js cache files (too large for Cloudflare Pages - 25MB limit)
+.next/cache/**
+.next/cache
+**/cache/**
+**/*.pack
+
+# Server chunks (not needed for Pages)
 .next/server/chunks/
 .next/server/app-paths-manifest.json
 

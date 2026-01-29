@@ -23,7 +23,7 @@ For a robust, production-ready solution, use **Next.js with API routes** (not SS
 
 ### Current Problem
 - Cache files (61MB) exceed Cloudflare Pages 25MB limit
-- Need to choose: SSG vs Full-Stack Next.js
+- Solution: Use `.wranglerignore` to exclude cache files
 
 ## Recommended Architecture (Robust Solution)
 
@@ -205,17 +205,16 @@ Value: {
    pnpm run populate-kv
    ```
 
-## Comparison: SSG vs Full-Stack
+## Why This Architecture
 
-| Aspect | SSG + Worker | Full-Stack + Worker |
-|--------|--------------|---------------------|
-| **Deployments** | 2 (Pages + Worker) | 2 (Pages + Worker) |
-| **API Routes** | ❌ Need separate Worker | ✅ Built-in |
-| **Complexity** | Higher | Lower |
-| **Cache Issue** | ✅ Solved | ✅ Solved (.wranglerignore) |
-| **Development** | More complex | Simpler |
-| **Robustness** | Good | Better |
-| **Scalability** | Good | Better |
+This Full-Stack Next.js + Workers API architecture provides:
+- ✅ Single deployment (simpler)
+- ✅ Built-in API routes
+- ✅ Lower complexity
+- ✅ Cache issue solved with `.wranglerignore`
+- ✅ Simpler development
+- ✅ Better robustness
+- ✅ Excellent scalability
 
 ## Why Full-Stack is More Robust
 
@@ -255,19 +254,11 @@ Value: {
 
 **Cost is the same**, but Full-Stack is simpler.
 
-## Performance Comparison
+## Performance
 
-### Full-Stack Architecture
 - **API Route**: ~50-100ms (Pages Function)
 - **Product Lookup**: ~30-50ms (Worker KV)
-- **Total**: ~80-150ms
-
-### SSG Architecture
-- **Static Site**: ~10ms (CDN)
-- **Product Lookup**: ~30-50ms (Worker KV)
-- **Total**: ~40-60ms
-
-**SSG is faster**, but Full-Stack is still fast enough (< 200ms).
+- **Total**: ~80-150ms ✅ (< 200ms target)
 
 ## Recommendation: **Full-Stack Next.js + Workers API**
 
