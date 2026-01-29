@@ -68,7 +68,10 @@ export default function ChatInterface() {
     setIsLoading(true);
 
     try {
-      const response = await fetch("/api/chat", {
+      // Use Cloudflare Worker API endpoint (fallback to /api/chat for local dev)
+      // NEXT_PUBLIC_CHAT_API_URL will be set in Cloudflare Pages environment variables
+      const apiUrl = process.env.NEXT_PUBLIC_CHAT_API_URL || "/api/chat";
+      const response = await fetch(apiUrl, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

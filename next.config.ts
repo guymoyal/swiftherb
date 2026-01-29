@@ -1,6 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  output: "export", // Static site generation for Cloudflare Pages
   images: {
     remotePatterns: [
       {
@@ -9,8 +10,9 @@ const nextConfig: NextConfig = {
         pathname: "/**",
       },
     ],
-    unoptimized: false, // Enable image optimization
+    unoptimized: true, // Required for static export
   },
+  trailingSlash: true, // Better compatibility with Cloudflare Pages
 };
 
 export default nextConfig;

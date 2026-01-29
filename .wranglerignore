@@ -1,0 +1,16 @@
+# Wrangler ignore file - excludes files from Pages deployment
+
+# Next.js cache files (too large for Cloudflare Pages)
+.next/cache/
+.next/server/chunks/
+.next/server/app-paths-manifest.json
+
+# Development files
+node_modules/
+.git/
+.env*
+*.log
+
+# Build artifacts we don't need
+.next/trace
+.next/analyze
