@@ -68,9 +68,9 @@ export default function ChatInterface() {
     setIsLoading(true);
 
     try {
-      // Use Cloudflare Worker API endpoint (fallback to /api/chat for local dev)
-      // NEXT_PUBLIC_CHAT_API_URL will be set in Cloudflare Pages environment variables
-      const apiUrl = process.env.NEXT_PUBLIC_CHAT_API_URL || "/api/chat";
+      // Use Next.js API route (handled by Cloudflare Pages Functions)
+      // In production, this runs as an Edge Function
+      const apiUrl = "/api/chat";
       const response = await fetch(apiUrl, {
         method: "POST",
         headers: {
