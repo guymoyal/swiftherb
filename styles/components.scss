@@ -1,0 +1,36 @@
+// Component-specific SCSS
+// Import this in your components or globals.css
+
+@import './variables.scss';
+@import './mixins.scss';
+
+// Example: Custom button styles
+.custom-button {
+  @include button-base;
+  background: $primary-green;
+  color: white;
+  
+  &:hover {
+    background: $primary-green-dark;
+  }
+}
+
+// Example: Custom card styles
+.custom-card {
+  @include card;
+  
+  @include respond-to(md) {
+    padding: $spacing-xl;
+  }
+}
+
+// Example: Product card enhancements
+.product-card-custom {
+  @include card;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: $shadow-xl;
+  }
+}

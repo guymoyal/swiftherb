@@ -1,0 +1,127 @@
+{
+  "privacy": {
+    "title": "Privacy Policy",
+    "lastUpdated": "December 2024",
+    "sections": [
+      {
+        "heading": "Introduction",
+        "content": "Welcome to SwiftHerb. We respect your privacy and are committed to protecting your personal data. This privacy policy explains how we collect, use, and safeguard your information when you use our AI-powered supplement recommendation service."
+      },
+      {
+        "heading": "Information We Collect",
+        "content": "We collect information that you provide directly to us, including:\n\n• Chat messages and queries you submit\n• Product preferences and interactions\n• Click tracking data (stored locally in your browser)\n\nWe do not collect personally identifiable information unless you voluntarily provide it. All chat history is stored locally in your browser using localStorage."
+      },
+      {
+        "heading": "How We Use Your Information",
+        "content": "We use the information we collect to:\n\n• Provide personalized supplement recommendations\n• Improve our AI service and recommendations\n• Track product clicks for analytics (stored locally)\n• Ensure the security and functionality of our service"
+      },
+      {
+        "heading": "Data Storage",
+        "content": "Your chat history and preferences are stored locally in your browser using localStorage. We do not store your personal conversations on our servers. You can clear this data at any time by using the 'Clear chat history' feature."
+      },
+      {
+        "heading": "Third-Party Services",
+        "content": "We use third-party services that may collect information:\n\n• **iHerb/Partnerize**: When you click product links, you are redirected to iHerb.com through Partnerize affiliate links. Please review iHerb's privacy policy for their data practices.\n• **AI Services**: We use DeepSeek AI to generate recommendations. Your queries are sent to their API but are not stored by us.\n\nWe do not share your personal information with third parties except as necessary to provide our service."
+      },
+      {
+        "heading": "Cookies and Tracking",
+        "content": "We use minimal tracking:\n\n• Local storage for chat history (your browser)\n• Click tracking stored locally (not sent to external servers)\n• No third-party cookies or advertising trackers\n\nYou can disable cookies in your browser settings, but this may affect functionality."
+      },
+      {
+        "heading": "Your Rights",
+        "content": "You have the right to:\n\n• Access your locally stored data\n• Delete your chat history at any time\n• Opt out of data collection (by not using the service)\n• Request information about data we process\n\nSince data is stored locally, you have full control over it."
+      },
+      {
+        "heading": "Children's Privacy",
+        "content": "Our service is not intended for children under 13. We do not knowingly collect information from children. If you believe we have inadvertently collected information from a child, please contact us immediately."
+      },
+      {
+        "heading": "Changes to This Policy",
+        "content": "We may update this privacy policy from time to time. We will notify you of any changes by posting the new policy on this page and updating the 'Last Updated' date."
+      },
+      {
+        "heading": "Contact Us",
+        "content": "If you have questions about this privacy policy, please contact us through our website."
+      }
+    ]
+  },
+  "terms": {
+    "title": "Terms of Service",
+    "lastUpdated": "December 2024",
+    "sections": [
+      {
+        "heading": "Acceptance of Terms",
+        "content": "By accessing and using SwiftHerb, you accept and agree to be bound by the terms and provision of this agreement. If you do not agree to these terms, please do not use our service."
+      },
+      {
+        "heading": "Use License",
+        "content": "Permission is granted to temporarily use SwiftHerb for personal, non-commercial purposes. This is the grant of a license, not a transfer of title, and under this license you may not:\n\n• Modify or copy the materials\n• Use the materials for any commercial purpose\n• Attempt to reverse engineer any software\n• Remove any copyright or proprietary notations"
+      },
+      {
+        "heading": "Medical Disclaimer",
+        "content": "**IMPORTANT**: SwiftHerb is NOT a medical service and does NOT provide medical advice, diagnosis, or treatment.\n\n• The information provided is for educational purposes only\n• Always consult with a qualified healthcare provider before starting any supplement regimen\n• Do not disregard professional medical advice or delay seeking it because of information from this service\n• If you have a medical emergency, call 911 immediately\n\nWe are not responsible for any health outcomes resulting from the use of recommended supplements."
+      },
+      {
+        "heading": "AI-Generated Content",
+        "content": "Our recommendations are generated by artificial intelligence and may contain errors or inaccuracies. We do not guarantee the accuracy, completeness, or usefulness of any information provided. You use the service at your own risk."
+      },
+      {
+        "heading": "Affiliate Links",
+        "content": "SwiftHerb participates in affiliate marketing programs. When you click on product links and make purchases on iHerb.com, we may earn a commission at no additional cost to you. This helps support our free service."
+      },
+      {
+        "heading": "Limitation of Liability",
+        "content": "In no event shall SwiftHerb or its suppliers be liable for any damages (including, without limitation, damages for loss of data or profit, or due to business interruption) arising out of the use or inability to use the materials on SwiftHerb, even if SwiftHerb or a SwiftHerb authorized representative has been notified orally or in writing of the possibility of such damage."
+      },
+      {
+        "heading": "Accuracy of Materials",
+        "content": "The materials appearing on SwiftHerb could include technical, typographical, or photographic errors. SwiftHerb does not warrant that any of the materials on its website are accurate, complete, or current. SwiftHerb may make changes to the materials contained on its website at any time without notice."
+      },
+      {
+        "heading": "Links",
+        "content": "SwiftHerb has not reviewed all of the sites linked to our website and is not responsible for the contents of any such linked site. The inclusion of any link does not imply endorsement by SwiftHerb. Use of any such linked website is at the user's own risk."
+      },
+      {
+        "heading": "Modifications",
+        "content": "SwiftHerb may revise these terms of service at any time without notice. By using this website you are agreeing to be bound by the then current version of these terms of service."
+      },
+      {
+        "heading": "Governing Law",
+        "content": "These terms and conditions are governed by and construed in accordance with applicable laws. Any disputes relating to these terms shall be subject to the exclusive jurisdiction of the courts."
+      }
+    ]
+  },
+  "about": {
+    "title": "About Us",
+    "sections": [
+      {
+        "heading": "Welcome to SwiftHerb",
+        "content": "SwiftHerb is an AI-powered supplement recommendation platform designed to help you discover natural health products that align with your wellness goals. We combine advanced artificial intelligence with comprehensive product knowledge to provide personalized supplement recommendations."
+      },
+      {
+        "heading": "Our Mission",
+        "content": "Our mission is to make natural health and wellness accessible to everyone. We believe that finding the right supplements shouldn't be complicated or overwhelming. Through intelligent AI assistance, we help you navigate the world of natural health products with confidence."
+      },
+      {
+        "heading": "How It Works",
+        "content": "Simply chat with our AI assistant about your health concerns, wellness goals, or questions about supplements. Our AI analyzes your needs and recommends a personalized wellness stack of 5-10 products from iHerb that work synergistically to support your health journey."
+      },
+      {
+        "heading": "What Makes Us Different",
+        "content": "• **AI-Powered**: Advanced AI technology provides personalized recommendations\n• **Evidence-Based**: Recommendations based on scientific understanding of supplements\n• **Comprehensive**: We suggest complete wellness stacks, not just single products\n• **Transparent**: Clear affiliate disclosure and honest recommendations\n• **Free**: No cost to use our recommendation service"
+      },
+      {
+        "heading": "Our Commitment",
+        "content": "We are committed to:\n\n• Providing accurate, helpful information\n• Maintaining transparency about our affiliate relationships\n• Prioritizing your health and safety\n• Continuously improving our AI recommendations\n• Respecting your privacy (your data stays local)"
+      },
+      {
+        "heading": "Important Note",
+        "content": "SwiftHerb is not a medical service. We provide educational information and product recommendations, but always consult with a healthcare provider before starting any supplement regimen, especially if you have medical conditions or are taking medications."
+      },
+      {
+        "heading": "Contact",
+        "content": "Have questions or feedback? We'd love to hear from you. Reach out through our website to get in touch with our team."
+      }
+    ]
+  }
+}

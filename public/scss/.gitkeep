@@ -1,0 +1,4 @@
+# SCSS files folder
+# Note: In Next.js, SCSS files are typically placed in a 'styles' folder at the root
+# and imported into components. However, you can organize them here if preferred.
+# To use SCSS in Next.js, you'll need to install sass: pnpm add sass
