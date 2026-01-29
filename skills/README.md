@@ -20,6 +20,15 @@ A comprehensive product management consultant that provides:
 - Product strategy guidance
 - Web research capabilities for finding solutions
 
+### 2. Cloudflare Architect Expert (`cloudflare-architect.md`)
+A Cloudflare infrastructure specialist that provides:
+- Data architecture design for edge computing
+- Cloudflare Workers, KV, R2, and D1 optimization
+- Data synchronization and update strategies
+- Performance optimization for API integrations
+- Cost-effective scaling solutions
+- Best practices for iHerb product data storage and updates
+
 ## How to Use
 
 1. **Consult a Skill**: Open the skill file and use it as a reference or prompt template

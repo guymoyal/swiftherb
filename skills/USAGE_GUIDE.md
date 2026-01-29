@@ -8,6 +8,21 @@
 4. **Research**: Use web search to find real-world examples
 5. **Iterate**: Refine suggestions based on your specific context
 
+## Available Skills
+
+### Creative Product Manager (`creative-product-manager.md`)
+- Feature ideation and prioritization
+- UX/UI improvements
+- Growth strategies
+- Competitive analysis
+
+### Cloudflare Architect Expert (`cloudflare-architect.md`)
+- Data architecture design for edge computing
+- Cloudflare Workers, KV, R2 optimization
+- Automated update strategies (scheduled workers)
+- Performance tuning for API integrations
+- Cost optimization strategies
+
 ## Using Skills with AI Assistants
 
 ### Method 1: Direct Consultation
@@ -18,12 +33,26 @@
 4. Ask your specific question
 5. The AI will respond as that expert consultant
 
-**Example**:
+**Example (Product Manager)**:
 ```
 [Paste Role Definition]
 
 I'm working on SwiftHerb, an AI-powered supplement recommendation platform.
 Question: How can I improve product card engagement to increase affiliate clicks?
+```
+
+**Example (Cloudflare Architect)**:
+```
+[Paste Role Definition]
+
+I'm building SwiftHerb and need to store iHerb product data (50-500 products).
+Requirements:
+- Update data every 2-4 hours automatically
+- Serve data to DeepSeek API quickly (< 100ms)
+- Scale efficiently as catalog grows
+- Minimize costs
+
+What's the best Cloudflare architecture pattern?
 ```
 
 ### Method 2: Template-Based

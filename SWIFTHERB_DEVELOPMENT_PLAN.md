@@ -49,7 +49,15 @@
 
 **Status**: Product database expanded to 50+ products. Improved fuzzy matching with similarity scoring. Next.js Image optimization implemented.
 
-### Phase 2: Cloudflare Integration
+### Phase 2: Cloudflare Integration & Data Architecture
+
+**Architecture Goal**: Design efficient data storage and update system for iHerb product data that:
+- Updates every 2-4 hours automatically
+- Serves data quickly to DeepSeek API (< 100ms)
+- Scales efficiently as product catalog grows
+- Minimizes costs while maintaining performance
+
+**Consult**: Use `skills/cloudflare-architect.md` for architecture decisions
 
 #### 2.1 Cloudflare Workers Setup
 - [x] Create Cloudflare Workers project (`workers/` folder)
@@ -67,12 +75,27 @@
 - KV namespace ID (will be generated during setup)
 - Worker deployment (user needs to run `wrangler deploy`)
 
-#### 2.2 Product Data Migration
+#### 2.2 Product Data Architecture & Updates
 - [x] Design KV key structure (`prod_[slug]`)
 - [x] Create script to populate KV with product data
 - [x] Product images already hosted (iHerb CDN)
+- [ ] **ARCHITECTURE NEEDED**: Design automated update system (every 2-4 hours)
+  - Scheduled Worker with Cron Triggers
+  - Incremental update strategy (only changed products)
+  - Error handling and retry logic
+  - Update validation and logging
+- [ ] **OPTIMIZATION NEEDED**: Fast product lookup for DeepSeek API integration
+  - Batch KV reads for multiple products
+  - In-memory caching in Workers
+  - Response time optimization (< 100ms target)
 - [ ] **USER ACTION REQUIRED**: Run population script after KV namespace creation
 - [ ] Add product search functionality (requires D1 or external service - future enhancement)
+
+**Architecture Consultation**: See `skills/cloudflare-architect.md` for:
+- KV vs R2 vs D1 storage decisions
+- Update frequency and strategy optimization
+- Performance tuning for DeepSeek API integration
+- Cost optimization strategies
 
 **KV Schema**:
 ```json
