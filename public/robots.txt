@@ -1,9 +1,13 @@
 # robots.txt for SwiftHerb
-# Currently disallowing all crawlers during development/pre-launch
-# Update this file when ready to launch
+# Allow all search engines to crawl and index
 
 User-agent: *
-Disallow: /
+Allow: /
 
-# Sitemap (ready for when you enable crawling)
+# Disallow admin and API routes
+Disallow: /api/
+Disallow: /_next/
+Disallow: /admin/
+
+# Sitemap location
 Sitemap: https://swiftherb.com/sitemap.xml

@@ -2,9 +2,21 @@ import { getAllArticles, getAllCategories } from "@/lib/articles";
 import ArticleCard from "@/components/ArticleCard";
 import type { Metadata } from "next";
 
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://swiftherb.com";
+
 export const metadata: Metadata = {
   title: "Health & Nutrition Articles - SwiftHerb",
   description: "Evidence-based articles about supplements, vitamins, and natural health from SwiftHerb's expert health writers.",
+  keywords: ["health articles", "nutrition", "supplements", "vitamins", "natural health", "wellness"],
+  openGraph: {
+    type: "website",
+    url: `${SITE_URL}/articles`,
+    title: "Health & Nutrition Articles - SwiftHerb",
+    description: "Evidence-based guides to supplements, vitamins, and natural health.",
+  },
+  alternates: {
+    canonical: `${SITE_URL}/articles`,
+  },
 };
 
 export default function ArticlesPage() {
