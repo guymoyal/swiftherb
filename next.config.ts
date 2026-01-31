@@ -1,8 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // Full-Stack Next.js (not static export)
-  // Cloudflare Pages Functions will handle /api/* routes automatically
+  output: "export", // Static export for Cloudflare Pages direct upload
   images: {
     remotePatterns: [
       {
@@ -11,8 +10,9 @@ const nextConfig: NextConfig = {
         pathname: "/**",
       },
     ],
-    unoptimized: false, // Enable image optimization
+    unoptimized: true, // Required for static export
   },
+  trailingSlash: true,
 };
 
 export default nextConfig;

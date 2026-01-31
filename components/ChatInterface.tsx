@@ -69,9 +69,8 @@ export default function ChatInterface() {
     setIsLoading(true);
 
     try {
-      // Use Next.js API route (handled by Cloudflare Pages Functions)
-      // In production, this runs as an Edge Function
-      const apiUrl = "/api/chat";
+      // Use Cloudflare Worker for chat API
+      const apiUrl = process.env.NEXT_PUBLIC_CHAT_API_URL || "https://swiftherb-chat-api.guymoy931.workers.dev";
       const response = await fetch(apiUrl, {
         method: "POST",
         headers: {

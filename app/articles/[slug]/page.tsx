@@ -1,4 +1,4 @@
-import { getArticleBySlug, getRelatedArticles } from "@/lib/articles";
+import { getArticleBySlug, getRelatedArticles, getAllArticles } from "@/lib/articles";
 import { notFound } from "next/navigation";
 import ArticleContent from "@/components/ArticleContent";
 import StructuredData from "@/components/StructuredData";
@@ -6,6 +6,15 @@ import { getArticleSchema, getBreadcrumbSchema } from "@/lib/seo";
 import type { Metadata } from "next";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://swiftherb.com";
+
+export const dynamic = "force-static";
+
+export async function generateStaticParams() {
+  const articles = getAllArticles();
+  return articles.map((article) => ({
+    slug: article.slug,
+  }));
+}
 
 interface ArticlePageProps {
   params: Promise<{
