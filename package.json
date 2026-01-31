@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "deploy:pages": "rm -rf .next/cache && wrangler pages deploy .next --project-name=swiftherb",
+    "deploy:pages": "rm -rf .next/cache && pnpm build && rm -rf .next/cache && wrangler pages deploy .next --project-name=swiftherb --commit-dirty=true",
     "deploy:worker": "cd workers && wrangler deploy src/index.ts --name swiftherb-products-api",
     "deploy:update-worker": "cd workers && wrangler deploy src/update-products.ts --config wrangler-update.toml --name swiftherb-update-products",
     "populate-kv": "tsx scripts/populate-kv.ts"
