@@ -76,6 +76,26 @@ export default function MessageBubble({ message, onQuickAction, onCompare }: Mes
             </div>
           </div>
         )}
+
+        {/* Bundle suggestions */}
+        {!isUser && message.bundleSuggestions && message.bundleSuggestions.length > 0 && (
+          <div className="mt-6 space-y-3 border-t border-gray-200 pt-5">
+            <div className="flex items-center gap-2 mb-3 px-1">
+              <span className="text-lg">📦</span>
+              <div className="text-sm font-semibold text-gray-700">
+                Complete Your Stack ({message.bundleSuggestions.length} additional products)
+              </div>
+            </div>
+            <p className="text-xs text-gray-600 mb-3 px-1">
+              These products work synergistically with your current selections
+            </p>
+            <div className="grid grid-cols-1 gap-3">
+              {message.bundleSuggestions.map((product, index) => (
+                <ProductCard key={product.id} product={product} index={index} />
+              ))}
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

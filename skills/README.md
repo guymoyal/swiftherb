@@ -29,6 +29,15 @@ A Cloudflare infrastructure specialist that provides:
 - Cost-effective scaling solutions
 - Best practices for iHerb product data storage and updates
 
+### 3. Health & Nutrition Content Writer (`health-content-writer.md`)
+An expert health and nutrition content writer that provides:
+- Evidence-based article writing about supplements and natural health
+- SEO-optimized content creation
+- Health education and supplement guidance
+- Product integration strategies
+- Medical accuracy and safety compliance
+- Engaging storytelling for complex health topics
+
 ## How to Use
 
 1. **Consult a Skill**: Open the skill file and use it as a reference or prompt template

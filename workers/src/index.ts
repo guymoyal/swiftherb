@@ -35,6 +35,54 @@ interface ProductResponse {
 }
 
 /**
+ * In-memory cache for frequently accessed products
+ * Reduces KV reads for hot products
+ * Cache TTL: 5 minutes
+ */
+const productCache = new Map<string, { data: KVProduct; timestamp: number }>();
+const CACHE_TTL = 5 * 60 * 1000; // 5 minutes
+
+/**
+ * Get product with caching
+ */
+async function getProductCached(
+  key: string,
+  env: Env
+): Promise<KVProduct | null> {
+  // Check cache first
+  const cached = productCache.get(key);
+  if (cached && Date.now() - cached.timestamp < CACHE_TTL) {
+    return cached.data;
+  }
+  
+  // Fetch from KV
+  const product = await env.PRODUCTS.get(key, "json");
+  
+  // Update cache
+  if (product) {
+    productCache.set(key, { data: product, timestamp: Date.now() });
+    
+    // Limit cache size (keep most recent 100 items)
+    if (productCache.size > 100) {
+      const firstKey = productCache.keys().next().value;
+      if (firstKey) {
+        productCache.delete(firstKey);
+      }
+    }
+  }
+  
+  return product;
+}
+
+/**
+ * Clear cache for a product (call after updates)
+ */
+function clearProductCache(slug: string) {
+  const key = `prod_${slug}`;
+  productCache.delete(key);
+}
+
+/**
  * Main request handler
  */
 export default {
@@ -131,7 +179,7 @@ async function handleGetProduct(
   }
 
   const key = `prod_${slug}`;
-  const product = await env.PRODUCTS.get(key, "json");
+  const product = await getProductCached(key, env); // Use cached version
 
   if (!product) {
     return new Response(
@@ -152,7 +200,11 @@ async function handleGetProduct(
       data: product,
     }),
     {
-      headers: { ...corsHeaders, "Content-Type": "application/json" },
+      headers: { 
+        ...corsHeaders, 
+        "Content-Type": "application/json",
+        "Cache-Control": "public, max-age=300", // 5 min browser cache
+      },
     }
   );
 }
@@ -195,10 +247,10 @@ async function handleGetProductsBatch(
       );
     }
 
-    // Fetch all products in parallel
+    // Fetch all products in parallel with caching
     const productPromises = slugs.map((slug: string) => {
       const key = `prod_${slug}`;
-      return env.PRODUCTS.get(key, "json");
+      return getProductCached(key, env); // Use cached version
     });
 
     const products = await Promise.all(productPromises);
@@ -210,7 +262,11 @@ async function handleGetProductsBatch(
         data: validProducts,
       }),
       {
-        headers: { ...corsHeaders, "Content-Type": "application/json" },
+        headers: { 
+          ...corsHeaders, 
+          "Content-Type": "application/json",
+          "Cache-Control": "public, max-age=300", // 5 min browser cache
+        },
       }
     );
   } catch (error) {

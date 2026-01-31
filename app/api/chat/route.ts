@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { callAI } from "@/lib/ai";
 import { getProductsFromKV } from "@/lib/kv";
 import { handleError } from "@/lib/error-handler";
+import { suggestComplementaryProducts, findBundlesWithProducts } from "@/lib/bundles";
 
 export async function POST(request: NextRequest) {
   try {
@@ -30,9 +31,30 @@ export async function POST(request: NextRequest) {
       products = await getProductsFromKV(productNames);
     }
 
+    // Check if user is asking about bundles or completing their stack
+    const lowerMessage = userMessage.toLowerCase();
+    const isBundleQuery = 
+      lowerMessage.includes("bundle") ||
+      lowerMessage.includes("complete my stack") ||
+      lowerMessage.includes("complete your stack") ||
+      lowerMessage.includes("what else should i add");
+
+    // If bundle query and we have products, suggest complementary products
+    let bundleSuggestions = undefined;
+    if (isBundleQuery && products && products.length > 0) {
+      const productSlugs = products.map(p => 
+        p.title.toLowerCase().replace(/[^a-z0-9]+/g, "_")
+      );
+      const complementarySlugs = suggestComplementaryProducts(productSlugs);
+      if (complementarySlugs.length > 0) {
+        bundleSuggestions = await getProductsFromKV(complementarySlugs);
+      }
+    }
+
     return NextResponse.json({
       content: aiResponse.content,
       products,
+      bundleSuggestions, // Additional products for bundle/stack completion
     });
   } catch (error) {
     const errorMessage = handleError(error, {

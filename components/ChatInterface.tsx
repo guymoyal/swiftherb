@@ -10,6 +10,7 @@ export interface Message {
   role: "user" | "assistant";
   content: string;
   products?: Product[];
+  bundleSuggestions?: Product[]; // Additional products for bundle/stack completion
 }
 
 export interface Product {
@@ -95,6 +96,7 @@ export default function ChatInterface() {
         role: "assistant",
         content: data.content,
         products: data.products,
+        bundleSuggestions: data.bundleSuggestions, // Additional products for bundles
       };
       setMessages((prev) => [...prev, assistantMessage]);
     } catch (error) {
@@ -177,17 +179,20 @@ export default function ChatInterface() {
                 onQuickAction={handleSendMessage}
               />
             ))}
-            {isLoading && (
-              <div className="flex justify-start animate-fadeIn">
-                <div className="bg-white rounded-2xl px-5 py-3 shadow-sm border border-gray-100">
-                  <div className="flex space-x-2">
-                    <div className="w-2.5 h-2.5 bg-green-500 rounded-full animate-bounce" style={{ animationDelay: "0s" }}></div>
-                    <div className="w-2.5 h-2.5 bg-green-500 rounded-full animate-bounce" style={{ animationDelay: "0.15s" }}></div>
-                    <div className="w-2.5 h-2.5 bg-green-500 rounded-full animate-bounce" style={{ animationDelay: "0.3s" }}></div>
-                  </div>
-                </div>
-              </div>
-            )}
+                    {isLoading && (
+                      <div className="flex justify-start animate-fadeIn">
+                        <div className="bg-white rounded-2xl px-5 py-3 shadow-sm border border-gray-100">
+                          <div className="flex items-center gap-3">
+                            <div className="flex space-x-2">
+                              <div className="w-2.5 h-2.5 bg-green-500 rounded-full animate-bounce" style={{ animationDelay: "0s" }}></div>
+                              <div className="w-2.5 h-2.5 bg-green-500 rounded-full animate-bounce" style={{ animationDelay: "0.15s" }}></div>
+                              <div className="w-2.5 h-2.5 bg-green-500 rounded-full animate-bounce" style={{ animationDelay: "0.3s" }}></div>
+                            </div>
+                            <span className="text-sm text-gray-500">SwiftHerb is thinking...</span>
+                          </div>
+                        </div>
+                      </div>
+                    )}
             <div ref={messagesEndRef} />
           </div>
         </div>

@@ -6,7 +6,11 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "deploy:pages": "rm -rf .next/cache && wrangler pages deploy .next --project-name=swiftherb",
+    "deploy:worker": "cd workers && wrangler deploy src/index.ts --name swiftherb-products-api",
+    "deploy:update-worker": "cd workers && wrangler deploy src/update-products.ts --config wrangler-update.toml --name swiftherb-update-products",
+    "populate-kv": "tsx scripts/populate-kv.ts"
   },
   "dependencies": {
     "next": "^15.0.0",

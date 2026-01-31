@@ -36,6 +36,18 @@ export default function QuickActions({ message, onAction, onCompare }: QuickActi
       onClick: () => onAction("Are there alternative products I should consider?"),
     },
     {
+      label: "Complete my stack",
+      action: "What other supplements should I add to complete my wellness stack?",
+      icon: "📦",
+      onClick: () => onAction("What other supplements should I add to complete my wellness stack?"),
+    },
+    {
+      label: "Bundle recommendations",
+      action: "Show me bundle recommendations for these products",
+      icon: "🎁",
+      onClick: () => onAction("Show me bundle recommendations for these products"),
+    },
+    {
       label: "Compare products",
       action: "compare",
       icon: "⚖️",
