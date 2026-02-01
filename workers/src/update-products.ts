@@ -8,7 +8,11 @@
 export interface Env {
   PRODUCTS: KVNamespace;
   ENVIRONMENT: string;
-  // Optional: iHerb API credentials if available
+  // Impact.com API credentials (if iHerb uses Impact.com)
+  IMPACT_API_KEY?: string;
+  IMPACT_API_URL?: string;
+  IMPACT_ACCOUNT_SID?: string; // iHerb's Account SID in Impact.com
+  // Alternative: iHerb API credentials if available
   IHERB_API_KEY?: string;
 }
 
@@ -109,23 +113,132 @@ export default {
 
 /**
  * Fetch product updates from source
- * TODO: Replace with actual iHerb API integration
+ * Supports multiple sources: Impact.com catalog API, iHerb API, or web scraping
  */
 async function fetchProductUpdates(env: Env): Promise<ProductUpdate[]> {
-  // For now, return empty array (no updates)
-  // In production, this would:
-  // 1. Call iHerb API to get updated products
-  // 2. Parse and transform data
-  // 3. Return array of updates
+  // Option 1: Impact.com Product Catalog API (if iHerb uses Impact.com)
+  if (env.IMPACT_API_KEY && env.IMPACT_ACCOUNT_SID) {
+    return await fetchFromImpactCom(env);
+  }
   
-  // Example structure:
-  // const response = await fetch('https://api.iherb.com/products', {
-  //   headers: { 'Authorization': `Bearer ${env.IHERB_API_KEY}` }
-  // });
-  // const data = await response.json();
-  // return transformToKVFormat(data);
+  // Option 2: Direct iHerb API (if available)
+  if (env.IHERB_API_KEY) {
+    return await fetchFromIHerbAPI(env);
+  }
   
+  // Option 3: Web scraping (fallback - implement if needed)
+  // return await fetchFromWebScraping(env);
+  
+  // No data source configured
+  console.log("No product data source configured. Set IMPACT_API_KEY or IHERB_API_KEY.");
   return [];
+}
+
+/**
+ * Fetch products from Impact.com catalog API
+ * Documentation: https://integrations.impact.com/impact-publisher/reference
+ */
+async function fetchFromImpactCom(env: Env): Promise<ProductUpdate[]> {
+  const apiUrl = env.IMPACT_API_URL || "https://api.impact.com";
+  const accountSid = env.IMPACT_ACCOUNT_SID!;
+  const apiKey = env.IMPACT_API_KEY!;
+  
+  try {
+    // Step 1: Get all catalogs for this advertiser (iHerb)
+    const catalogsResponse = await fetch(
+      `${apiUrl}/Advertisers/${accountSid}/Catalogs`,
+      {
+        headers: {
+          "Authorization": `Bearer ${apiKey}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    
+    if (!catalogsResponse.ok) {
+      throw new Error(`Impact.com API error: ${catalogsResponse.status}`);
+    }
+    
+    const catalogs = await catalogsResponse.json();
+    
+    if (!catalogs || catalogs.length === 0) {
+      console.log("No catalogs found in Impact.com");
+      return [];
+    }
+    
+    // Step 2: Fetch items from all catalogs
+    const allProducts: ProductUpdate[] = [];
+    
+    for (const catalog of catalogs) {
+      try {
+        // Fetch catalog items (may need pagination for large catalogs)
+        const itemsResponse = await fetch(
+          `${apiUrl}/Advertisers/${accountSid}/Catalogs/${catalog.id}/Items`,
+          {
+            headers: {
+              "Authorization": `Bearer ${apiKey}`,
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        
+        if (!itemsResponse.ok) {
+          console.error(`Failed to fetch catalog ${catalog.id}: ${itemsResponse.status}`);
+          continue;
+        }
+        
+        const items = await itemsResponse.json();
+        
+        // Transform Impact.com items to our format
+        const products = items.map((item: any) => ({
+          slug: item.sku?.toLowerCase().replace(/[^a-z0-9]+/g, "_") || 
+                item.id?.toLowerCase().replace(/[^a-z0-9]+/g, "_") || 
+                `item_${item.id}`,
+          product: {
+            id: item.sku || item.id,
+            title: item.name || item.title,
+            price: item.price || item.salePrice || "N/A",
+            image: item.imageUrl || item.image || "",
+            description: item.description || "",
+            category: item.category || catalog.name || "Supplements",
+            slug: item.sku?.toLowerCase().replace(/[^a-z0-9]+/g, "_") || 
+                  item.id?.toLowerCase().replace(/[^a-z0-9]+/g, "_") || 
+                  `item_${item.id}`,
+            iherb_url: item.productUrl || item.url || "",
+            updated_at: new Date().toISOString(),
+          },
+        }));
+        
+        allProducts.push(...products);
+        
+        // Rate limiting: small delay between catalogs
+        await new Promise((resolve) => setTimeout(resolve, 200));
+      } catch (error) {
+        console.error(`Error fetching catalog ${catalog.id}:`, error);
+      }
+    }
+    
+    console.log(`Fetched ${allProducts.length} products from Impact.com`);
+    return allProducts;
+  } catch (error) {
+    console.error("Error fetching from Impact.com:", error);
+    throw error;
+  }
+}
+
+/**
+ * Fetch products from iHerb API (if they have one)
+ */
+async function fetchFromIHerbAPI(env: Env): Promise<ProductUpdate[]> {
+  // TODO: Implement if iHerb provides an API
+  const response = await fetch("https://api.iherb.com/products", {
+    headers: {
+      Authorization: `Bearer ${env.IHERB_API_KEY}`,
+    },
+  });
+  
+  const data = await response.json();
+  return transformToKVFormat(data);
 }
 
 /**

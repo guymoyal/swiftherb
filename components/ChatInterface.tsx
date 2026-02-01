@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import MessageBubble from "./MessageBubble";
 import ChatInput from "./ChatInput";
 import ProductComparison from "./ProductComparison";
@@ -23,13 +23,84 @@ export interface Product {
 }
 
 const STORAGE_KEY = "swiftherb_chat_history";
+const LAST_CONVERSATION_KEY = "swiftherb_last_conversation";
 
 export default function ChatInterface() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [comparisonProducts, setComparisonProducts] = useState<Product[] | undefined>(undefined);
+  const [hasPreviousConversation, setHasPreviousConversation] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const chatContainerRef = useRef<HTMLDivElement>(null);
+
+  // Reset conversation function
+  const resetConversation = useCallback(() => {
+    // Save current conversation as last conversation before clearing
+    setMessages((currentMessages) => {
+      if (currentMessages.length > 0) {
+        try {
+          localStorage.setItem(LAST_CONVERSATION_KEY, JSON.stringify(currentMessages));
+          setHasPreviousConversation(true);
+        } catch (error) {
+          console.error("Failed to save last conversation:", error);
+        }
+      }
+      // Clear current conversation
+      setComparisonProducts(undefined);
+      try {
+        localStorage.removeItem(STORAGE_KEY);
+      } catch (error) {
+        console.error("Failed to clear chat history:", error);
+      }
+      return [];
+    });
+  }, []);
+
+  // Restore last conversation function
+  const restoreLastConversation = () => {
+    try {
+      const lastConversation = localStorage.getItem(LAST_CONVERSATION_KEY);
+      if (lastConversation) {
+        const parsed = JSON.parse(lastConversation);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          setMessages(parsed);
+          setHasPreviousConversation(false);
+          // Move last conversation to current
+          localStorage.setItem(STORAGE_KEY, lastConversation);
+          localStorage.removeItem(LAST_CONVERSATION_KEY);
+        }
+      }
+    } catch (error) {
+      console.error("Failed to restore last conversation:", error);
+    }
+  };
+
+  // Listen for reset conversation event from logo click
+  useEffect(() => {
+    const handleReset = () => {
+      resetConversation();
+    };
+
+    window.addEventListener("swiftherb:reset-conversation", handleReset);
+    return () => {
+      window.removeEventListener("swiftherb:reset-conversation", handleReset);
+    };
+  }, [resetConversation]);
+
+  // Check for previous conversation on mount
+  useEffect(() => {
+    try {
+      const lastConversation = localStorage.getItem(LAST_CONVERSATION_KEY);
+      if (lastConversation) {
+        const parsed = JSON.parse(lastConversation);
+        if (Array.isArray(parsed) && parsed.length > 0) {
+          setHasPreviousConversation(true);
+        }
+      }
+    } catch (error) {
+      console.error("Failed to check for previous conversation:", error);
+    }
+  }, []);
 
   // Load messages from localStorage on mount
   useEffect(() => {
@@ -135,6 +206,16 @@ export default function ChatInterface() {
               <p className="text-lg text-gray-600 mb-8">
                 Ask me about supplements, vitamins, or health concerns.
               </p>
+              {hasPreviousConversation && (
+                <div className="mb-6">
+                  <button
+                    onClick={restoreLastConversation}
+                    className="px-6 py-3 text-sm font-medium bg-green-600 text-white rounded-full hover:bg-green-700 transition-colors shadow-sm"
+                  >
+                    Restore Last Conversation
+                  </button>
+                </div>
+              )}
               {messages.length === 0 && (
                 <div className="flex flex-wrap gap-2 justify-center max-w-2xl mx-auto">
                   {[

@@ -15,6 +15,14 @@ crons = ["0 */3 * * *"]  # Every 3 hours at minute 0
 [vars]
 ENVIRONMENT = "production"
 
+# Impact.com API (if iHerb uses Impact.com)
+# Set via: wrangler secret put IMPACT_API_KEY
+# Set via: wrangler secret put IMPACT_ACCOUNT_SID
+# IMPACT_API_URL - Optional, defaults to https://api.impact.com
+
+# Alternative: iHerb API (if available)
+# Set via: wrangler secret put IHERB_API_KEY
+
 # For local development/testing
 [dev]
 port = 8789
