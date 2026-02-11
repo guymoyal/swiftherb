@@ -59,9 +59,8 @@ export const metadata: Metadata = {
   },
   verification: {
     // Add Google Search Console verification when available
-    // google: "your-verification-code",
     other: {
-      "impact-site-verification": "d77a181b-c932-4e31-8d8a-b57df50a65dd",
+      "impact-site-verification": "3c8ba2e6-1f79-44b6-b4a9-75af117b5073",
     },
   },
   alternates: {
@@ -77,7 +76,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <meta name="impact-site-verification" content="d77a181b-c932-4e31-8d8a-b57df50a65dd" />
+        <meta name="impact-site-verification" content="3c8ba2e6-1f79-44b6-b4a9-75af117b5073" />
       </head>
       <body className="flex flex-col min-h-screen">
         <StructuredData data={[getOrganizationSchema(), getWebSiteSchema()]} />
