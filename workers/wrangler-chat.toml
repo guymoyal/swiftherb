@@ -3,9 +3,9 @@ main = "src/chat.ts"
 compatibility_date = "2024-01-01"
 
 # KV Namespace binding (same as products API)
-# [[kv_namespaces]]
-# binding = "PRODUCTS"
-# id = "your_kv_namespace_id"
+[[kv_namespaces]]
+binding = "PRODUCTS"
+id = "cc09538377c34c08916ac38a0f5846ed"
 
 # Environment variables (set via wrangler secret or dashboard)
 # DEEPSEEK_API_KEY - Set via: wrangler secret put DEEPSEEK_API_KEY
