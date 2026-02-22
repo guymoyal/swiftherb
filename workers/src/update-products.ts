@@ -8,13 +8,14 @@
 export interface Env {
   PRODUCTS: KVNamespace;
   ENVIRONMENT: string;
-  // Impact.com API credentials (currently in use)
-  IMPACT_API_KEY?: string;
-  IMPACT_API_URL?: string;
-  IMPACT_ACCOUNT_SID?: string; // iHerb's Advertiser Account SID (NOT your Account SID!)
-  // Admitad API credentials (for future migration)
-  // ADMITAD_API_KEY?: string;
-  // ADMITAD_API_URL?: string;
+  // Admitad API credentials
+  ADMITAD_CLIENT_ID?: string;
+  ADMITAD_CLIENT_SECRET?: string;
+  ADMITAD_BASE64_HEADER?: string; // Base64 encoded "CLIENT_ID:CLIENT_SECRET"
+  ADMITAD_API_URL?: string; // Optional, defaults to https://api.admitad.com
+  ADMITAD_ADVCAMPAIGN_ID?: string; // iHerb's campaign ID for filtering products
+  ADMITAD_W_ID?: string; // Your Ad Space ID for deeplinks
+  ADMITAD_C_ID?: string; // iHerb's Campaign ID for deeplinks
   // Alternative: iHerb API credentials if available
   IHERB_API_KEY?: string;
 }
@@ -209,187 +210,241 @@ export default {
 
 /**
  * Fetch product updates from source
- * Currently supports: Impact.com catalog API
- * Future: Will migrate to Admitad API
- * Supports multiple sources: Impact.com catalog API, iHerb API, or web scraping
+ * Supports multiple sources: Admitad API, iHerb API, or web scraping
+ * Priority: Admitad > iHerb API
+ * Automatically falls back to next option if current one fails
  */
 async function fetchProductUpdates(env: Env): Promise<ProductUpdate[]> {
-  // Option 1: Impact.com Product Catalog API (currently in use)
-  if (env.IMPACT_API_KEY && env.IMPACT_ACCOUNT_SID) {
-    return await fetchFromImpactCom(env);
+  // Option 1: Admitad Product Feed API (preferred)
+  if (env.ADMITAD_CLIENT_ID && env.ADMITAD_CLIENT_SECRET) {
+    try {
+      console.log("Attempting to fetch from Admitad...");
+      const products = await fetchFromAdmitad(env);
+      if (products.length > 0) {
+        return products;
+      }
+      console.log("Admitad returned no products, falling back to iHerb API");
+    } catch (error) {
+      console.warn("Admitad API failed, falling back to iHerb API:", error instanceof Error ? error.message : String(error));
+      // Continue to fallback below
+    }
   }
   
   // Option 2: Direct iHerb API (if available)
   if (env.IHERB_API_KEY) {
-    return await fetchFromIHerbAPI(env);
+    try {
+      console.log("Attempting to fetch from iHerb API...");
+      return await fetchFromIHerbAPI(env);
+    } catch (error) {
+      console.error("iHerb API failed:", error instanceof Error ? error.message : String(error));
+    }
   }
   
   // Option 3: Web scraping (fallback - implement if needed)
   // return await fetchFromWebScraping(env);
   
-  // No data source configured
-  console.log("No product data source configured. Set IMPACT_API_KEY or IHERB_API_KEY.");
+  // No data source configured or all sources failed
+  console.log("No product data source configured or all sources failed. Set ADMITAD_CLIENT_ID/CLIENT_SECRET or IHERB_API_KEY.");
   return [];
 }
 
 /**
- * Fetch products from Impact.com catalog API
- * Documentation: https://integrations.impact.com/impact-publisher/reference
- * TODO: Migrate to Admitad API when ready
+ * Get OAuth2 access token from Admitad API
+ * Documentation: https://www.admitad.com/en/developers/doc/api_en/
  */
-async function fetchFromImpactCom(env: Env): Promise<ProductUpdate[]> {
-  const apiUrl = env.IMPACT_API_URL || "https://api.impact.com";
-  // This is YOUR Account SID (Media Partner Account SID)
-  const mediaPartnerAccountSid = env.IMPACT_ACCOUNT_SID!;
-  const apiKey = env.IMPACT_API_KEY!;
+async function getAdmitadAccessToken(env: Env): Promise<string> {
+  const apiUrl = env.ADMITAD_API_URL || "https://api.admitad.com";
+  const base64Header = env.ADMITAD_BASE64_HEADER;
+  
+  // Use provided base64 header or generate from client_id:client_secret
+  let authHeader: string;
+  let clientIdForLogging: string = "unknown";
+  
+  if (base64Header) {
+    authHeader = `Basic ${base64Header}`;
+    // Decode to get client ID for logging (without exposing secret)
+    try {
+      const decoded = atob(base64Header);
+      clientIdForLogging = decoded.split(':')[0] || "could not decode";
+    } catch (e) {
+      clientIdForLogging = "invalid base64";
+    }
+  } else if (env.ADMITAD_CLIENT_ID && env.ADMITAD_CLIENT_SECRET) {
+    authHeader = `Basic ${btoa(`${env.ADMITAD_CLIENT_ID}:${env.ADMITAD_CLIENT_SECRET}`)}`;
+    clientIdForLogging = env.ADMITAD_CLIENT_ID;
+  } else {
+    throw new Error("Admitad credentials not configured");
+  }
+  
+  console.log(`Attempting Admitad OAuth with Client ID: ${clientIdForLogging.substring(0, 10)}...`);
+  
+  const response = await fetch(`${apiUrl}/token/`, {
+    method: "POST",
+    headers: {
+      "Authorization": authHeader,
+      "Content-Type": "application/x-www-form-urlencoded",
+    },
+    body: "grant_type=client_credentials&scope=public",
+  });
+  
+  if (!response.ok) {
+    const errorText = await response.text();
+    console.error(`Admitad OAuth Error:`, {
+      status: response.status,
+      statusText: response.statusText,
+      body: errorText,
+      clientIdUsed: clientIdForLogging.substring(0, 10) + "...",
+    });
+    throw new Error(`Admitad OAuth error: ${response.status} - ${errorText}`);
+  }
+  
+  const data = await response.json();
+  console.log(`✓ Successfully obtained Admitad access token`);
+  return data.access_token;
+}
+
+/**
+ * Fetch products from Admitad Product Feed API
+ * Documentation: https://www.admitad.com/en/developers/doc/api_en/
+ * Endpoint: GET https://api.admitad.com/products/
+ */
+async function fetchFromAdmitad(env: Env): Promise<ProductUpdate[]> {
+  const apiUrl = env.ADMITAD_API_URL || "https://api.admitad.com";
+  const advcampaignId = env.ADMITAD_ADVCAMPAIGN_ID; // iHerb's campaign ID for filtering (optional)
   
   try {
-    // Step 1: Get all catalogs available to your account
-    // API version 15 (matches account API version)
-    // Impact.com uses Basic Auth: base64(AccountSID:APIKey)
-    const basicAuth = btoa(`${mediaPartnerAccountSid}:${apiKey}`);
+    // Step 1: Get OAuth2 access token
+    console.log("Getting Admitad access token...");
+    const accessToken = await getAdmitadAccessToken(env);
+    console.log("✓ Got Admitad access token");
     
-    const catalogsResponse = await fetch(
-      `${apiUrl}/Mediapartners/${mediaPartnerAccountSid}/Catalogs`,
-      {
-        headers: {
-          "Authorization": `Basic ${basicAuth}`,
-          "Content-Type": "application/json",
-          "Accept": "application/vnd.impact.com.v15+json", // API v15 (account version)
-        },
-      }
-    );
-    
-    if (!catalogsResponse.ok) {
-      const errorText = await catalogsResponse.text();
-      console.error(`Impact.com API Error Details:`, {
-        status: catalogsResponse.status,
-        statusText: catalogsResponse.statusText,
-        headers: Object.fromEntries(catalogsResponse.headers.entries()),
-        body: errorText,
-        url: `${apiUrl}/Mediapartners/${mediaPartnerAccountSid}/Catalogs`,
-      });
-      throw new Error(`Impact.com API error: ${catalogsResponse.status} - ${errorText}`);
-    }
-    
-    const catalogsData = await catalogsResponse.json();
-    
-    // Log full response for debugging
-    console.log("Impact.com API Response:", JSON.stringify(catalogsData, null, 2).substring(0, 1000));
-    
-    // Handle different response formats
-    let catalogs: any[] = [];
-    if (Array.isArray(catalogsData)) {
-      catalogs = catalogsData;
-    } else if (catalogsData.Catalogs && Array.isArray(catalogsData.Catalogs)) {
-      // Impact.com API format: {"Catalogs": [...]}
-      catalogs = catalogsData.Catalogs;
-    } else if (catalogsData.catalogs && Array.isArray(catalogsData.catalogs)) {
-      catalogs = catalogsData.catalogs;
-    } else if (catalogsData.data && Array.isArray(catalogsData.data)) {
-      catalogs = catalogsData.data;
-    } else if (catalogsData.items && Array.isArray(catalogsData.items)) {
-      catalogs = catalogsData.items;
+    // Step 2: Fetch product feed
+    // Build query parameters
+    const params = new URLSearchParams();
+    params.append("format", "json"); // Use JSON format
+    if (advcampaignId) {
+      params.append("advcampaign_id", advcampaignId); // Filter by iHerb campaign (if provided)
+      console.log(`Filtering products by campaign ID: ${advcampaignId}`);
     } else {
-      console.log("Unexpected catalogs response format:", JSON.stringify(catalogsData).substring(0, 500));
-      return [];
+      console.log("⚠️ No ADVCAMPAIGN_ID set - will fetch all available products from your programs");
     }
+    params.append("limit", "1000"); // Max products per page
+    params.append("offset", "0"); // Start from beginning
     
-    // Check total count from response metadata
-    const totalCount = catalogsData["@total"] || catalogsData.total || catalogs.length;
-    console.log(`Total catalogs available: ${totalCount}`);
+    let allProducts: ProductUpdate[] = [];
+    let offset = 0;
+    let hasMore = true;
+    const limit = 1000;
     
-    if (catalogs.length === 0) {
-      if (totalCount === 0 || totalCount === "0") {
-        console.log("⚠️ No catalogs found. Possible reasons:");
-        console.log("  1. iHerb program not approved yet");
-        console.log("  2. Missing 'Catalogs' API scope");
-        console.log("  3. No catalogs shared with your account");
-      } else {
-        console.log(`⚠️ Response shows ${totalCount} catalogs but array is empty (pagination issue?)`);
-      }
-      return [];
-    }
-    
-    console.log(`✓ Found ${catalogs.length} catalog(s) available`);
-    console.log("Sample catalog structure:", JSON.stringify(catalogs[0], null, 2).substring(0, 500));
-    
-    // Step 2: Fetch items from all catalogs (or filter for iHerb)
-    const allProducts: ProductUpdate[] = [];
-    
-    for (const catalog of catalogs) {
-      try {
-        // Fetch catalog items (may need pagination for large catalogs)
-        // Use the catalog's advertiserAccountSid if available, otherwise use Mediapartners endpoint
-        const catalogId = catalog.id || catalog.catalogId;
-        const advertiserAccountSid = catalog.advertiserAccountSid || mediaPartnerAccountSid;
-        
-        // Use Basic Auth for items endpoint too
-        const basicAuth = btoa(`${mediaPartnerAccountSid}:${apiKey}`);
-        
-        const itemsResponse = await fetch(
-          `${apiUrl}/Mediapartners/${mediaPartnerAccountSid}/Catalogs/${catalogId}/Items`,
-          {
-            headers: {
-              "Authorization": `Basic ${basicAuth}`,
-              "Content-Type": "application/json",
-              "Accept": "application/vnd.impact.com.v15+json", // API v15 (account version)
-            },
-          }
-        );
-        
-        if (!itemsResponse.ok) {
-          console.error(`Failed to fetch catalog ${catalog.id}: ${itemsResponse.status}`);
-          continue;
+    // Paginate through all products
+    while (hasMore) {
+      params.set("offset", offset.toString());
+      
+      const productsResponse = await fetch(
+        `${apiUrl}/products/?${params.toString()}`,
+        {
+          headers: {
+            "Authorization": `Bearer ${accessToken}`,
+            "Content-Type": "application/json",
+          },
         }
+      );
+      
+      if (!productsResponse.ok) {
+        const errorText = await productsResponse.text();
+        console.error(`Admitad Products API Error:`, {
+          status: productsResponse.status,
+          statusText: productsResponse.statusText,
+          body: errorText,
+          url: `${apiUrl}/products/?${params.toString()}`,
+        });
         
-        const items = await itemsResponse.json();
+        // If first request fails, throw error
+        if (offset === 0) {
+          throw new Error(`Admitad Products API error: ${productsResponse.status} - ${errorText}`);
+        }
+        // Otherwise, break pagination loop
+        break;
+      }
+      
+      const productsData = await productsResponse.json();
+      
+      // Handle different response formats
+      let products: any[] = [];
+      if (Array.isArray(productsData)) {
+        products = productsData;
+      } else if (productsData.results && Array.isArray(productsData.results)) {
+        products = productsData.results;
+      } else if (productsData.data && Array.isArray(productsData.data)) {
+        products = productsData.data;
+      } else if (productsData.items && Array.isArray(productsData.items)) {
+        products = productsData.items;
+      } else if (productsData.products && Array.isArray(productsData.products)) {
+        products = productsData.products;
+      } else {
+        console.log("Unexpected Admitad response format:", JSON.stringify(productsData).substring(0, 500));
+        break;
+      }
+      
+      if (products.length === 0) {
+        hasMore = false;
+        break;
+      }
+      
+      console.log(`  Fetched ${products.length} products (offset: ${offset})`);
+      
+      // Transform Admitad products to our format
+      const transformedProducts = products.map((item: any) => {
+        // Generate slug from product name or ID
+        const slug = (item.name || item.title || item.product_name || String(item.id))
+          .toLowerCase()
+          .replace(/[^a-z0-9]+/g, "_")
+          .replace(/^_+|_+$/g, "") || `product_${item.id}`;
         
-        // Log catalog being processed
-        console.log(`  Processing catalog: ${catalog.name || catalog.id} (${items.length} items)`);
-        
-        // Transform Impact.com items to our format
-        const products = items.map((item: any) => ({
-          slug: item.sku?.toLowerCase().replace(/[^a-z0-9]+/g, "_") || 
-                item.id?.toLowerCase().replace(/[^a-z0-9]+/g, "_") || 
-                `item_${item.id}`,
+        return {
+          slug: slug,
           product: {
-            id: item.sku || item.id,
-            title: item.name || item.title,
-            price: item.price || item.salePrice || "N/A",
-            image: item.imageUrl || item.image || "",
-            description: item.description || "",
-            category: item.category || catalog.name || "Supplements",
-            slug: item.sku?.toLowerCase().replace(/[^a-z0-9]+/g, "_") || 
-                  item.id?.toLowerCase().replace(/[^a-z0-9]+/g, "_") || 
-                  `item_${item.id}`,
-            iherb_url: item.productUrl || item.url || "",
+            id: item.id || item.product_id || item.sku || String(item.id),
+            title: item.name || item.title || item.product_name || "Unknown Product",
+            price: item.price || item.sale_price || item.regular_price || "N/A",
+            image: item.image || item.image_url || item.picture || "",
+            description: item.description || item.short_description || "",
+            category: item.category || item.category_name || "Supplements",
+            slug: slug,
+            iherb_url: item.url || item.product_url || item.link || "",
             updated_at: new Date().toISOString(),
           },
-        }));
-        
-        allProducts.push(...products);
-        
-        // Rate limiting: small delay between catalogs
+        };
+      });
+      
+      allProducts.push(...transformedProducts);
+      
+      // Check if there are more products
+      const totalCount = productsData.count || productsData.total || productsData.results_count;
+      if (totalCount && offset + products.length >= totalCount) {
+        hasMore = false;
+      } else if (products.length < limit) {
+        hasMore = false;
+      } else {
+        offset += limit;
+        // Rate limiting: small delay between pages
         await new Promise((resolve) => setTimeout(resolve, 200));
-      } catch (error) {
-        console.error(`Error fetching catalog ${catalog.id}:`, error);
       }
     }
     
-    console.log(`✓ Successfully fetched ${allProducts.length} products from Impact.com`);
+    console.log(`✓ Successfully fetched ${allProducts.length} products from Admitad`);
     
-    // Log catalog summary
+    // Log summary
     if (allProducts.length > 0) {
       const categories = new Set(allProducts.map(p => p.product.category));
-      console.log(`  Categories found: ${Array.from(categories).join(", ")}`);
+      console.log(`  Categories found: ${Array.from(categories).slice(0, 10).join(", ")}${categories.size > 10 ? "..." : ""}`);
       console.log(`  Products with images: ${allProducts.filter(p => p.product.image).length}`);
       console.log(`  Products with descriptions: ${allProducts.filter(p => p.product.description).length}`);
     }
     
     return allProducts;
   } catch (error) {
-    console.error("Error fetching from Impact.com:", error);
+    console.error("Error fetching from Admitad:", error);
     throw error;
   }
 }

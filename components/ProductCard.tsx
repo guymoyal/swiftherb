@@ -1,10 +1,9 @@
 "use client";
 
 import { Product } from "./ChatInterface";
-import { generateLink } from "@/lib/partnerize";
+import { generateAffiliateLink } from "@/lib/affiliate";
 import { trackProductClick } from "@/lib/analytics";
 import { useState } from "react";
-import Image from "next/image";
 
 /**
  * Props for ProductCard component
@@ -24,7 +23,10 @@ interface ProductCardProps {
  * @param index - Index for staggered animation
  */
 export default function ProductCard({ product, index = 0 }: ProductCardProps) {
-  const affiliateLink = generateLink(product.title);
+  const affiliateLink = generateAffiliateLink({
+    title: product.title,
+    iherb_url: product.iherb_url,
+  });
   const [imageError, setImageError] = useState(false);
 
   return (
@@ -36,14 +38,12 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
     >
       <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
         {product.image && !imageError ? (
-          <div className="flex-shrink-0 relative w-24 h-24 sm:w-28 sm:h-28">
-            <Image
+          <div className="flex-shrink-0 w-24 h-24 sm:w-28 sm:h-28">
+            <img
               src={product.image}
               alt={product.title}
-              fill
-              className="object-cover rounded-lg shadow-md group-hover:shadow-lg transition-shadow duration-300"
+              className="w-full h-full object-cover rounded-lg shadow-md group-hover:shadow-lg transition-shadow duration-300"
               onError={() => setImageError(true)}
-              sizes="(max-width: 640px) 96px, 112px"
               loading="lazy"
             />
           </div>

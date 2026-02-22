@@ -8,7 +8,7 @@ A low-latency AI pharmacist assistant that converts chat queries into high-value
 - **Backend Infrastructure:** Cloudflare Workers (Edge Computing)
 - **Data Persistence:** Cloudflare Workers KV (Key-Value Store)
 - **AI Model:** DeepSeek-V3 (via OpenRouter)
-- **Affiliate Integration:** Partnerize (Deep Linking via `prf.hn`)
+- **Affiliate Integration:** Admitad (Deep Linking via `api.admitad.com/deeplink`)
 
 ## Getting Started
 
@@ -23,8 +23,9 @@ cp .env.example .env
 ```
 
 3. Fill in your environment variables in `.env`:
-   - `OPENROUTER_API_KEY`: Your OpenRouter API key
-   - `NEXT_PUBLIC_PARTNERIZE_CAMREF`: Your Partnerize CAMREF ID
+   - `DEEPSEEK_API_KEY`: Your DeepSeek API key
+   - `ADMITAD_CLIENT_ID` and `ADMITAD_CLIENT_SECRET`: Your Admitad API credentials
+   - `NEXT_PUBLIC_ADMITAD_W_ID` and `NEXT_PUBLIC_ADMITAD_C_ID`: Your Admitad affiliate IDs (when available)
    - `NEXT_PUBLIC_SITE_URL`: Your site URL (for development: `http://localhost:3000`)
 
 4. Run the development server:
@@ -53,7 +54,8 @@ swiftherb/
 ├── lib/                   # Utility functions
 │   ├── ai.ts             # AI integration (OpenRouter)
 │   ├── kv.ts             # Cloudflare KV operations
-│   └── partnerize.ts     # Partnerize link generation
+│   ├── admitad.ts        # Admitad link generation
+│   └── affiliate.ts     # Unified affiliate link generator
 └── SWIFTHERB_MASTER_PLAN.md # Project master plan
 ```
 
@@ -61,7 +63,7 @@ swiftherb/
 
 - **AI-Powered Chat:** Conversational interface powered by DeepSeek-V3
 - **Product Recommendations:** AI suggests products wrapped in `[[Double Brackets]]`
-- **Affiliate Links:** Automatic Partnerize deep linking for all product recommendations
+- **Affiliate Links:** Automatic Admitad deep linking for all product recommendations
 - **Safety Features:** Emergency keyword detection for medical emergencies
 - **Wellness Stacks:** AI suggests multiple products for higher cart values
 

@@ -15,13 +15,11 @@ crons = ["0 */3 * * *"]  # Every 3 hours at minute 0
 [vars]
 ENVIRONMENT = "production"
 
-# Impact.com API (currently in use)
-# Set via: wrangler secret put IMPACT_API_KEY
-# Set via: wrangler secret put IMPACT_ACCOUNT_SID
-# IMPACT_API_URL - Optional, defaults to https://api.impact.com
-
-# Admitad API (for future migration)
-# Set via: wrangler secret put ADMITAD_API_KEY
+# Admitad API
+# Set via: wrangler secret put ADMITAD_CLIENT_ID
+# Set via: wrangler secret put ADMITAD_CLIENT_SECRET
+# Set via: wrangler secret put ADMITAD_BASE64_HEADER (optional, auto-generated if not provided)
+# Set via: wrangler secret put ADMITAD_ADVCAMPAIGN_ID (iHerb's campaign ID for filtering)
 # ADMITAD_API_URL - Optional, defaults to https://api.admitad.com
 
 # Alternative: iHerb API (if available)

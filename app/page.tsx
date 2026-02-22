@@ -1,4 +1,5 @@
 import ChatInterface from "@/components/ChatInterface";
+import BestSellers from "@/components/BestSellers";
 import StructuredData from "@/components/StructuredData";
 import { getFAQSchema } from "@/lib/seo";
 import type { Metadata } from "next";
@@ -36,10 +37,14 @@ export default function Home() {
   return (
     <>
       <StructuredData data={getFAQSchema(faqs)} />
-      <div className="flex flex-col h-screen bg-gradient-to-b from-gray-50 via-white to-gray-50">
-        <main className="flex-1 overflow-hidden">
+      <div className="flex flex-col min-h-screen bg-gradient-to-b from-gray-50 via-white to-gray-50">
+        {/* Chat Interface at the top - takes available space but allows scrolling */}
+        <main className="flex-1 min-h-[600px] max-h-[calc(100vh-400px)] overflow-hidden">
           <ChatInterface />
         </main>
+        
+        {/* Best Sellers at the bottom */}
+        <BestSellers />
       </div>
     </>
   );

@@ -20,6 +20,7 @@ export interface Product {
   image: string;
   description: string;
   category: string;
+  iherb_url?: string;
 }
 
 const STORAGE_KEY = "swiftherb_chat_history";
@@ -201,10 +202,10 @@ export default function ChatInterface() {
           {messages.length === 0 && (
             <div className="text-center mt-16 mb-12 animate-fadeIn">
               <h2 className="text-4xl font-semibold mb-3 text-gray-900">
-                {messages.length > 0 ? "Continue the conversation" : "How can I help you today?"}
+                {messages.length > 0 ? "Continue the conversation" : "How can our AI pharmacist assist you?"}
               </h2>
               <p className="text-lg text-gray-600 mb-8">
-                Ask me about supplements, vitamins, or health concerns.
+                Share your health concerns or goals, and we&apos;ll use AI to find the best natural solutions
               </p>
               {hasPreviousConversation && (
                 <div className="mb-6">
