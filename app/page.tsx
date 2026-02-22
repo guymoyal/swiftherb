@@ -40,7 +40,11 @@ export default function Home() {
       <div className="flex flex-col min-h-screen bg-gradient-to-b from-gray-50 via-white to-gray-50">
         {/* Chat Interface at the top - takes available space but allows scrolling */}
         <main className="flex-1 min-h-[600px] max-h-[calc(100vh-400px)] overflow-hidden">
-          <ChatInterface />
+          {/* SEO: Hidden h1 for proper heading hierarchy */}
+          <h1 className="sr-only">SwiftHerb - AI Pharmacist Assistant for Natural Health Products</h1>
+          <section aria-label="AI Chat Assistant">
+            <ChatInterface />
+          </section>
         </main>
         
         {/* Best Sellers at the bottom */}

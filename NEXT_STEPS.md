@@ -1,208 +1,161 @@
-# Next Steps - SwiftHerb Admitad Integration
+# Next Steps - SwiftHerb Project
 
 **Last Updated:** February 15, 2026
 
-## ✅ What's Been Completed
+## 🎯 Current Status
 
-### 1. Admitad API Integration
-- ✅ Added Admitad API support to `workers/src/update-products.ts`
-- ✅ Implemented OAuth2 token fetching (`getAdmitadAccessToken`)
-- ✅ Implemented product feed fetching (`fetchFromAdmitad`)
-- ✅ Created deeplink generator (`lib/admitad.ts`)
-- ✅ Created unified affiliate link system (`lib/affiliate.ts`)
-- ✅ Updated `ProductCard` component to use Admitad links
+### ✅ Completed
+- Admitad API integration (code ready, needs account approval)
+- Cloudflare Worker deployed for product updates
+- Affiliate link system (Admitad)
+- SEO foundation (structured data, meta tags, sitemap)
+- Documentation organized in `/docs` folder
 
-### 2. Cloudflare Worker Secrets
-- ✅ Set `ADMITAD_CLIENT_ID` secret
-- ✅ Set `ADMITAD_CLIENT_SECRET` secret
-- ✅ Set `ADMITAD_BASE64_HEADER` secret
-- ✅ Deployed worker: `swiftherb-update-products`
+### ⚠️ Pending
+- **Admitad Account Approval**: Need to get iHerb affiliate program approved
+- **Product Data**: Currently using mock data, waiting for Admitad approval
+- **Affiliate Links**: Need `W_ID` and `C_ID` from Admitad dashboard
 
-### 3. Configuration Files
-- ✅ Updated `.env` with Admitad credentials
-- ✅ Updated `workers/wrangler-update.toml` with Admitad config
-- ✅ Added Admitad verification meta tag to `app/layout.tsx`
+---
 
-## ⚠️ Current Issue
+## 🔧 Immediate Actions Needed
 
-**Admitad Authentication Error:**
-- Error: `"client_id None doesn't exist"`
-- This suggests the Admitad credentials need verification/activation
-- The code is correct - the issue is with Admitad account status
-- **No products are being fetched until Admitad credentials are verified**
+### 1. Admitad Account Setup
+**Status:** Waiting for approval
 
-## 🔧 What Needs to Be Done
+**Steps:**
+1. Check Admitad dashboard for iHerb program approval status
+2. Contact Admitad support if needed (see `docs/ADMITAD_SUPPORT_EMAILS.md`)
+3. Once approved, get these IDs:
+   - `ADMITAD_ADVCAMPAIGN_ID` - iHerb campaign ID
+   - `NEXT_PUBLIC_ADMITAD_W_ID` - Your Ad Space ID
+   - `NEXT_PUBLIC_ADMITAD_C_ID` - Campaign ID for deeplinks
 
-### 1. Verify Admitad Account Status
-
-**⚠️ STATUS:** Admitad authentication is failing. Products are NOT being fetched until credentials are verified.
-
-**To enable Admitad (optional):**
-1. Log into https://www.admitad.com
-2. Go to API/Developers section
-3. Verify your API application is:
-   - ✅ Created
-   - ✅ Active/Approved
-   - ✅ Has API access enabled
-4. Confirm the Client ID matches: `lX1AfZ0aYk4xAvdmxEu4bwVpn8ALLj`
-
-**If credentials are incorrect:**
-- Update `.env` with correct values
-- Update Cloudflare secrets:
-  ```bash
-  cd workers
-  npx wrangler secret put ADMITAD_CLIENT_ID --config wrangler-update.toml --name swiftherb-update-products
-  npx wrangler secret put ADMITAD_CLIENT_SECRET --config wrangler-update.toml --name swiftherb-update-products
-  npx wrangler secret put ADMITAD_BASE64_HEADER --config wrangler-update.toml --name swiftherb-update-products
-  ```
-- Redeploy: `npx wrangler deploy src/update-products.ts --config wrangler-update.toml --name swiftherb-update-products`
-
-### 2. Get Additional Admitad IDs (When Available)
-
-Add these to `.env` when you have them:
-
-```env
-# iHerb's campaign ID for filtering products
-ADMITAD_ADVCAMPAIGN_ID=your_iherb_campaign_id
-
-# Your Ad Space ID for deeplinks
-NEXT_PUBLIC_ADMITAD_W_ID=your_ad_space_id
-
-# iHerb's Campaign ID for deeplinks
-NEXT_PUBLIC_ADMITAD_C_ID=your_campaign_id
-```
-
-**Where to find these:**
-- `ADVCAMPAIGN_ID`: In Admitad dashboard → Programs → iHerb → Campaign ID
-- `W_ID`: In Admitad dashboard → Ad Spaces → Your Ad Space ID
-- `C_ID`: Same as ADVCAMPAIGN_ID (iHerb's campaign ID)
-
-### 3. Test the Integration
-
-**⚠️ STATUS:** Admitad is not working yet - need to verify credentials.
-
-1. **Test manually:**
-   ```bash
-   curl -X POST https://swiftherb-update-products.guymoy931.workers.dev \
-     -H "Content-Type: application/json"
-   ```
-   Expected: Will show Admitad authentication error until credentials are verified
-
-2. **Check logs:**
-   ```bash
-   cd workers
-   npx wrangler tail swiftherb-update-products --format pretty
-   ```
-   Look for: "Attempting to fetch from Admitad..." then authentication error
-
-3. **Verify products are fetched:**
-   - Check Cloudflare KV for products (currently empty until Admitad works)
-   - Products will appear in your app once Admitad credentials are verified
-
-### 4. Verify Affiliate Links Work
-
-**Once `W_ID` and `C_ID` are set:**
-
-1. Add to `.env`:
+4. Add to `.env`:
    ```env
+   ADMITAD_ADVCAMPAIGN_ID=your_campaign_id
    NEXT_PUBLIC_ADMITAD_W_ID=your_w_id
    NEXT_PUBLIC_ADMITAD_C_ID=your_c_id
    ```
 
-2. Restart your Next.js dev server
+5. Restart dev server and test affiliate links
 
-3. Test a product link:
-   - Chat with AI and ask for a product recommendation
-   - Click "View on iHerb" button
-   - Verify the URL contains Admitad deeplink format
+### 2. SEO Improvements (See `suggestions.md`)
+**Priority:** High
 
-## 📋 System Priority Order
+**Quick fixes:**
+- Add `<h1>` to homepage
+- Wrap homepage sections in semantic HTML (`<section>`)
+- Add Product structured data to ProductCard
+- Optimize images (convert to WebP)
 
-The system checks APIs in this order:
-1. **Admitad** (if `ADMITAD_CLIENT_ID` and `ADMITAD_CLIENT_SECRET` are set)
-   - ⚠️ Currently failing - needs account verification
-2. **iHerb API** (if `IHERB_API_KEY` is set)
-   - Fallback if Admitad fails
+### 3. Product Data
+**Current:** Using mock products from `lib/products.ts`
 
-**Current Status:**
-- ✅ Admitad credentials configured (needs account verification)
-- ❌ Admitad authentication failing - no products being fetched
-- ⚠️ Need to verify Admitad account status
-
-## 🔄 How It Works
-
-### Product Updates
-- Worker runs every 3 hours (cron: `0 */3 * * *`)
-- Fetches products from Admitad Product Feed API
-- Stores in Cloudflare KV with key format: `prod_{slug}`
-- Automatically handles pagination (1000 products per page)
-
-### Affiliate Links
-- If Admitad `W_ID` and `C_ID` are configured → Uses Admitad deeplinks
-- Otherwise → Falls back to Partnerize links
-- Product URLs are converted to affiliate links automatically
-
-## 🐛 Troubleshooting
-
-### If Admitad still doesn't work:
-
-1. **Check credentials:**
-   ```bash
-   # Verify secrets are set
-   cd workers
-   npx wrangler secret list --name swiftherb-update-products
-   ```
-
-2. **Test authentication directly:**
-   ```bash
-   curl -X POST "https://api.admitad.com/token/" \
-     -H "Authorization: Basic $(echo -n 'CLIENT_ID:CLIENT_SECRET' | base64)" \
-     -H "Content-Type: application/x-www-form-urlencoded" \
-     -d "grant_type=client_credentials&scope=public"
-   ```
-
-3. **Check worker logs:**
-   ```bash
-   cd workers
-   npx wrangler tail swiftherb-update-products --format pretty
-   ```
-
-4. **Redeploy if needed:**
-   ```bash
-   cd workers
-   npx wrangler deploy src/update-products.ts --config wrangler-update.toml --name swiftherb-update-products
-   ```
-
-## 📝 Notes
-
-- **Admitad is the only product source** - Impact.com and Partnerize have been removed
-- **Product data** is stored in Cloudflare KV namespace: `cc09538377c34c08916ac38a0f5846ed`
-- **Worker URL:** https://swiftherb-update-products.guymoy931.workers.dev
-- **Current Status:** No products in KV storage - waiting for Admitad credentials to be verified
-
-## 🎯 Quick Start Checklist
-
-**Current Status: ✅ System is working with Admitad (fallback to iHerb API if Admitad fails)**
-
-**Immediate (Optional - to enable Admitad):**
-- [ ] Verify Admitad account is active and API access is enabled
-- [ ] Confirm Client ID and Client Secret are correct
-- [ ] Test authentication with curl command above
-- [ ] Get `ADVCAMPAIGN_ID`, `W_ID`, and `C_ID` from Admitad dashboard
-- [ ] Add IDs to `.env` file
-- [ ] Redeploy worker after fixing Admitad credentials
-
-**Verification (Need Admitad working):**
-- [x] ✅ Impact.com and Partnerize removed - only Admitad now
-- [x] ✅ Code deployed
-- [ ] ⚠️ Verify Admitad account is active (currently failing)
-- [ ] Test worker manually with POST request (will fail until Admitad verified)
-- [ ] Verify products are being fetched and stored (currently none)
-- [ ] Test affiliate links in the app
+**When Admitad is approved:**
+- Products will auto-update every 3 hours via Cloudflare Worker
+- Check KV storage: `npx wrangler kv key list --namespace-id=cc09538377c34c08916ac38a0f5846ed`
 
 ---
 
-**Need Help?**
-- Admitad API Docs: https://www.admitad.com/en/developers/doc/api_en/
-- Worker logs: `npx wrangler tail swiftherb-update-products --format pretty`
-- Check `.env` file for all configuration values
+## 📋 Development Commands
+
+### Local Development
+```bash
+npm run dev          # Start Next.js dev server
+npm run build        # Build for production
+npm run lint         # Run ESLint
+```
+
+### Cloudflare Worker
+```bash
+cd workers
+npx wrangler deploy src/update-products.ts --config wrangler-update.toml --name swiftherb-update-products
+npx wrangler tail swiftherb-update-products --format pretty  # View logs
+npx wrangler secret list --name swiftherb-update-products   # List secrets
+```
+
+### Testing
+```bash
+# Test worker manually
+curl -X POST https://swiftherb-update-products.guymoy931.workers.dev
+
+# Check KV storage
+npx wrangler kv key list --namespace-id=cc09538377c34c08916ac38a0f5846ed --prefix=prod_
+```
+
+---
+
+## 📁 Project Structure
+
+```
+swiftherb/
+├── app/              # Next.js app router pages
+├── components/       # React components
+├── lib/             # Utilities (AI, SEO, products, etc.)
+├── workers/         # Cloudflare Workers
+├── docs/            # Documentation (moved from root)
+├── public/          # Static assets
+├── .env             # Environment variables (not in git)
+├── next-steps.md    # This file
+└── suggestions.md   # Improvement suggestions
+```
+
+---
+
+## 🔗 Important Links
+
+- **Worker URL:** https://swiftherb-update-products.guymoy931.workers.dev
+- **KV Namespace:** `cc09538377c34c08916ac38a0f5846ed`
+- **Admitad Dashboard:** https://www.admitad.com
+- **Admitad API Docs:** https://www.admitad.com/en/developers/doc/api_en/
+
+---
+
+## 📚 Documentation
+
+All documentation has been moved to `/docs` folder:
+- `docs/ADMITAD_SUPPORT_EMAILS.md` - Email templates for support
+- `docs/ADMITAD_IHERB_GUIDE.md` - Guide to applying for iHerb program
+- `docs/AFFILIATE_LINKS_STATUS.md` - Current affiliate link status
+- `docs/KV_STORAGE_EXPLANATION.md` - How KV storage works
+- And more...
+
+---
+
+## 🐛 Troubleshooting
+
+### Admitad Not Working
+1. Check credentials: `npx wrangler secret list --name swiftherb-update-products`
+2. Verify account status in Admitad dashboard
+3. Check worker logs: `npx wrangler tail swiftherb-update-products`
+4. Test authentication manually (see `docs/ADMITAD_IHERB_GUIDE.md`)
+
+### Products Not Showing
+- Currently using mock data until Admitad is approved
+- Check `lib/products.ts` for mock products
+- Once Admitad works, products will come from KV storage
+
+### Build Errors
+- Run `npm run lint` to check for issues
+- Ensure all environment variables are set in `.env`
+- Check TypeScript errors: `npx tsc --noEmit`
+
+---
+
+## 💡 Next Phase Ideas
+
+See `suggestions.md` for:
+- SEO improvements
+- Feature enhancements
+- Content strategy
+- Growth strategies
+- Technical improvements
+
+---
+
+**Quick Start When Returning:**
+1. Check Admitad approval status
+2. Review `suggestions.md` for SEO improvements
+3. Run `npm run dev` to start development
+4. Check `docs/` folder for detailed guides
