@@ -161,6 +161,39 @@ export async function generateProductImage(productName: string): Promise<string 
 }
 
 /**
+ * Generate article image using Unsplash
+ * Searches for health/wellness related images
+ */
+export async function generateArticleImage(articleTitle: string, category?: string): Promise<string | null> {
+  if (!UNSPLASH_ACCESS_KEY || UNSPLASH_ACCESS_KEY === "your_access_key_here") {
+    console.warn("UNSPLASH_ACCESS_KEY not set. Get free key at: https://unsplash.com/developers");
+    return null;
+  }
+
+  try {
+    // Create search query from article title and category
+    const searchQuery = encodeURIComponent(`${articleTitle} ${category || ""} health wellness`);
+    const response = await fetch(
+      `https://api.unsplash.com/search/photos?query=${searchQuery}&per_page=1&orientation=landscape&client_id=${UNSPLASH_ACCESS_KEY}`
+    );
+
+    if (!response.ok) {
+      throw new Error(`Unsplash API error: ${response.status}`);
+    }
+
+    const data = await response.json();
+    if (data.results && data.results.length > 0) {
+      return data.results[0].urls.regular; // or .full for higher quality
+    }
+
+    return null;
+  } catch (error) {
+    console.error("Error fetching article image from Unsplash:", error);
+    return null;
+  }
+}
+
+/**
  * Batch generate images for multiple products
  */
 export async function generateProductImages(

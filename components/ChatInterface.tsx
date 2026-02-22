@@ -4,6 +4,7 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import MessageBubble from "./MessageBubble";
 import ChatInput from "./ChatInput";
 import ProductComparison from "./ProductComparison";
+import ResetConfirmModal from "./ResetConfirmModal";
 
 export interface Message {
   id: string;
@@ -31,6 +32,7 @@ export default function ChatInterface() {
   const [isLoading, setIsLoading] = useState(false);
   const [comparisonProducts, setComparisonProducts] = useState<Product[] | undefined>(undefined);
   const [hasPreviousConversation, setHasPreviousConversation] = useState(false);
+  const [showResetModal, setShowResetModal] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const chatContainerRef = useRef<HTMLDivElement>(null);
 
@@ -139,6 +141,15 @@ export default function ChatInterface() {
 
     setMessages((prev) => [...prev, userMessage]);
     setIsLoading(true);
+    
+    // Scroll to show loader immediately
+    requestAnimationFrame(() => {
+      setTimeout(() => {
+        if (messagesEndRef.current) {
+          messagesEndRef.current.scrollIntoView({ behavior: "smooth", block: "end" });
+        }
+      }, 150);
+    });
 
     try {
       // Use Cloudflare Worker for chat API
@@ -162,13 +173,23 @@ export default function ChatInterface() {
       }
 
       const data = await response.json();
+      console.log("[ChatInterface] API Response:", { 
+        hasContent: !!data.content, 
+        productsCount: data.products?.length || 0,
+        products: data.products 
+      });
+      
       const assistantMessage: Message = {
         id: (Date.now() + 1).toString(),
         role: "assistant",
         content: data.content,
-        products: data.products,
-        bundleSuggestions: data.bundleSuggestions, // Additional products for bundles
+        products: data.products || [],
+        bundleSuggestions: data.bundleSuggestions || [], // Additional products for bundles
       };
+      console.log("[ChatInterface] Created message:", { 
+        hasProducts: !!assistantMessage.products, 
+        productsLength: assistantMessage.products?.length || 0 
+      });
       setMessages((prev) => [...prev, assistantMessage]);
     } catch (error) {
       console.error("Error sending message:", error);
@@ -187,22 +208,36 @@ export default function ChatInterface() {
   // Auto-scroll to bottom when new messages arrive
   useEffect(() => {
     if (messagesEndRef.current) {
-      messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+      messagesEndRef.current.scrollIntoView({ behavior: "smooth", block: "end" });
     }
-  }, [messages, isLoading]);
+  }, [messages]);
+
+  // Auto-scroll when loading starts to show the loader
+  useEffect(() => {
+    if (isLoading) {
+      // Use requestAnimationFrame + setTimeout to ensure DOM has updated
+      requestAnimationFrame(() => {
+        setTimeout(() => {
+          if (messagesEndRef.current) {
+            messagesEndRef.current.scrollIntoView({ behavior: "smooth", block: "end" });
+          }
+        }, 100);
+      });
+    }
+  }, [isLoading]);
 
   return (
-    <div className="flex flex-col h-full">
+    <div className="flex flex-col h-full min-h-0">
       {/* Centered container like Gemini */}
       <div 
         ref={chatContainerRef}
-        className="flex-1 overflow-y-auto scroll-smooth"
+        className="flex-1 overflow-y-auto scroll-smooth min-h-0"
       >
-        <div className="max-w-4xl mx-auto px-4 py-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           {messages.length === 0 && (
             <div className="text-center mt-16 mb-12 animate-fadeIn">
               <h2 className="text-4xl font-semibold mb-3 text-gray-900">
-                {messages.length > 0 ? "Continue the conversation" : "How can our AI pharmacist assist you?"}
+                How can our AI pharmacist assist you?
               </h2>
               <p className="text-lg text-gray-600 mb-8">
                 Share your health concerns or goals, and we&apos;ll use AI to find the best natural solutions
@@ -217,68 +252,91 @@ export default function ChatInterface() {
                   </button>
                 </div>
               )}
-              {messages.length === 0 && (
-                <div className="flex flex-wrap gap-2 justify-center max-w-2xl mx-auto">
-                  {[
-                    "Help with anxiety",
-                    "Improve sleep quality",
-                    "Boost energy levels",
-                    "Support immune system",
-                  ].map((suggestion) => (
-                    <button
-                      key={suggestion}
-                      onClick={() => handleSendMessage(suggestion)}
-                      className="px-4 py-2 text-sm bg-white border border-gray-200 rounded-full hover:border-green-500 hover:bg-green-50 transition-colors text-gray-700"
-                    >
-                      {suggestion}
-                    </button>
-                  ))}
-                </div>
-              )}
-              {messages.length > 0 && (
-                <div className="flex justify-center">
+              <div className="flex flex-wrap gap-2 justify-center max-w-2xl mx-auto">
+                {[
+                  "Help with anxiety",
+                  "Improve sleep quality",
+                  "Boost energy levels",
+                  "Support immune system",
+                ].map((suggestion) => (
                   <button
-                    onClick={() => {
-                      if (confirm("Clear chat history? This cannot be undone.")) {
-                        setMessages([]);
-                        localStorage.removeItem(STORAGE_KEY);
-                      }
-                    }}
-                    className="px-4 py-2 text-sm text-gray-500 hover:text-gray-700 underline"
+                    key={suggestion}
+                    onClick={() => handleSendMessage(suggestion)}
+                    className="px-4 py-2 text-sm bg-white border border-gray-200 rounded-full hover:border-green-500 hover:bg-green-50 transition-colors text-gray-700"
                   >
-                    Clear chat history
+                    {suggestion}
                   </button>
-                </div>
-              )}
+                ))}
+              </div>
             </div>
           )}
-          <div className="space-y-6 pb-8">
-            {messages.map((message) => (
-              <MessageBubble 
-                key={message.id} 
-                message={message}
-                onQuickAction={handleSendMessage}
-              />
-            ))}
-                    {isLoading && (
-                      <div className="flex justify-start animate-fadeIn">
-                        <div className="bg-white rounded-2xl px-5 py-3 shadow-sm border border-gray-100">
-                          <div className="flex items-center gap-3">
-                            <div className="flex space-x-2">
-                              <div className="w-2.5 h-2.5 bg-green-500 rounded-full animate-bounce" style={{ animationDelay: "0s" }}></div>
-                              <div className="w-2.5 h-2.5 bg-green-500 rounded-full animate-bounce" style={{ animationDelay: "0.15s" }}></div>
-                              <div className="w-2.5 h-2.5 bg-green-500 rounded-full animate-bounce" style={{ animationDelay: "0.3s" }}></div>
-                            </div>
-                            <span className="text-sm text-gray-500">SwiftHerb is thinking...</span>
-                          </div>
-                        </div>
+          {messages.length > 0 && (
+            <div className="space-y-6 pb-8">
+              {messages.map((message) => (
+                <MessageBubble 
+                  key={message.id} 
+                  message={message}
+                  onQuickAction={handleSendMessage}
+                />
+              ))}
+              {isLoading && (
+                <div className="flex justify-start animate-fadeIn">
+                  <div className="bg-white rounded-2xl px-5 py-3 shadow-sm border border-gray-100">
+                    <div className="flex items-center gap-3">
+                      <div className="flex space-x-2">
+                        <div className="w-2.5 h-2.5 bg-green-500 rounded-full animate-bounce" style={{ animationDelay: "0s" }}></div>
+                        <div className="w-2.5 h-2.5 bg-green-500 rounded-full animate-bounce" style={{ animationDelay: "0.15s" }}></div>
+                        <div className="w-2.5 h-2.5 bg-green-500 rounded-full animate-bounce" style={{ animationDelay: "0.3s" }}></div>
                       </div>
-                    )}
-            <div ref={messagesEndRef} />
-          </div>
+                      <span className="text-sm text-gray-500">SwiftHerb is thinking...</span>
+                    </div>
+                  </div>
+                </div>
+              )}
+              <div ref={messagesEndRef} />
+            </div>
+          )}
         </div>
       </div>
-      <ChatInput onSend={handleSendMessage} disabled={isLoading} />
+      {/* Reset button - always visible */}
+      {messages.length > 0 && (
+        <div className="border-t border-gray-200 bg-white/80 backdrop-blur-sm px-4 py-3">
+          <div className="max-w-7xl mx-auto flex justify-end">
+            <button
+              onClick={() => setShowResetModal(true)}
+              className="px-5 py-2.5 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 hover:border-gray-400 transition-all shadow-sm hover:shadow-md flex items-center gap-2"
+              aria-label="Reset conversation"
+            >
+              <svg
+                width="16"
+                height="16"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M3 6h18"></path>
+                <path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"></path>
+                <path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"></path>
+              </svg>
+              Reset Chat
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Reset Confirmation Modal */}
+      <ResetConfirmModal
+        isOpen={showResetModal}
+        onClose={() => setShowResetModal(false)}
+        onConfirm={resetConversation}
+      />
+      {/* Chat Input - always visible */}
+      <div className="flex-shrink-0">
+        <ChatInput onSend={handleSendMessage} disabled={isLoading} />
+      </div>
     </div>
   );
 }

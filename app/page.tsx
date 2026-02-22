@@ -39,10 +39,10 @@ export default function Home() {
       <StructuredData data={getFAQSchema(faqs)} />
       <div className="flex flex-col min-h-screen bg-gradient-to-b from-gray-50 via-white to-gray-50">
         {/* Chat Interface at the top - takes available space but allows scrolling */}
-        <main className="flex-1 min-h-[600px] max-h-[calc(100vh-400px)] overflow-hidden">
+        <main className="flex-1 min-h-[600px] flex flex-col">
           {/* SEO: Hidden h1 for proper heading hierarchy */}
           <h1 className="sr-only">SwiftHerb - AI Pharmacist Assistant for Natural Health Products</h1>
-          <section aria-label="AI Chat Assistant">
+          <section aria-label="AI Chat Assistant" className="flex-1 flex flex-col min-h-0">
             <ChatInterface />
           </section>
         </main>

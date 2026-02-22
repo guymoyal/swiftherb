@@ -10,7 +10,9 @@
     "deploy:pages": "rm -rf .next out && pnpm build && rm -rf .next/cache .next/cache-webpack && find .next -name '*.pack' -type f -delete 2>/dev/null || true && wrangler pages deploy out --project-name=swiftherb",
     "deploy:worker": "cd workers && wrangler deploy src/index.ts --name swiftherb-products-api",
     "deploy:update-worker": "cd workers && wrangler deploy src/update-products.ts --config wrangler-update.toml --name swiftherb-update-products",
-    "populate-kv": "tsx scripts/populate-kv.ts"
+    "populate-kv": "tsx scripts/populate-kv.ts",
+    "update-article-images": "tsx scripts/update-article-images.ts",
+    "update-product-images": "tsx scripts/update-product-images.ts"
   },
   "dependencies": {
     "next": "^15.0.0",
