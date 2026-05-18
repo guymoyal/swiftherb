@@ -12,6 +12,9 @@ export default function Footer() {
             <Link href="/" className="hover:text-green-600 transition-colors font-medium">
               Get recommendations
             </Link>
+            <Link href="/catalog" className="hover:text-green-600 transition-colors">
+              Catalog
+            </Link>
             <Link href="/articles" className="hover:text-green-600 transition-colors">
               Articles
             </Link>
@@ -36,6 +39,9 @@ export default function Footer() {
             <Link href="/terms" className="hover:text-green-600 transition-colors">
               Terms
             </Link>
+            <Link href="/editorial-standards" className="hover:text-green-600 transition-colors">
+              Editorial
+            </Link>
             <Link href="/affiliate-disclosure" className="hover:text-green-600 transition-colors">
               Disclosure
             </Link>
@@ -53,7 +59,7 @@ export default function Footer() {
               <a href="https://twitter.com/swiftherb" target="_blank" rel="noopener noreferrer" className="hover:text-green-600 transition-colors" aria-label="Twitter">Twitter</a>
               <a href="https://github.com/swiftherb" target="_blank" rel="noopener noreferrer" className="hover:text-green-600 transition-colors" aria-label="GitHub">GitHub</a>
             </div>
-            <p className="text-xs text-gray-500">Not medical advice. Commissions may be earned.</p>
+            <p className="text-xs text-gray-500">Not medical advice. Affiliate status is explained on our Disclosure page.</p>
           </div>
         </div>
       </div>

@@ -13,6 +13,11 @@ interface ProductCardProps {
   product: Product;
   /** Index for animation delay */
   index?: number;
+  /**
+   * When true, links go straight to iHerb (no affiliate parameters).
+   * Use on editorial catalog pages before affiliate approval.
+   */
+  directRetailerLink?: boolean;
 }
 
 /**
@@ -22,11 +27,18 @@ interface ProductCardProps {
  * @param product - Product data to display
  * @param index - Index for staggered animation
  */
-export default function ProductCard({ product, index = 0 }: ProductCardProps) {
-  const affiliateLink = generateAffiliateLink({
-    title: product.title,
-    iherb_url: product.iherb_url,
-  });
+export default function ProductCard({
+  product,
+  index = 0,
+  directRetailerLink = false,
+}: ProductCardProps) {
+  const affiliateLink = directRetailerLink
+    ? product.iherb_url ||
+      `https://www.iherb.com/search?kw=${encodeURIComponent(product.title)}`
+    : generateAffiliateLink({
+        title: product.title,
+        iherb_url: product.iherb_url,
+      });
   const [imageError, setImageError] = useState(false);
 
   return (
@@ -94,6 +106,15 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
         <p className="text-sm text-gray-600 mb-3 line-clamp-2 flex-1">
           {product.description}
         </p>
+
+        {typeof product.rating === "number" && (
+          <p className="text-xs text-gray-500 mb-2">
+            Rating: {product.rating.toFixed(1)}
+            {typeof product.reviewCount === "number"
+              ? ` · ${product.reviewCount} reviews`
+              : ""}
+          </p>
+        )}
 
         {/* CTA Button - Full width at bottom */}
         <a

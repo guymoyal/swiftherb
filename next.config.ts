@@ -6,6 +6,11 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: "https",
+        hostname: "cloudinary.images-iherb.com",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
         hostname: "images.iherb.com",
         pathname: "/**",
       },

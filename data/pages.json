@@ -21,7 +21,7 @@
       },
       {
         "heading": "Third-Party Services",
-        "content": "We use third-party services that may collect information:\n\n• iHerb/Admitad: When you click product links, you are redirected to iHerb.com through Admitad affiliate links. Please review iHerb's privacy policy for their data practices.\n• AI Services: We use DeepSeek AI to generate recommendations. Your queries are sent to their API but are not stored by us.\n\nWe do not share your personal information with third parties except as necessary to provide our service."
+        "content": "We use third-party services that may collect information:\n\n• iHerb: When you click product links, you leave SwiftHerb and land on iHerb. Please review iHerb's privacy policy for their practices.\n• AI: We may use providers such as DeepSeek for chat features. Queries may be sent to their API per their policy.\n\nWe aim to minimize server-side storage of personal conversation content."
       },
       {
         "heading": "Cookies and Tracking",
@@ -67,7 +67,7 @@
       },
       {
         "heading": "Affiliate Links",
-        "content": "SwiftHerb participates in affiliate marketing programs. When you click on product links and make purchases on iHerb.com, we may earn a commission at no additional cost to you. This helps support our free service."
+        "content": "SwiftHerb may participate in affiliate marketing when approved by retailer or network partners. Tracked links would be disclosed on our Affiliate Disclosure page. Until such programs are active, outbound product links may go directly to iHerb without affiliate parameters."
       },
       {
         "heading": "Limitation of Liability",
@@ -119,6 +119,10 @@
         "content": "SwiftHerb is not a medical service. We provide educational information and product recommendations, but always consult with a healthcare provider before starting any supplement regimen, especially if you have medical conditions or are taking medications."
       },
       {
+        "heading": "Editorial catalog",
+        "content": "Our public catalog organizes supplements by category. Listing pages are editorial: they help you browse and link out to iHerb where official imagery, supplement facts, and customer star ratings appear. SwiftHerb does not replace the merchant listing; always verify details on iHerb before purchasing."
+      },
+      {
         "heading": "Contact",
         "content": "Have questions or feedback? We'd love to hear from you. Reach out through our website to get in touch with our team."
       }
@@ -137,7 +141,7 @@
       },
       {
         "heading": "Email",
-        "content": "You can reach us at the contact email listed in our website footer or through the Admitad partner dashboard if you are an existing affiliate partner."
+        "content": "You can reach us using the contact options shown on our Contact page and in the site footer."
       },
       {
         "heading": "Before You Contact",
@@ -147,7 +151,7 @@
   },
   "affiliate-disclosure": {
     "title": "Affiliate Disclosure",
-    "lastUpdated": "December 2024",
+    "lastUpdated": "February 2026",
     "sections": [
       {
         "heading": "FTC Compliance",
@@ -155,7 +159,7 @@
       },
       {
         "heading": "How We Earn",
-        "content": "SwiftHerb is a free service. We participate in the Admitad affiliate program. When you click on product links on our site and make a purchase on iHerb.com, we may earn a commission at no extra cost to you. This commission helps us keep SwiftHerb free and improve our AI recommendations."
+        "content": "SwiftHerb is free to browse. When we are accepted into an affiliate or partnership program (for example through networks like Partnerize, Impact, CJ, or Awin), we may use tracked links so that purchases you make on iHerb can support our work—at no extra cost to you. Until such a relationship is active and disclosed here, our product buttons may link directly to iHerb without affiliate tracking."
       },
       {
         "heading": "No Extra Cost to You",
@@ -163,11 +167,41 @@
       },
       {
         "heading": "Our Recommendations",
-        "content": "Our AI recommends products based on your stated health goals and preferences. We aim to suggest products that are relevant and useful. Our affiliate relationship does not determine which products we recommend; we recommend what we believe fits your needs."
+        "content": "AI and catalog suggestions are informational. We aim for relevance and transparency. If we add affiliate tracking in the future, we will label it clearly and keep this page updated so you always know how links work."
       },
       {
         "heading": "Transparency",
         "content": "We believe in clear disclosure. This page exists so you can understand our business model. If you have questions about our affiliate practices, please contact us."
+      }
+    ]
+  },
+  "editorial-standards": {
+    "title": "Editorial Standards",
+    "lastUpdated": "February 2026",
+    "sections": [
+      {
+        "heading": "Purpose",
+        "content": "SwiftHerb helps people discover supplements sold on iHerb through AI chat and curated category pages. We focus on clarity, transparency, and respect for your health decisions."
+      },
+      {
+        "heading": "Not medical advice",
+        "content": "Content on SwiftHerb is educational. It is not a diagnosis, treatment, or substitute for a licensed clinician. For emergencies, call your local emergency number."
+      },
+      {
+        "heading": "Product information",
+        "content": "Catalog cards may show titles, short descriptions, prices, and thumbnail imagery for navigation. Official labeling, allergen statements, supplement facts, and verified customer reviews always live on iHerb. Before buying, read the full listing on the retailer site."
+      },
+      {
+        "heading": "How we monetize (now and later)",
+        "content": "We may apply to affiliate programs so tracked links can support the project. Until a program is active, buttons may link directly to iHerb. This page and our Affiliate Disclosure will stay updated as our status changes."
+      },
+      {
+        "heading": "Data sourcing",
+        "content": "We may build our catalog from hand-curated entries, licensed feeds, or third-party tools you run under your own accounts (for example data services like Apify). You are responsible for complying with iHerb's Terms of Use and applicable law when collecting or refreshing data."
+      },
+      {
+        "heading": "Corrections",
+        "content": "If you spot an inaccuracy in our editorial copy or a broken product link, contact us via the Contact page. We aim to fix clear errors promptly."
       }
     ]
   },
@@ -180,7 +214,7 @@
       },
       {
         "heading": "Three Simple Steps",
-        "content": "1. Tell us what you need – Chat with our AI about your health goals, symptoms, or questions (e.g. sleep, energy, stress, immunity).\n\n2. Get your stack – Our AI recommends 5–10 products that work together, not just a single item. This personalized stack approach often leads to better results and higher value.\n\n3. Shop on iHerb – Click through to iHerb to view details, compare, and purchase. We use affiliate links so we can keep SwiftHerb free."
+        "content": "1. Tell us what you need – Chat with our AI about your health goals, symptoms, or questions (e.g. sleep, energy, stress, immunity).\n\n2. Get your stack – Our AI recommends 5–10 products that work together, not just a single item. This personalized stack approach often leads to better results and higher value.\n\n3. Shop on iHerb – Click through to iHerb to view details, compare, and purchase. When affiliate programs are active we may use tracked links; otherwise we link directly to iHerb. See our Affiliate Disclosure for the current status."
       },
       {
         "heading": "Why We Recommend Multiple Products",

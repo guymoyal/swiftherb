@@ -3,6 +3,7 @@
  */
 
 import { getAllArticles } from "./articles";
+import { getCatalogCategories } from "./catalog";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://swiftherb.com";
 const SITE_NAME = "SwiftHerb";
@@ -184,6 +185,12 @@ export function getSitemapUrls() {
       priority: "0.8",
     },
     {
+      loc: `${SITE_URL}/editorial-standards`,
+      lastmod: today,
+      changefreq: "monthly",
+      priority: "0.65",
+    },
+    {
       loc: `${SITE_URL}/privacy`,
       lastmod: today,
       changefreq: "yearly",
@@ -195,6 +202,12 @@ export function getSitemapUrls() {
       changefreq: "yearly",
       priority: "0.5",
     },
+    ...getCatalogCategories().map((c) => ({
+      loc: `${SITE_URL}/catalog/${c.slug}`,
+      lastmod: today,
+      changefreq: "weekly",
+      priority: "0.75",
+    })),
     ...articles.map((article) => ({
       loc: `${SITE_URL}/articles/${article.slug}`,
       lastmod: article.lastUpdated || article.publishedDate,

@@ -22,6 +22,9 @@ export interface Product {
   description: string;
   category: string;
   iherb_url?: string;
+  /** Optional: shown when present (e.g. catalog from feeds/scrapers) */
+  rating?: number;
+  reviewCount?: number;
 }
 
 const STORAGE_KEY = "swiftherb_chat_history";

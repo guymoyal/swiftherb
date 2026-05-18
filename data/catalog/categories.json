@@ -1,0 +1,62 @@
+[
+  {
+    "slug": "vitamins",
+    "title": "Vitamins",
+    "description": "Multivitamins, letter vitamins, and specialty vitamin formulas. Editorial listings link to iHerb for full details and current pricing.",
+    "iherbSourceUrl": "https://www.iherb.com/c/vitamins"
+  },
+  {
+    "slug": "minerals",
+    "title": "Minerals",
+    "description": "Magnesium, zinc, calcium, iron, and trace minerals.",
+    "iherbSourceUrl": "https://www.iherb.com/c/minerals"
+  },
+  {
+    "slug": "herbs",
+    "title": "Herbs & botanicals",
+    "description": "Botanicals, traditional herbs, and plant-based supplements.",
+    "iherbSourceUrl": "https://www.iherb.com/c/herbs"
+  },
+  {
+    "slug": "sports",
+    "title": "Sports nutrition",
+    "description": "Protein, amino acids, pre-workout, and recovery products.",
+    "iherbSourceUrl": "https://www.iherb.com/c/sports"
+  },
+  {
+    "slug": "digestive",
+    "title": "Digestive health",
+    "description": "Probiotics, enzymes, fiber, and gut-support formulas.",
+    "iherbSourceUrl": "https://www.iherb.com/c/digestive-health"
+  },
+  {
+    "slug": "omega-probiotics",
+    "title": "Omega-3 & EFAs",
+    "description": "Fish oil, algae oil, and essential fatty acids.",
+    "iherbSourceUrl": "https://www.iherb.com/c/omega-3-6-9"
+  },
+  {
+    "slug": "sleep-mood",
+    "title": "Sleep & mood",
+    "description": "Melatonin, relaxation, and occasional stress support (supplements only — not medical advice).",
+    "iherbSourceUrl": "https://www.iherb.com/search?kw=sleep+supplements"
+  },
+  {
+    "slug": "immune",
+    "title": "Immune support",
+    "description": "Vitamin C, zinc combos, and seasonal wellness products.",
+    "iherbSourceUrl": "https://www.iherb.com/search?kw=immune+support+supplements"
+  },
+  {
+    "slug": "joint-bone",
+    "title": "Joint & bone",
+    "description": "Glucosamine, collagen, vitamin D3, and mobility-focused formulas.",
+    "iherbSourceUrl": "https://www.iherb.com/c/bone-joint-cartilage"
+  },
+  {
+    "slug": "beauty-collagen",
+    "title": "Beauty & collagen",
+    "description": "Collagen, biotin, and skin-hair-nails products.",
+    "iherbSourceUrl": "https://www.iherb.com/c/hair-skin-nails"
+  }
+]

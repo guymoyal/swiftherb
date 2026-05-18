@@ -3,13 +3,13 @@ import { getPageContent } from "@/lib/content";
 import PageContentRenderer from "@/components/PageContent";
 
 export const metadata: Metadata = {
-  title: "Affiliate Disclosure",
+  title: "Editorial Standards | SwiftHerb",
   description:
-    "How SwiftHerb may earn from outbound links, when affiliate tracking is active, and how we use direct links to iHerb today.",
+    "How SwiftHerb presents supplement information, outbound links to iHealth retailers, and our approach to transparency.",
 };
 
-export default function AffiliateDisclosurePage() {
-  const content = getPageContent("affiliate-disclosure");
+export default function EditorialStandardsPage() {
+  const content = getPageContent("editorial-standards");
 
   if (!content) {
     return (

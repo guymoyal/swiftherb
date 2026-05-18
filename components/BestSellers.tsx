@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import ProductCard from "./ProductCard";
 import { Product } from "./ChatInterface";
 import { MOCK_PRODUCTS } from "@/lib/products";
@@ -74,11 +74,12 @@ export default function BestSellers() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-10">
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-3">
-            Best Sellers
-          </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Discover our most popular natural health products, carefully selected for quality and effectiveness
+          <p className="text-sm font-semibold uppercase tracking-wide text-green-700 mb-2">
+            Popular on SwiftHerb
+          </p>
+          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-3">Featured products</h2>
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
+            Real pack shots from iHerb—tap through for full details, ingredients, and reviews.
           </p>
         </div>
 

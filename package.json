@@ -16,7 +16,9 @@
     "generate:article-images": "tsx scripts/generate-article-images.ts",
     "unsplash:image": "tsx scripts/unsplash-cli.ts image",
     "unsplash:article": "tsx scripts/unsplash-cli.ts article",
-    "unsplash:batch": "tsx scripts/unsplash-cli.ts batch"
+    "unsplash:batch": "tsx scripts/unsplash-cli.ts batch",
+    "catalog:build-mock": "tsx scripts/build-catalog-from-mock.ts",
+    "catalog:sync-apify": "tsx scripts/sync-catalog-apify.ts"
   },
   "dependencies": {
     "next": "^15.0.0",
