@@ -87,6 +87,22 @@ npx wrangler pages deploy out --project-name=swiftherb
 3. Add your domain (e.g., `swiftherb.com`)
 4. Update DNS records as instructed
 
+### www → apex (canonical host)
+
+`wrangler pages deploy` does **not** configure www redirects; use either:
+
+- **Dashboard:** Rules → Redirect Rules → create a rule: if hostname is `www.swiftherb.com`, redirect (301) to `https://swiftherb.com` preserving path and query.
+- **CLI helper:** Create an API token (Zone → Single Redirect → Edit), then:
+
+```bash
+export CLOUDFLARE_API_TOKEN=...
+export CLOUDFLARE_ZONE_NAME=swiftherb.com   # or CLOUDFLARE_ZONE_ID
+
+pnpm cf:www-redirect
+```
+
+This adds or updates a Dynamic Redirect rule (`pnpm` runs `tsx scripts/ensure-www-redirect-rule.ts`). Uses `NEXT_PUBLIC_SITE_URL` from `.env` for the apex when set.
+
 ---
 
 ## 🔐 Environment Variables Setup
