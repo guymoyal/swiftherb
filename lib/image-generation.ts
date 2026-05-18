@@ -161,36 +161,44 @@ export async function generateProductImage(productName: string): Promise<string 
 }
 
 /**
- * Generate article image using Unsplash
- * Searches for health/wellness related images
+ * Search Unsplash by a custom query string (e.g. AI-generated).
+ * Returns the first result's small image URL or null.
  */
-export async function generateArticleImage(articleTitle: string, category?: string): Promise<string | null> {
+export async function searchUnsplashByQuery(query: string): Promise<string | null> {
   if (!UNSPLASH_ACCESS_KEY || UNSPLASH_ACCESS_KEY === "your_access_key_here") {
-    console.warn("UNSPLASH_ACCESS_KEY not set. Get free key at: https://unsplash.com/developers");
     return null;
   }
-
   try {
-    // Create search query from article title and category
-    const searchQuery = encodeURIComponent(`${articleTitle} ${category || ""} health wellness`);
+    const encoded = encodeURIComponent(query);
     const response = await fetch(
-      `https://api.unsplash.com/search/photos?query=${searchQuery}&per_page=1&orientation=landscape&client_id=${UNSPLASH_ACCESS_KEY}`
+      `https://api.unsplash.com/search/photos?query=${encoded}&per_page=1&orientation=landscape&client_id=${UNSPLASH_ACCESS_KEY}`
     );
-
-    if (!response.ok) {
-      throw new Error(`Unsplash API error: ${response.status}`);
-    }
-
+    if (!response.ok) throw new Error(`Unsplash API error: ${response.status}`);
     const data = await response.json();
-    if (data.results && data.results.length > 0) {
-      return data.results[0].urls.regular; // or .full for higher quality
+    if (data.results?.length > 0) {
+      return data.results[0].urls.small;
     }
-
     return null;
   } catch (error) {
-    console.error("Error fetching article image from Unsplash:", error);
+    console.error("Error fetching from Unsplash:", error);
     return null;
   }
+}
+
+/**
+ * Generate article image using Unsplash.
+ * If searchQuery is provided (e.g. from AI), uses that; otherwise builds from title + category.
+ */
+export async function generateArticleImage(
+  articleTitle: string,
+  category?: string,
+  searchQuery?: string
+): Promise<string | null> {
+  const query =
+    searchQuery && searchQuery.trim()
+      ? searchQuery.trim()
+      : `${articleTitle} ${category || ""} health wellness`;
+  return searchUnsplashByQuery(query);
 }
 
 /**

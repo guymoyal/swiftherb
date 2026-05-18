@@ -12,9 +12,14 @@ export default function Header() {
   const navItems = [
     { href: "/", label: "Home" },
     { href: "/articles", label: "Articles" },
-    { href: "/about", label: "About Us" },
+    { href: "/compare", label: "Compare" },
+    { href: "/how-it-works", label: "How It Works" },
+    { href: "/faq", label: "FAQ" },
+    { href: "/about", label: "About" },
+    { href: "/contact", label: "Contact" },
     { href: "/privacy", label: "Privacy" },
     { href: "/terms", label: "Terms" },
+    { href: "/affiliate-disclosure", label: "Disclosure" },
   ];
 
   return (

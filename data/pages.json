@@ -21,7 +21,7 @@
       },
       {
         "heading": "Third-Party Services",
-        "content": "We use third-party services that may collect information:\n\n• **iHerb/Admitad**: When you click product links, you are redirected to iHerb.com through Admitad affiliate links. Please review iHerb's privacy policy for their data practices.\n• **AI Services**: We use DeepSeek AI to generate recommendations. Your queries are sent to their API but are not stored by us.\n\nWe do not share your personal information with third parties except as necessary to provide our service."
+        "content": "We use third-party services that may collect information:\n\n• iHerb/Admitad: When you click product links, you are redirected to iHerb.com through Admitad affiliate links. Please review iHerb's privacy policy for their data practices.\n• AI Services: We use DeepSeek AI to generate recommendations. Your queries are sent to their API but are not stored by us.\n\nWe do not share your personal information with third parties except as necessary to provide our service."
       },
       {
         "heading": "Cookies and Tracking",
@@ -59,7 +59,7 @@
       },
       {
         "heading": "Medical Disclaimer",
-        "content": "**IMPORTANT**: SwiftHerb is NOT a medical service and does NOT provide medical advice, diagnosis, or treatment.\n\n• The information provided is for educational purposes only\n• Always consult with a qualified healthcare provider before starting any supplement regimen\n• Do not disregard professional medical advice or delay seeking it because of information from this service\n• If you have a medical emergency, call 911 immediately\n\nWe are not responsible for any health outcomes resulting from the use of recommended supplements."
+        "content": "IMPORTANT: SwiftHerb is NOT a medical service and does NOT provide medical advice, diagnosis, or treatment.\n\n• The information provided is for educational purposes only\n• Always consult with a qualified healthcare provider before starting any supplement regimen\n• Do not disregard professional medical advice or delay seeking it because of information from this service\n• If you have a medical emergency, call 911 immediately\n\nWe are not responsible for any health outcomes resulting from the use of recommended supplements."
       },
       {
         "heading": "AI-Generated Content",
@@ -108,7 +108,7 @@
       },
       {
         "heading": "What Makes Us Different",
-        "content": "• **AI-Powered**: Advanced AI technology provides personalized recommendations\n• **Evidence-Based**: Recommendations based on scientific understanding of supplements\n• **Comprehensive**: We suggest complete wellness stacks, not just single products\n• **Transparent**: Clear affiliate disclosure and honest recommendations\n• **Free**: No cost to use our recommendation service"
+        "content": "• AI-Powered: Advanced AI technology provides personalized recommendations\n• Evidence-Based: Recommendations based on scientific understanding of supplements\n• Comprehensive: We suggest complete wellness stacks, not just single products\n• Transparent: Clear affiliate disclosure and honest recommendations\n• Free: No cost to use our recommendation service"
       },
       {
         "heading": "Our Commitment",
@@ -121,6 +121,74 @@
       {
         "heading": "Contact",
         "content": "Have questions or feedback? We'd love to hear from you. Reach out through our website to get in touch with our team."
+      }
+    ]
+  },
+  "contact": {
+    "title": "Contact Us",
+    "sections": [
+      {
+        "heading": "Get in Touch",
+        "content": "We'd love to hear from you. Whether you have a question about SwiftHerb, feedback about our AI recommendations, or want to partner with us, reach out and we'll get back to you as soon as we can."
+      },
+      {
+        "heading": "How to Reach Us",
+        "content": "• General inquiries: Use the contact form or email below.\n• Support: For technical issues or questions about using SwiftHerb.\n• Partnerships: If you're an advertiser or brand interested in working with us.\n\nWe aim to respond within 1–2 business days."
+      },
+      {
+        "heading": "Email",
+        "content": "You can reach us at the contact email listed in our website footer or through the Admitad partner dashboard if you are an existing affiliate partner."
+      },
+      {
+        "heading": "Before You Contact",
+        "content": "Please check our FAQ page for quick answers to common questions about how SwiftHerb works, our recommendations, and affiliate disclosures."
+      }
+    ]
+  },
+  "affiliate-disclosure": {
+    "title": "Affiliate Disclosure",
+    "lastUpdated": "December 2024",
+    "sections": [
+      {
+        "heading": "FTC Compliance",
+        "content": "In compliance with the FTC Guidelines and best practices for affiliate marketing, we disclose the following about our relationship with retailers and how we may earn compensation."
+      },
+      {
+        "heading": "How We Earn",
+        "content": "SwiftHerb is a free service. We participate in the Admitad affiliate program. When you click on product links on our site and make a purchase on iHerb.com, we may earn a commission at no extra cost to you. This commission helps us keep SwiftHerb free and improve our AI recommendations."
+      },
+      {
+        "heading": "No Extra Cost to You",
+        "content": "Prices you see on iHerb are the same whether you use our links or not. We do not charge you for using our recommendations. Our affiliate relationship does not influence the price you pay."
+      },
+      {
+        "heading": "Our Recommendations",
+        "content": "Our AI recommends products based on your stated health goals and preferences. We aim to suggest products that are relevant and useful. Our affiliate relationship does not determine which products we recommend; we recommend what we believe fits your needs."
+      },
+      {
+        "heading": "Transparency",
+        "content": "We believe in clear disclosure. This page exists so you can understand our business model. If you have questions about our affiliate practices, please contact us."
+      }
+    ]
+  },
+  "how-it-works": {
+    "title": "How It Works",
+    "sections": [
+      {
+        "heading": "Your AI Supplement Assistant",
+        "content": "SwiftHerb uses advanced AI to give you personalized supplement recommendations. Instead of guessing which products to try, you describe your goals or concerns and our AI suggests a tailored wellness stack from iHerb."
+      },
+      {
+        "heading": "Three Simple Steps",
+        "content": "1. Tell us what you need – Chat with our AI about your health goals, symptoms, or questions (e.g. sleep, energy, stress, immunity).\n\n2. Get your stack – Our AI recommends 5–10 products that work together, not just a single item. This personalized stack approach often leads to better results and higher value.\n\n3. Shop on iHerb – Click through to iHerb to view details, compare, and purchase. We use affiliate links so we can keep SwiftHerb free."
+      },
+      {
+        "heading": "Why We Recommend Multiple Products",
+        "content": "We suggest wellness stacks (5–10 products) rather than one-off products because:\n\n• Synergy: Many supplements work better together (e.g. vitamin D with magnesium).\n• Higher order value: Stacks align with how people actually build a supplement routine.\n• Better outcomes: A complete stack supports your goals more effectively than a single product.\n\nOur AI is built to recommend combinations that fit your needs and budget."
+      },
+      {
+        "heading": "Quality and Safety",
+        "content": "We only recommend products available on iHerb. We are not a medical service; our recommendations are for educational purposes. Always consult a healthcare provider before starting new supplements, especially if you have health conditions or take medications."
       }
     ]
   }

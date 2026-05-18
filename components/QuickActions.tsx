@@ -56,14 +56,14 @@ export default function QuickActions({ message, onAction, onCompare }: QuickActi
   ];
 
   return (
-    <div className="mt-3 flex flex-wrap gap-2 px-1">
+    <div className="flex flex-wrap gap-2 px-1">
       {actions.map((item) => (
         <button
           key={item.label}
           onClick={item.onClick}
-          className="px-3 py-1.5 text-xs bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-full transition-colors flex items-center gap-1.5 border border-gray-200 hover:border-gray-300"
+          className="px-4 py-2 text-sm font-medium bg-white border border-green-200 text-gray-900 rounded-lg hover:bg-green-50 hover:border-green-300 hover:text-gray-900 transition-all duration-200 shadow-sm hover:shadow-md flex items-center gap-2 group"
         >
-          <span>{item.icon}</span>
+          <span className="text-base group-hover:scale-110 transition-transform">{item.icon}</span>
           <span>{item.label}</span>
         </button>
       ))}

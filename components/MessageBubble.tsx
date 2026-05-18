@@ -20,8 +20,8 @@ interface MessageBubbleProps {
  */
 export default function MessageBubble({ message, onQuickAction, onCompare }: MessageBubbleProps) {
   const isUser = message.role === "user";
-  const [visibleProductCount, setVisibleProductCount] = useState(6);
-  const [visibleBundleCount, setVisibleBundleCount] = useState(6);
+  const [visibleProductCount, setVisibleProductCount] = useState(8);
+  const [visibleBundleCount, setVisibleBundleCount] = useState(8);
 
   // Parse product names from double brackets [[Product Name]] and replace with styled spans
   const productMatches = message.content.match(/\[\[([^\]]+)\]\]/g) || [];
@@ -45,11 +45,11 @@ export default function MessageBubble({ message, onQuickAction, onCompare }: Mes
     <div
       className={`flex ${isUser ? "justify-end" : "justify-start"} animate-fadeIn mb-6`}
     >
-      <div className={`w-full ${isUser ? "max-w-[85%] sm:max-w-[75%] order-2" : hasProducts ? "max-w-full order-1" : "max-w-[85%] sm:max-w-[75%] order-1"}`}>
+      <div className={`w-full ${isUser ? "flex justify-end order-2" : hasProducts ? "max-w-full order-1" : "max-w-[85%] sm:max-w-[75%] order-1"}`}>
         {/* Message text bubble - Hide if products exist (only show products and quick actions) */}
         {!hasProducts && (
           <div
-            className={`rounded-2xl px-4 py-3 ${
+            className={`rounded-2xl px-4 py-3 ${isUser ? "inline-block" : ""} ${
               isUser
                 ? "bg-green-600 text-white shadow-md"
                 : "bg-white text-gray-800 border border-gray-200 shadow-sm"
@@ -68,7 +68,7 @@ export default function MessageBubble({ message, onQuickAction, onCompare }: Mes
             <div className="text-sm font-semibold text-gray-700 mb-4 px-1">
               Recommended Products ({message.products.length})
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-5 lg:gap-6">
               {message.products.slice(0, visibleProductCount).map((product, index) => (
                 <ProductCard key={product.id} product={product} index={index} />
               ))}
@@ -76,7 +76,7 @@ export default function MessageBubble({ message, onQuickAction, onCompare }: Mes
             {message.products.length > visibleProductCount && (
               <div className="text-center mt-6">
                 <button
-                  onClick={() => setVisibleProductCount((prev) => Math.min(prev + 6, message.products!.length))}
+                  onClick={() => setVisibleProductCount((prev) => Math.min(prev + 8, message.products!.length))}
                   className="px-8 py-3 bg-gradient-to-r from-green-600 to-green-700 text-white font-semibold rounded-lg hover:from-green-700 hover:to-green-800 transition-all duration-200 shadow-md hover:shadow-lg transform hover:scale-105 active:scale-95"
                 >
                   Show More ({message.products.length - visibleProductCount} more available)
@@ -98,7 +98,7 @@ export default function MessageBubble({ message, onQuickAction, onCompare }: Mes
             <p className="text-xs text-gray-600 mb-4 px-1">
               These products work synergistically with your current selections
             </p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-5 lg:gap-6">
               {message.bundleSuggestions.slice(0, visibleBundleCount).map((product, index) => (
                 <ProductCard key={product.id} product={product} index={index} />
               ))}
@@ -106,7 +106,7 @@ export default function MessageBubble({ message, onQuickAction, onCompare }: Mes
             {message.bundleSuggestions.length > visibleBundleCount && (
               <div className="text-center mt-6">
                 <button
-                  onClick={() => setVisibleBundleCount((prev) => Math.min(prev + 6, message.bundleSuggestions!.length))}
+                  onClick={() => setVisibleBundleCount((prev) => Math.min(prev + 8, message.bundleSuggestions!.length))}
                   className="px-8 py-3 bg-gradient-to-r from-green-600 to-green-700 text-white font-semibold rounded-lg hover:from-green-700 hover:to-green-800 transition-all duration-200 shadow-md hover:shadow-lg transform hover:scale-105 active:scale-95"
                 >
                   Show More ({message.bundleSuggestions.length - visibleBundleCount} more available)

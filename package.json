@@ -12,7 +12,11 @@
     "deploy:update-worker": "cd workers && wrangler deploy src/update-products.ts --config wrangler-update.toml --name swiftherb-update-products",
     "populate-kv": "tsx scripts/populate-kv.ts",
     "update-article-images": "tsx scripts/update-article-images.ts",
-    "update-product-images": "tsx scripts/update-product-images.ts"
+    "update-product-images": "tsx scripts/update-product-images.ts",
+    "generate:article-images": "tsx scripts/generate-article-images.ts",
+    "unsplash:image": "tsx scripts/unsplash-cli.ts image",
+    "unsplash:article": "tsx scripts/unsplash-cli.ts article",
+    "unsplash:batch": "tsx scripts/unsplash-cli.ts batch"
   },
   "dependencies": {
     "next": "^15.0.0",
@@ -29,6 +33,7 @@
     "postcss": "^8",
     "sass": "^1.77.0",
     "tailwindcss": "^3.4.1",
+    "tsx": "^4.21.0",
     "typescript": "^5",
     "wrangler": "^4.61.1"
   }

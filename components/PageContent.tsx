@@ -50,27 +50,6 @@ export default function PageContentRenderer({ content }: PageContentProps) {
                         </div>
                       );
                     }
-                    // Check if paragraph is bold
-                    if (paragraph.includes("**")) {
-                      const parts = paragraph.split(/(\*\*[^*]+\*\*)/g);
-                      return (
-                        <p key={pIndex} className="text-base sm:text-lg">
-                          {parts.map((part, partIndex) => {
-                            if (part.startsWith("**") && part.endsWith("**")) {
-                              return (
-                                <strong
-                                  key={partIndex}
-                                  className="font-bold text-gray-900"
-                                >
-                                  {part.slice(2, -2)}
-                                </strong>
-                              );
-                            }
-                            return <span key={partIndex}>{part}</span>;
-                          })}
-                        </p>
-                      );
-                    }
                     // Regular paragraph
                     return (
                       <p key={pIndex} className="text-base sm:text-lg">

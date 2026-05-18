@@ -3,25 +3,61 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Article } from "@/lib/articles";
+import { useState } from "react";
 
 interface ArticleCardProps {
   article: Article;
 }
 
 export default function ArticleCard({ article }: ArticleCardProps) {
+  const [imageError, setImageError] = useState(false);
+  const [imageSrc, setImageSrc] = useState(article.featuredImage);
+
   return (
     <Link href={`/articles/${article.slug}`}>
       <article className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-gray-200 group">
         {/* Featured Image */}
-        {article.featuredImage && (
+        {imageSrc && !imageError ? (
           <div className="relative w-full h-48 overflow-hidden bg-gray-100">
             <Image
-              src={article.featuredImage}
+              src={imageSrc}
               alt={article.title}
               fill
               className="object-cover group-hover:scale-105 transition-transform duration-300"
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              onError={() => {
+                setImageError(true);
+                // Try to use a placeholder if original fails
+                setImageSrc(`https://via.placeholder.com/400x200/10b981/ffffff?text=${encodeURIComponent(article.title.substring(0, 30))}`);
+              }}
             />
+          </div>
+        ) : (
+          <div className="relative w-full h-48 overflow-hidden bg-gradient-to-br from-green-100 via-green-50 to-emerald-100 flex items-center justify-center">
+            <div className="text-center px-4">
+              <svg
+                width="48"
+                height="48"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                className="text-green-600 mx-auto mb-2"
+              >
+                <path
+                  d="M12 2C8 2 4 4 4 8C4 12 8 16 12 18C16 16 20 12 20 8C20 4 16 2 12 2Z"
+                  fill="currentColor"
+                  className="opacity-90"
+                />
+                <path
+                  d="M12 18L12 22"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  className="opacity-70"
+                />
+              </svg>
+              <p className="text-xs text-green-700 font-medium">{article.category}</p>
+            </div>
           </div>
         )}
 

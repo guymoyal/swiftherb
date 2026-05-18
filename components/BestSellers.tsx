@@ -48,7 +48,7 @@ const getBestSellers = (): Product[] => {
 
 export default function BestSellers() {
   const [products] = useState<Product[]>(() => getBestSellers());
-  const [visibleCount, setVisibleCount] = useState(6);
+  const [visibleCount, setVisibleCount] = useState(8);
   const productsToShow = products.slice(0, visibleCount);
   const hasMore = visibleCount < products.length;
 
@@ -83,7 +83,7 @@ export default function BestSellers() {
         </div>
 
         {/* Products Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-5 lg:gap-6">
           {productsToShow.map((product, index) => (
             <ProductCard key={product.id} product={product} index={index} />
           ))}
@@ -93,7 +93,7 @@ export default function BestSellers() {
         {hasMore && (
           <div className="text-center mt-10">
             <button
-              onClick={() => setVisibleCount((prev) => Math.min(prev + 6, products.length))}
+              onClick={() => setVisibleCount((prev) => Math.min(prev + 8, products.length))}
               className="px-8 py-3 bg-gradient-to-r from-green-600 to-green-700 text-white font-semibold rounded-lg hover:from-green-700 hover:to-green-800 transition-all duration-200 shadow-md hover:shadow-lg transform hover:scale-105 active:scale-95"
             >
               Show More ({products.length - visibleCount} more available)

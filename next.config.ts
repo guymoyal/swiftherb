@@ -9,6 +9,16 @@ const nextConfig: NextConfig = {
         hostname: "images.iherb.com",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "images.unsplash.com",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "**.unsplash.com",
+        pathname: "/**",
+      },
     ],
     unoptimized: true, // Required for static export
   },
