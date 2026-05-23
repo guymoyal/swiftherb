@@ -13,6 +13,7 @@ export default function Header() {
     { href: "/", label: "Home" },
     { href: "/catalog", label: "Catalog" },
     { href: "/articles", label: "Articles" },
+    { href: "/reviews", label: "Brands" },
     { href: "/compare", label: "Compare" },
     { href: "/how-it-works", label: "How It Works" },
     { href: "/faq", label: "FAQ" },
@@ -30,9 +31,13 @@ export default function Header() {
               key={item.href}
               href={item.href}
               className={`text-sm font-medium transition-colors hover:text-green-600 ${
-                pathname === item.href
-                  ? "text-green-600 border-b-2 border-green-600 pb-1"
-                  : "text-gray-700"
+                item.href === "/reviews"
+                  ? pathname === item.href || pathname.startsWith(`${item.href}/`)
+                    ? "text-green-600 border-b-2 border-green-600 pb-1"
+                    : "text-gray-700"
+                  : pathname === item.href
+                    ? "text-green-600 border-b-2 border-green-600 pb-1"
+                    : "text-gray-700"
               }`}
             >
               {item.label}
@@ -85,9 +90,13 @@ export default function Header() {
                 href={item.href}
                 onClick={() => setMobileMenuOpen(false)}
                 className={`text-sm font-medium py-2 transition-colors ${
-                  pathname === item.href
-                    ? "text-green-600"
-                    : "text-gray-700 hover:text-green-600"
+                  item.href === "/reviews"
+                    ? pathname === item.href || pathname.startsWith(`${item.href}/`)
+                      ? "text-green-600"
+                      : "text-gray-700 hover:text-green-600"
+                    : pathname === item.href
+                      ? "text-green-600"
+                      : "text-gray-700 hover:text-green-600"
                 }`}
               >
                 {item.label}

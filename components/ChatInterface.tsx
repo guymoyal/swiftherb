@@ -240,10 +240,11 @@ export default function ChatInterface() {
           {messages.length === 0 && (
             <div className="text-center mt-16 mb-12 animate-fadeIn">
               <h2 className="text-4xl font-semibold mb-3 text-gray-900">
-                How can our AI pharmacist assist you?
+                What do you need?
               </h2>
               <p className="text-lg text-gray-600 mb-8">
-                Share your health concerns or goals, and we&apos;ll use AI to find the best natural solutions
+                Our AI helper suggests supplements on iHerb from your goals or questions—not medical
+                advice.
               </p>
               {hasPreviousConversation && (
                 <div className="mb-6">
@@ -291,7 +292,7 @@ export default function ChatInterface() {
                         <div className="w-2.5 h-2.5 bg-green-500 rounded-full animate-bounce" style={{ animationDelay: "0.15s" }}></div>
                         <div className="w-2.5 h-2.5 bg-green-500 rounded-full animate-bounce" style={{ animationDelay: "0.3s" }}></div>
                       </div>
-                      <span className="text-sm text-gray-500">SwiftHerb is thinking...</span>
+                      <span className="text-sm text-gray-500">AI helper is thinking…</span>
                     </div>
                   </div>
                 </div>

@@ -1,4 +1,50 @@
 /**
+ * Admitad “tatrck” redirect base (publisher tracking) — wraps the final iHerb URL in `?url=`.
+ * Default matches your Admitad link; override with NEXT_PUBLIC_ADMITAD_TATRCK_BASE.
+ * Set NEXT_PUBLIC_ADMITAD_TATRCK_DISABLED=true to turn off and fall back to API deeplink / Partnerize / plain.
+ */
+export const DEFAULT_ADMITAD_TATRCK_BASE = "https://tatrck.com/h/0Jm30_BU0dp3";
+
+export function isAdmitadTatrckWrappingEnabled(): boolean {
+  if (process.env.NEXT_PUBLIC_ADMITAD_TATRCK_DISABLED === "true") return false;
+  return true;
+}
+
+export function getAdmitadTatrckBase(): string {
+  const raw =
+    process.env.NEXT_PUBLIC_ADMITAD_TATRCK_BASE?.trim() || DEFAULT_ADMITAD_TATRCK_BASE;
+  return raw.replace(/\/+$/, "");
+}
+
+/** True for www.iherb.com, iherb.com, and regional iHerb hosts. */
+export function isLikelyIHerbRetailUrl(url: string): boolean {
+  try {
+    const host = new URL(url).hostname.toLowerCase();
+    return host === "iherb.com" || host.endsWith(".iherb.com");
+  } catch {
+    return false;
+  }
+}
+
+export function isAdmitadTatrckUrl(url: string): boolean {
+  try {
+    const host = new URL(url).hostname.toLowerCase();
+    return host === "tatrck.com" || host.endsWith(".tatrck.com");
+  } catch {
+    return false;
+  }
+}
+
+/**
+ * Wrap a destination iHerb URL in Admitad tatrck (same pattern as
+ * https://tatrck.com/h/0Jm30_BU0dp3?url=https://www.iherb.com/... ).
+ */
+export function wrapDestinationWithAdmitadTatrck(destinationUrl: string): string {
+  const base = getAdmitadTatrckBase();
+  return `${base}?url=${encodeURIComponent(destinationUrl)}`;
+}
+
+/**
  * Generates an Admitad deep link for iHerb products
  * Documentation: https://www.admitad.com/en/developers/doc/api_en/
  * 

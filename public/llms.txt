@@ -1,0 +1,23 @@
+# SwiftHerb — LLM / crawler context
+
+> Human-readable site summary for AI assistants and answer engines. Not a legal policy document.
+
+## What this site is
+SwiftHerb is an informational supplement discovery site focused on products sold on iHerb. It offers an AI chat for suggestions, curated catalog-style pages, articles, and brand overview templates. Content is for education and shopping navigation, not medical diagnosis or treatment.
+
+## Primary URLs
+- Home: https://swiftherb.com/
+- Affiliate disclosure: https://swiftherb.com/affiliate-disclosure/
+- Editorial standards: https://swiftherb.com/editorial-standards/
+- Privacy: https://swiftherb.com/privacy/
+- Sitemap: https://swiftherb.com/sitemap.xml
+- Robots: https://swiftherb.com/robots.txt
+
+## Outbound commerce
+Product and brand CTAs may redirect through an affiliate network (e.g. Admitad) before opening iHerb. See the Affiliate Disclosure page for the current model.
+
+## Contact
+Use the Contact page linked from the site footer when available.
+
+## Crawling
+Public content is intended to be indexable. Disallowed paths are listed in robots.txt (e.g. API-style routes if present).

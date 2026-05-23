@@ -1,5 +1,7 @@
 import ChatInterface from "@/components/ChatInterface";
 import BestSellers from "@/components/BestSellers";
+import TopBrands from "@/components/TopBrands";
+import BrandsOverview from "@/components/BrandsOverview";
 import StructuredData from "@/components/StructuredData";
 import { getFAQSchema } from "@/lib/seo";
 import type { Metadata } from "next";
@@ -107,7 +109,10 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Product cards right below hero */}
+          <TopBrands />
+          <BrandsOverview />
+
+          {/* Product cards */}
           <BestSellers />
 
           <section className="max-w-6xl mx-auto px-4 sm:px-6 w-full py-10 sm:py-12">

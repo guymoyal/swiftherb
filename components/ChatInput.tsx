@@ -45,7 +45,7 @@ export default function ChatInput({ onSend, disabled }: ChatInputProps) {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyPress={handleKeyPress}
-              placeholder="Message SwiftHerb..."
+              placeholder="What do you need? Ask our AI helper…"
               className="w-full resize-none rounded-2xl border border-gray-300 px-5 py-3 pr-14 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent max-h-32 overflow-y-auto bg-white shadow-sm text-gray-900 placeholder-gray-400 scrollbar-hide"
               rows={1}
               disabled={disabled}
@@ -73,7 +73,11 @@ export default function ChatInput({ onSend, disabled }: ChatInputProps) {
           </div>
         </div>
         <p className="text-xs text-gray-500 mt-2 px-1">
-          SwiftHerb can make mistakes. Not medical advice. Commissions may be earned.
+          AI-generated answers can be wrong. Not medical advice. Outbound links may earn a commission—see{" "}
+          <a href="/affiliate-disclosure/" className="text-green-700 hover:underline font-medium">
+            Affiliate Disclosure
+          </a>
+          .
         </p>
         <div className="text-xs text-gray-400 mt-1 px-1">
           Press Enter to send, Shift+Enter for new line

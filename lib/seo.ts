@@ -4,6 +4,7 @@
 
 import { getAllArticles } from "./articles";
 import { getCatalogCategories } from "./catalog";
+import { getAllBrandSlugs } from "./brands";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://swiftherb.com";
 const SITE_NAME = "SwiftHerb";
@@ -177,6 +178,24 @@ export function getSitemapUrls() {
       lastmod: today,
       changefreq: "weekly",
       priority: "0.9",
+    },
+    {
+      loc: `${SITE_URL}/reviews`,
+      lastmod: today,
+      changefreq: "weekly",
+      priority: "0.72",
+    },
+    ...getAllBrandSlugs().map((slug) => ({
+      loc: `${SITE_URL}/reviews/${slug}`,
+      lastmod: today,
+      changefreq: "monthly" as const,
+      priority: "0.65",
+    })),
+    {
+      loc: `${SITE_URL}/llms.txt`,
+      lastmod: today,
+      changefreq: "monthly",
+      priority: "0.35",
     },
     {
       loc: `${SITE_URL}/about`,

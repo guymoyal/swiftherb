@@ -67,7 +67,7 @@
       },
       {
         "heading": "Affiliate Links",
-        "content": "SwiftHerb may participate in affiliate marketing when approved by retailer or network partners. Tracked links would be disclosed on our Affiliate Disclosure page. Until such programs are active, outbound product links may go directly to iHerb without affiliate parameters."
+        "content": "SwiftHerb may use affiliate tracking links (for example through Admitad) that forward you to iHerb. Details and the current link model are on our Affiliate Disclosure page. We may add or change networks when programs become active."
       },
       {
         "heading": "Limitation of Liability",
@@ -159,7 +159,7 @@
       },
       {
         "heading": "How We Earn",
-        "content": "SwiftHerb is free to browse. When we are accepted into an affiliate or partnership program (for example through networks like Partnerize, Impact, CJ, or Awin), we may use tracked links so that purchases you make on iHerb can support our work—at no extra cost to you. Until such a relationship is active and disclosed here, our product buttons may link directly to iHerb without affiliate tracking."
+        "content": "SwiftHerb is free to browse. While we pursue direct iHerb program approval, many outbound product and brand buttons use an Admitad tracking link (tatrck) that forwards to the same iHerb page or search you would open manually—at no extra cost to you. When we add or change networks (for example Partnerize, Impact, CJ, or Awin), we will update this disclosure."
       },
       {
         "heading": "No Extra Cost to You",
@@ -167,7 +167,7 @@
       },
       {
         "heading": "Our Recommendations",
-        "content": "AI and catalog suggestions are informational. We aim for relevance and transparency. If we add affiliate tracking in the future, we will label it clearly and keep this page updated so you always know how links work."
+        "content": "AI and catalog suggestions are informational. We aim for relevance and transparency. Outbound commerce links may use Admitad or other disclosed trackers; we keep this page updated when our setup changes."
       },
       {
         "heading": "Transparency",
@@ -193,7 +193,7 @@
       },
       {
         "heading": "How we monetize (now and later)",
-        "content": "We may apply to affiliate programs so tracked links can support the project. Until a program is active, buttons may link directly to iHerb. This page and our Affiliate Disclosure will stay updated as our status changes."
+        "content": "We may apply to additional affiliate programs so tracked links can support the project. Product and brand CTAs may route through Admitad (tatrck) to iHerb while other programs are pending. This page and our Affiliate Disclosure stay updated as our status changes."
       },
       {
         "heading": "Data sourcing",
@@ -214,7 +214,7 @@
       },
       {
         "heading": "Three Simple Steps",
-        "content": "1. Tell us what you need – Chat with our AI about your health goals, symptoms, or questions (e.g. sleep, energy, stress, immunity).\n\n2. Get your stack – Our AI recommends 5–10 products that work together, not just a single item. This personalized stack approach often leads to better results and higher value.\n\n3. Shop on iHerb – Click through to iHerb to view details, compare, and purchase. When affiliate programs are active we may use tracked links; otherwise we link directly to iHerb. See our Affiliate Disclosure for the current status."
+        "content": "1. Tell us what you need – Chat with our AI about your health goals, symptoms, or questions (e.g. sleep, energy, stress, immunity).\n\n2. Get your stack – Our AI recommends 5–10 products that work together, not just a single item. This personalized stack approach often leads to better results and higher value.\n\n3. Shop on iHerb – Click through from product cards; links may use Admitad tracking (tatrck) that forwards to iHerb so you can view details, compare, and purchase. See our Affiliate Disclosure for the current setup."
       },
       {
         "heading": "Why We Recommend Multiple Products",

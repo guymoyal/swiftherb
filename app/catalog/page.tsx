@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { getCatalogCategories, getCatalogProductCount } from "@/lib/catalog";
+import { generateAffiliateLink } from "@/lib/affiliate";
 
 export const metadata: Metadata = {
   title: "Supplement Catalog by Category | SwiftHerb",
@@ -11,6 +12,10 @@ export const metadata: Metadata = {
 export default function CatalogIndexPage() {
   const categories = getCatalogCategories();
   const count = getCatalogProductCount();
+  const iherbHomeHref = generateAffiliateLink({
+    title: "iHerb",
+    iherb_url: "https://www.iherb.com",
+  });
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
@@ -30,7 +35,7 @@ export default function CatalogIndexPage() {
           <p className="text-lg text-gray-600 max-w-3xl leading-relaxed">
             SwiftHerb lists popular categories to help you discover products sold on{" "}
             <a
-              href="https://www.iherb.com"
+              href={iherbHomeHref}
               className="text-green-700 hover:underline font-medium"
               rel="noopener noreferrer"
             >
@@ -40,13 +45,12 @@ export default function CatalogIndexPage() {
             star ratings always come from iHerb when you click through.
           </p>
           <p className="mt-4 text-sm text-gray-500 max-w-3xl">
-            This section is informational and not medical advice. We may earn commissions when
-            affiliate programs approve our application; until then, links go directly to iHerb
-            with no tracking. See our{" "}
+            This section is informational and not medical advice. Outbound iHerb links may use
+            disclosed affiliate tracking (see our{" "}
             <Link href="/affiliate-disclosure" className="text-green-700 hover:underline">
-              disclosure
-            </Link>{" "}
-            and{" "}
+              Affiliate Disclosure
+            </Link>
+            ). See also our{" "}
             <Link href="/editorial-standards" className="text-green-700 hover:underline">
               editorial standards
             </Link>

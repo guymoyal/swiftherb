@@ -13,11 +13,6 @@ interface ProductCardProps {
   product: Product;
   /** Index for animation delay */
   index?: number;
-  /**
-   * When true, links go straight to iHerb (no affiliate parameters).
-   * Use on editorial catalog pages before affiliate approval.
-   */
-  directRetailerLink?: boolean;
 }
 
 /**
@@ -30,15 +25,11 @@ interface ProductCardProps {
 export default function ProductCard({
   product,
   index = 0,
-  directRetailerLink = false,
 }: ProductCardProps) {
-  const affiliateLink = directRetailerLink
-    ? product.iherb_url ||
-      `https://www.iherb.com/search?kw=${encodeURIComponent(product.title)}`
-    : generateAffiliateLink({
-        title: product.title,
-        iherb_url: product.iherb_url,
-      });
+  const affiliateLink = generateAffiliateLink({
+    title: product.title,
+    iherb_url: product.iherb_url,
+  });
   const [imageError, setImageError] = useState(false);
 
   return (

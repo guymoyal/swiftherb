@@ -69,7 +69,6 @@ export default async function CatalogCategoryPage({ params }: Props) {
                 key={`${product.slug}-${product.id}`}
                 product={product}
                 index={index}
-                directRetailerLink
               />
             ))}
           </div>
