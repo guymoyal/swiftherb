@@ -1,0 +1,9 @@
+# SwiftHerb (agents and assistants)
+
+This file is for automated crawlers that look for ai.txt.
+
+Site summary for language models: https://swiftherb.com/llms.txt
+Sitemap: https://swiftherb.com/sitemap.xml
+Affiliate and link policy: https://swiftherb.com/affiliate-disclosure/
+
+Public pages are indexable unless robots.txt says otherwise.

@@ -3,9 +3,9 @@ import { getAllBrands, getBrandMonogram } from "@/lib/brands";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Brand reviews (template) | SwiftHerb",
+  title: "Supplement brand notes | SwiftHerb",
   description:
-    "Editorial brand overview templates for supplement lines on iHerb. Not medical advice—placeholder pages for future reviews.",
+    "Working drafts for brands sold on iHerb. Each page lists what we would want a reader to check before buying. Not medical advice.",
 };
 
 export default function ReviewsIndexPage() {
@@ -14,11 +14,11 @@ export default function ReviewsIndexPage() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-emerald-50/40 via-white to-gray-50">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 py-10 sm:py-14">
-        <p className="text-xs font-semibold uppercase tracking-wide text-green-700 mb-2">Templates</p>
-        <h1 className="text-3xl sm:text-4xl font-bold text-gray-900">Brand reviews</h1>
+        <p className="text-xs font-semibold uppercase tracking-wide text-green-700 mb-2">In progress</p>
+        <h1 className="text-3xl sm:text-4xl font-bold text-gray-900">Brand notes</h1>
         <p className="mt-3 text-gray-600 max-w-2xl leading-relaxed">
-          Stub pages for every brand in the directory. Replace template copy with your editorial reviews
-          and disclosure rules before promoting.
+          These pages are shells with honest disclaimers. Fill them in when you have something useful to say,
+          then link them from articles or social posts.
         </p>
 
         <ul className="mt-10 grid gap-3 sm:grid-cols-2 list-none p-0">

@@ -11,11 +11,19 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://swiftherb.com";
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "SwiftHerb - AI Pharmacist Assistant",
+    default: "SwiftHerb",
     template: "%s | SwiftHerb",
   },
-  description: "AI-powered supplement recommendation platform. Get personalized natural health product recommendations from our AI pharmacist assistant.",
-  keywords: ["supplements", "vitamins", "natural health", "AI pharmacist", "iHerb", "health products", "wellness"],
+  description:
+    "SwiftHerb helps you browse supplements on iHerb: a simple catalog, short articles, and a chat assistant. Not medical advice. Read labels on iHerb before you buy.",
+  keywords: [
+    "supplements",
+    "vitamins",
+    "iHerb",
+    "supplement guide",
+    "wellness",
+    "natural health",
+  ],
   authors: [{ name: "SwiftHerb" }],
   creator: "SwiftHerb",
   publisher: "SwiftHerb",
@@ -29,8 +37,9 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: SITE_URL,
     siteName: "SwiftHerb",
-    title: "SwiftHerb - AI Pharmacist Assistant",
-    description: "AI-powered supplement recommendation platform. Get personalized natural health product recommendations.",
+    title: "SwiftHerb",
+    description:
+      "Browse supplements on iHerb with a little help from our catalog and chat. We are not doctors; always double-check the listing before you order.",
     images: [
       {
         url: `${SITE_URL}/images/swiftherb-logo.png`,
@@ -42,8 +51,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "SwiftHerb - AI Pharmacist Assistant",
-    description: "AI-powered supplement recommendation platform.",
+    title: "SwiftHerb",
+    description: "Supplement discovery for iHerb: catalog, articles, and a chat assistant.",
     images: [`${SITE_URL}/images/swiftherb-logo.png`],
   },
   robots: {
@@ -77,6 +86,7 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <meta name="verify-admitad" content="53694d76ea" />
+        <link rel="alternate" type="text/plain" href="/llms.txt" title="SwiftHerb llms.txt" />
       </head>
       <body className="flex flex-col min-h-screen">
         <StructuredData data={[getOrganizationSchema(), getWebSiteSchema()]} />

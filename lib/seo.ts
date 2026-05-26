@@ -8,7 +8,8 @@ import { getAllBrandSlugs } from "./brands";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://swiftherb.com";
 const SITE_NAME = "SwiftHerb";
-const SITE_DESCRIPTION = "AI-powered supplement recommendation platform. Get personalized natural health product recommendations from our AI pharmacist assistant.";
+const SITE_DESCRIPTION =
+  "SwiftHerb is a small site that helps you narrow supplement choices on iHerb. You get short catalog pages, optional brand writeups, and a chat assistant. We are not medical professionals; always read the real product page before you buy.";
 
 /**
  * Organization structured data
@@ -21,9 +22,24 @@ export function getOrganizationSchema() {
     url: SITE_URL,
     logo: `${SITE_URL}/images/swiftherb-logo.png`,
     description: SITE_DESCRIPTION,
-    sameAs: [
-      // Add social media links when available
+    knowsAbout: [
+      "Dietary supplements",
+      "Vitamins",
+      "Minerals",
+      "Herbal supplements",
+      "Online health retail",
     ],
+    areaServed: {
+      "@type": "Place",
+      name: "Worldwide where iHerb delivers",
+    },
+    contactPoint: {
+      "@type": "ContactPoint",
+      contactType: "customer support",
+      url: `${SITE_URL}/contact/`,
+      availableLanguage: ["English"],
+    },
+    sameAs: [] as string[],
   };
 }
 
@@ -37,14 +53,15 @@ export function getWebSiteSchema() {
     name: SITE_NAME,
     url: SITE_URL,
     description: SITE_DESCRIPTION,
-    potentialAction: {
-      "@type": "SearchAction",
-      target: {
-        "@type": "EntryPoint",
-        urlTemplate: `${SITE_URL}/?q={search_term_string}`,
+    publisher: {
+      "@type": "Organization",
+      name: SITE_NAME,
+      logo: {
+        "@type": "ImageObject",
+        url: `${SITE_URL}/images/swiftherb-logo.png`,
       },
-      "query-input": "required name=search_term_string",
     },
+    inLanguage: "en-US",
   };
 }
 
@@ -180,6 +197,42 @@ export function getSitemapUrls() {
       priority: "0.9",
     },
     {
+      loc: `${SITE_URL}/catalog`,
+      lastmod: today,
+      changefreq: "weekly",
+      priority: "0.85",
+    },
+    {
+      loc: `${SITE_URL}/compare`,
+      lastmod: today,
+      changefreq: "monthly",
+      priority: "0.55",
+    },
+    {
+      loc: `${SITE_URL}/contact`,
+      lastmod: today,
+      changefreq: "yearly",
+      priority: "0.45",
+    },
+    {
+      loc: `${SITE_URL}/faq`,
+      lastmod: today,
+      changefreq: "monthly",
+      priority: "0.7",
+    },
+    {
+      loc: `${SITE_URL}/how-it-works`,
+      lastmod: today,
+      changefreq: "monthly",
+      priority: "0.72",
+    },
+    {
+      loc: `${SITE_URL}/affiliate-disclosure`,
+      lastmod: today,
+      changefreq: "yearly",
+      priority: "0.5",
+    },
+    {
       loc: `${SITE_URL}/reviews`,
       lastmod: today,
       changefreq: "weekly",
@@ -196,6 +249,12 @@ export function getSitemapUrls() {
       lastmod: today,
       changefreq: "monthly",
       priority: "0.35",
+    },
+    {
+      loc: `${SITE_URL}/ai.txt`,
+      lastmod: today,
+      changefreq: "monthly",
+      priority: "0.3",
     },
     {
       loc: `${SITE_URL}/about`,

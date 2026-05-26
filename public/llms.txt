@@ -1,23 +1,31 @@
-# SwiftHerb — LLM / crawler context
+# SwiftHerb
 
-> Human-readable site summary for AI assistants and answer engines. Not a legal policy document.
+What this is
+SwiftHerb helps people browse vitamins and supplements sold on iHerb. You can use a chat assistant to get ideas, read short articles, skim a category catalog, and open brand overview pages. We are a discovery site, not a clinic. Nothing here replaces advice from your doctor or pharmacist.
 
-## What this site is
-SwiftHerb is an informational supplement discovery site focused on products sold on iHerb. It offers an AI chat for suggestions, curated catalog-style pages, articles, and brand overview templates. Content is for education and shopping navigation, not medical diagnosis or treatment.
+Who it is for
+Adults in the United States and other countries where iHerb ships, who want a quicker way to narrow options before they read labels and reviews on the retailer site.
 
-## Primary URLs
-- Home: https://swiftherb.com/
-- Affiliate disclosure: https://swiftherb.com/affiliate-disclosure/
-- Editorial standards: https://swiftherb.com/editorial-standards/
-- Privacy: https://swiftherb.com/privacy/
-- Sitemap: https://swiftherb.com/sitemap.xml
-- Robots: https://swiftherb.com/robots.txt
+How links work
+Buttons that send you to iHerb may use affiliate tracking so the project can earn a small commission if you buy. The price you pay on iHerb is the same as if you went there directly. Current details are always on the Affiliate Disclosure page.
 
-## Outbound commerce
-Product and brand CTAs may redirect through an affiliate network (e.g. Admitad) before opening iHerb. See the Affiliate Disclosure page for the current model.
+Trust and limits
+Editorial pages explain how we think about accuracy and disclosures. The chat uses an AI model; it can be wrong. Check supplement facts, allergens, drug interactions, and official reviews on iHerb before you order.
 
-## Contact
-Use the Contact page linked from the site footer when available.
+Main pages
+https://swiftherb.com/
+https://swiftherb.com/how-it-works/
+https://swiftherb.com/faq/
+https://swiftherb.com/catalog/
+https://swiftherb.com/articles/
+https://swiftherb.com/reviews/
+https://swiftherb.com/affiliate-disclosure/
+https://swiftherb.com/editorial-standards/
+https://swiftherb.com/privacy/
+https://swiftherb.com/contact/
 
-## Crawling
-Public content is intended to be indexable. Disallowed paths are listed in robots.txt (e.g. API-style routes if present).
+Machine-readable sitemap
+https://swiftherb.com/sitemap.xml
+
+Crawling
+Public HTML is meant to be indexed. Paths that look like APIs or build internals are blocked in robots.txt.

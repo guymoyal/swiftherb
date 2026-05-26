@@ -8,17 +8,16 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "SwiftHerb - AI Pharmacist Assistant for Natural Health Products",
+  title: "SwiftHerb | Supplements on iHerb, without the guesswork",
   description:
-    "Get personalized supplement recommendations from our AI pharmacist assistant. Find the best vitamins, minerals, and natural health products from iHerb.",
+    "Use our catalog, articles, and chat to narrow vitamins and supplements on iHerb. Plain language, no white coats, and no paywall. Always confirm details on iHerb before you buy.",
   keywords: [
-    "AI pharmacist",
-    "supplement recommendations",
-    "natural health",
-    "vitamins",
     "supplements",
+    "vitamins",
     "iHerb",
-    "health products",
+    "supplement guide",
+    "wellness",
+    "natural health",
   ],
 };
 
@@ -26,27 +25,27 @@ const faqs = [
   {
     question: "What is SwiftHerb?",
     answer:
-      "SwiftHerb is an AI-powered pharmacist assistant that helps you find the best natural health products and supplements. Our AI analyzes your needs and recommends personalized products from iHerb.",
+      "SwiftHerb is a side project built around one retailer: iHerb. We group products into categories, publish short articles, and run a chat that suggests ideas when you tell us what you are trying to fix (sleep, stress, energy, and so on). Think of it as a map, not a prescription.",
   },
   {
-    question: "How does SwiftHerb recommend products?",
+    question: "How do you pick products?",
     answer:
-      "SwiftHerb uses advanced AI to understand your health goals, symptoms, or questions. Based on your input, our AI pharmacist suggests relevant supplements, vitamins, and natural health products.",
+      "The chat reads what you wrote and pulls from the same product list we use on the site. Nothing is magic: it is pattern matching plus common supplement pairings. You still need to read ingredients, dose, and reviews on iHerb.",
   },
   {
-    question: "Are the recommendations medical advice?",
+    question: "Is this medical advice?",
     answer:
-      "No. SwiftHerb provides informational recommendations only and is not a substitute for professional medical advice, diagnosis, or treatment. Always consult with a healthcare provider before starting any supplement regimen.",
+      "No. We are not your doctor, nurse, or pharmacist. If you are pregnant, on medication, or managing a condition, talk to a clinician before you change supplements.",
   },
   {
-    question: "Where do the products come from?",
+    question: "Where do the links go?",
     answer:
-      "SwiftHerb highlights products sold on iHerb, a large natural-health retailer. Our catalog and AI suggestions link you to iHerb for official images, supplement facts, and customer reviews. We may use affiliate tracking only when we are accepted into a program and disclose it on our Affiliate Disclosure page; otherwise links go directly to iHerb.",
+      "Most buttons send you to iHerb. Some links pass through an affiliate tracker first so the site can earn a small commission if you buy. That does not change the price you pay on iHerb. Read the Affiliate Disclosure page for the current setup.",
   },
   {
-    question: "Is SwiftHerb free to use?",
+    question: "Does it cost anything?",
     answer:
-      "Yes, SwiftHerb is completely free to use. You can chat with our AI pharmacist assistant and get product recommendations at no cost.",
+      "Browsing and chatting are free. You pay iHerb if you decide to order something.",
   },
 ];
 
@@ -56,7 +55,7 @@ export default function Home() {
       <StructuredData data={getFAQSchema(faqs)} />
       <div className="flex flex-col min-h-screen bg-gradient-to-b from-emerald-50/90 via-white to-gray-50/90">
         <main className="flex flex-col flex-1">
-          <h1 className="sr-only">SwiftHerb - AI Pharmacist Assistant for Natural Health Products</h1>
+          <h1 className="sr-only">SwiftHerb: supplement discovery for iHerb</h1>
 
           {/* Hero */}
           <div className="relative overflow-hidden border-b border-emerald-100/80 bg-gradient-to-br from-emerald-600 via-green-600 to-teal-700 text-white">
@@ -70,19 +69,19 @@ export default function Home() {
               <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
                 <div className="max-w-2xl">
                   <p className="text-emerald-100 text-sm font-semibold tracking-wide uppercase mb-2">
-                    Natural health · Smarter discovery
+                    Supplements on iHerb
                   </p>
                   <h2 className="text-3xl sm:text-4xl font-bold tracking-tight leading-tight mb-3">
-                    Your AI guide to supplements on iHerb
+                    Less tab hopping, more &apos;oh, that might work&apos;
                   </h2>
                   <p className="text-emerald-50/95 text-base sm:text-lg leading-relaxed">
-                    Ask in plain language, get thoughtful suggestions, then open real iHerb listings with
-                    photos, reviews, and labels—not medical advice, just a faster path to what might fit
-                    your goals.
+                    Tell the assistant what you are dealing with in normal words. It throws out a short
+                    list you can open on iHerb where the photos, supplement facts, and one-star reviews
+                    already live. We are not here to diagnose anything, only to save you a little time.
                   </p>
                 </div>
                 <div className="flex flex-wrap gap-2 lg:justify-end">
-                  {["Editorial catalog", "Direct iHerb links", "Privacy-first chat"].map((label) => (
+                  {["Category pages", "Links to iHerb", "Chat stays in your browser"].map((label) => (
                     <span
                       key={label}
                       className="inline-flex items-center rounded-full bg-white/15 px-3 py-1.5 text-xs sm:text-sm font-medium text-white ring-1 ring-white/25 backdrop-blur-sm"
@@ -119,17 +118,17 @@ export default function Home() {
             <div className="rounded-2xl border border-emerald-100 bg-gradient-to-br from-white to-emerald-50/50 p-6 sm:p-8 shadow-sm ring-1 ring-gray-100">
               <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
                 <div className="space-y-2 max-w-xl">
-                  <h2 className="text-xl sm:text-2xl font-bold text-gray-900">Shop by category on iHerb</h2>
+                  <h2 className="text-xl sm:text-2xl font-bold text-gray-900">Browse by category</h2>
                   <p className="text-gray-600 text-sm sm:text-base leading-relaxed">
-                    Curated category pages with product cards—each links to iHerb so you always see current
-                    pack shots, price, and verified customer reviews.
+                    Each tile opens a page of cards. Click through to iHerb when you want the full label,
+                    price, and verified buyer comments.
                   </p>
                 </div>
                 <Link
                   href="/catalog"
                   className="inline-flex justify-center items-center px-6 py-3 rounded-xl bg-green-600 text-white font-semibold text-sm sm:text-base hover:bg-green-700 transition-colors shadow-md hover:shadow-lg shrink-0"
                 >
-                  Open catalog →
+                  Open catalog
                 </Link>
               </div>
             </div>
@@ -142,14 +141,14 @@ export default function Home() {
           >
             <div className="max-w-6xl mx-auto px-4 sm:px-6 w-full pt-8 sm:pt-10 pb-4">
               <p className="text-xs font-semibold uppercase tracking-wide text-green-700 mb-1">
-                AI assistant
+                Chat assistant
               </p>
               <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">
-                Ask for personalized picks
+                Stuck? Start with one sentence.
               </h2>
               <p className="text-gray-600 mt-1 text-sm sm:text-base max-w-2xl">
-                Describe your goals or concerns—we&apos;ll suggest supplements that may fit. Not medical
-                advice; always confirm with a clinician.
+                Example: &apos;I travel a lot and sleep badly.&apos; We will toss back a few products to inspect on
+                iHerb. If something feels off, stop and ask a professional.
               </p>
             </div>
             <div className="flex-1 flex flex-col min-h-0">

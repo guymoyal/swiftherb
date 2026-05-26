@@ -75,11 +75,11 @@ export default function BestSellers() {
         {/* Header */}
         <div className="text-center mb-10">
           <p className="text-sm font-semibold uppercase tracking-wide text-green-700 mb-2">
-            Popular on SwiftHerb
+            Staff picks
           </p>
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-3">Featured products</h2>
+          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-3">Products people keep opening</h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
-            Real pack shots from iHerb—tap through for full details, ingredients, and reviews.
+            Photos come straight from iHerb. Tap a card, read the real listing, then decide if it belongs in your cabinet.
           </p>
         </div>
 

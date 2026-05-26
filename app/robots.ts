@@ -17,6 +17,16 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ["/api/", "/_next/", "/admin/", "/api.disabled/"],
       },
       {
+        userAgent: "Googlebot",
+        allow: "/",
+        disallow: ["/api/", "/_next/", "/admin/", "/api.disabled/"],
+      },
+      {
+        userAgent: "Googlebot-Image",
+        allow: "/",
+        disallow: ["/api/", "/_next/", "/admin/", "/api.disabled/"],
+      },
+      {
         userAgent: "GPTBot",
         allow: "/",
         disallow: ["/api/", "/_next/", "/admin/", "/api.disabled/"],

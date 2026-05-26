@@ -2,7 +2,7 @@ import Link from "next/link";
 import { getAllBrands, getBrandMonogram } from "@/lib/brands";
 
 /**
- * Full brand grid with “Full review” links — template overview under Top 3.
+ * Full brand grid with Full review links under the top three picks.
  */
 export default function BrandsOverview() {
   const brands = getAllBrands();
@@ -15,10 +15,10 @@ export default function BrandsOverview() {
             <p className="text-xs font-semibold uppercase tracking-wide text-green-700 mb-1">
               Brand directory
             </p>
-            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">All brands (template)</h2>
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">More brands on the way</h2>
             <p className="mt-2 text-gray-600 text-sm sm:text-base max-w-2xl">
-              Overview tiles link to stub review pages. Swap in logos, scores, and criteria when your
-              editorial workflow is ready.
+              Each tile jumps to a draft review page. When you are ready, swap initials for real logos and
+              add the story you want Google to index.
             </p>
           </div>
         </div>

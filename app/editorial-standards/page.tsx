@@ -5,7 +5,7 @@ import PageContentRenderer from "@/components/PageContent";
 export const metadata: Metadata = {
   title: "Editorial Standards | SwiftHerb",
   description:
-    "How SwiftHerb presents supplement information, outbound links to iHealth retailers, and our approach to transparency.",
+    "How SwiftHerb presents supplement information, outbound links to iHerb, and our approach to transparency.",
 };
 
 export default function EditorialStandardsPage() {

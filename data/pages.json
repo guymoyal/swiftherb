@@ -96,27 +96,27 @@
     "sections": [
       {
         "heading": "Welcome to SwiftHerb",
-        "content": "SwiftHerb is an AI-powered supplement recommendation platform designed to help you discover natural health products that align with your wellness goals. We combine advanced artificial intelligence with comprehensive product knowledge to provide personalized supplement recommendations."
+        "content": "SwiftHerb started as a simple idea: shopping for supplements online should take fewer open tabs. We wire together category pages, a handful of articles, and a chat that reacts to what you type. Nothing replaces reading the label on iHerb; we just try to get you there faster."
       },
       {
         "heading": "Our Mission",
-        "content": "Our mission is to make natural health and wellness accessible to everyone. We believe that finding the right supplements shouldn't be complicated or overwhelming. Through intelligent AI assistance, we help you navigate the world of natural health products with confidence."
+        "content": "We want regular people to feel less lost in the vitamin aisle, even when that aisle is digital. If the site saves you twenty minutes of guessing, it did its job."
       },
       {
         "heading": "How It Works",
-        "content": "Simply chat with our AI assistant about your health concerns, wellness goals, or questions about supplements. Our AI analyzes your needs and recommends a personalized wellness stack of 5-10 products from iHerb that work synergistically to support your health journey."
+        "content": "Open the chat, write a sentence about what you want (better sleep, calmer mornings, more steady energy, whatever is true for you). You will get a short stack of products to compare on iHerb. Skim our catalog pages the same way: they are starting points, not shopping carts."
       },
       {
         "heading": "What Makes Us Different",
-        "content": "• AI-Powered: Advanced AI technology provides personalized recommendations\n• Evidence-Based: Recommendations based on scientific understanding of supplements\n• Comprehensive: We suggest complete wellness stacks, not just single products\n• Transparent: Clear affiliate disclosure and honest recommendations\n• Free: No cost to use our recommendation service"
+        "content": "We keep the tone plain, we link straight to the retailer for the real facts, and we say when a link might earn us a commission. The assistant can be wrong; treat it like a well-meaning friend who reads too many labels, not an expert in your medical chart."
       },
       {
         "heading": "Our Commitment",
-        "content": "We are committed to:\n\n• Providing accurate, helpful information\n• Maintaining transparency about our affiliate relationships\n• Prioritizing your health and safety\n• Continuously improving our AI recommendations\n• Respecting your privacy (your data stays local)"
+        "content": "We are honest about limits, we update disclosures when our affiliate setup changes, and we do not make you create an account to poke around. Chat history stays in your browser unless you choose otherwise."
       },
       {
         "heading": "Important Note",
-        "content": "SwiftHerb is not a medical service. We provide educational information and product recommendations, but always consult with a healthcare provider before starting any supplement regimen, especially if you have medical conditions or are taking medications."
+        "content": "If you need real medical guidance, call a licensed professional. SwiftHerb is for adults who can judge risk on their own and who still read the fine print on a bottle."
       },
       {
         "heading": "Editorial catalog",
@@ -133,11 +133,11 @@
     "sections": [
       {
         "heading": "Get in Touch",
-        "content": "We'd love to hear from you. Whether you have a question about SwiftHerb, feedback about our AI recommendations, or want to partner with us, reach out and we'll get back to you as soon as we can."
+        "content": "Questions about the site, a bug, or a partnership idea? Send a note through the contact options in the footer. We read everything, even if we cannot always reply the same day."
       },
       {
         "heading": "How to Reach Us",
-        "content": "• General inquiries: Use the contact form or email below.\n• Support: For technical issues or questions about using SwiftHerb.\n• Partnerships: If you're an advertiser or brand interested in working with us.\n\nWe aim to respond within 1–2 business days."
+        "content": "General questions, broken links, or ideas for a new category page: use the same contact path. For press or brand deals, mention that in the subject line so it lands in the right pile. We try to answer within one or two business days."
       },
       {
         "heading": "Email",
@@ -159,7 +159,7 @@
       },
       {
         "heading": "How We Earn",
-        "content": "SwiftHerb is free to browse. While we pursue direct iHerb program approval, many outbound product and brand buttons use an Admitad tracking link (tatrck) that forwards to the same iHerb page or search you would open manually—at no extra cost to you. When we add or change networks (for example Partnerize, Impact, CJ, or Awin), we will update this disclosure."
+        "content": "SwiftHerb is free to browse. Many outbound product and brand buttons pass through an Admitad tracking link (tatrck) that forwards to the same iHerb page or search you would open by hand, at no extra cost to you. If we add another network later, we will spell it out here."
       },
       {
         "heading": "No Extra Cost to You",

@@ -13,12 +13,12 @@ export default function TopBrands() {
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-2xl mx-auto mb-8">
           <p className="text-xs font-semibold uppercase tracking-wide text-green-700 mb-2">
-            Editor overview
+            Brand notes
           </p>
-          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">Top 3 brands we&apos;re templating</h2>
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">Three lines we are writing up first</h2>
           <p className="mt-2 text-gray-600 text-sm sm:text-base leading-relaxed">
-            Placeholder layout for future full reviews. Each card links to a dedicated brand page with
-            overview copy and an iHerb CTA.
+            Short blurbs link out to iHerb the same way product cards do. Full reviews will roll in over time;
+            for now this is a layout you can grow into.
           </p>
         </div>
 
