@@ -59,7 +59,16 @@ export default function Footer() {
               <a href="https://twitter.com/swiftherb" target="_blank" rel="noopener noreferrer" className="hover:text-green-600 transition-colors" aria-label="Twitter">Twitter</a>
               <a href="https://github.com/swiftherb" target="_blank" rel="noopener noreferrer" className="hover:text-green-600 transition-colors" aria-label="GitHub">GitHub</a>
             </div>
-            <p className="text-xs text-gray-500">Not medical advice. Affiliate status is explained on our Disclosure page.</p>
+            <p className="text-xs text-gray-500">
+              Not medical advice.{" "}
+              <a href="/affiliate-disclosure/" className="text-green-700 hover:underline">
+                Affiliate disclosure
+              </a>
+              . Contact:{" "}
+              <a href="mailto:guysites1@gmail.com" className="text-green-700 hover:underline">
+                guysites1@gmail.com
+              </a>
+            </p>
           </div>
         </div>
       </div>

@@ -5,7 +5,7 @@ import PageContentRenderer from "@/components/PageContent";
 export const metadata: Metadata = {
   title: "Affiliate Disclosure",
   description:
-    "How SwiftHerb may earn from outbound links, when affiliate tracking is active, and how we use direct links to iHerb today.",
+    "How SwiftHerb earns from iHerb affiliate links, interim Admitad tracking, planned Impact integration for the AI Advisor, and optional Buy Me a Coffee tips.",
 };
 
 export default function AffiliateDisclosurePage() {

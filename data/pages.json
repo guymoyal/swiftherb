@@ -1,11 +1,11 @@
 {
   "privacy": {
     "title": "Privacy Policy",
-    "lastUpdated": "December 2024",
+    "lastUpdated": "May 2026",
     "sections": [
       {
         "heading": "Introduction",
-        "content": "Welcome to SwiftHerb. We respect your privacy and are committed to protecting your personal data. This privacy policy explains how we collect, use, and safeguard your information when you use our AI-powered supplement recommendation service."
+        "content": "Welcome to SwiftHerb. This policy explains what we collect when you use our supplement discovery site and AI Advisor, and what happens when you leave SwiftHerb to shop on iHerb or other sites."
       },
       {
         "heading": "Information We Collect",
@@ -21,11 +21,11 @@
       },
       {
         "heading": "Third-Party Services",
-        "content": "We use third-party services that may collect information:\n\n• iHerb: When you click product links, you leave SwiftHerb and land on iHerb. Please review iHerb's privacy policy for their practices.\n• AI: We may use providers such as DeepSeek for chat features. Queries may be sent to their API per their policy.\n\nWe aim to minimize server-side storage of personal conversation content."
+        "content": "We rely on outside services that have their own privacy rules:\n\n• iHerb: When you click a product link, you leave SwiftHerb. iHerb and any affiliate tracking partner in the link path may collect data under their own policies.\n• Affiliate networks: Outbound links may pass through a tracking redirect (for example Admitad or, once approved, Impact) before you reach iHerb.\n• AI providers: Chat messages may be sent to an AI API (such as DeepSeek) to generate replies. Read that provider's policy for retention and use.\n\nWe do not sell your chat text. We aim to keep server-side storage of conversations minimal."
       },
       {
         "heading": "Cookies and Tracking",
-        "content": "We use minimal tracking:\n\n• Local storage for chat history (your browser)\n• Click tracking stored locally (not sent to external servers)\n• No third-party cookies or advertising trackers\n\nYou can disable cookies in your browser settings, but this may affect functionality."
+        "content": "On SwiftHerb itself we mostly use browser local storage for chat history and local click notes. We do not run ad retargeting pixels on our pages.\n\nWhen you click an affiliate product link, third parties in the redirect chain (affiliate network and iHerb) may set their own cookies or similar identifiers. Those are governed by their policies, not ours.\n\nYou can clear local storage in your browser or use private browsing if you prefer."
       },
       {
         "heading": "Your Rights",
@@ -41,7 +41,7 @@
       },
       {
         "heading": "Contact Us",
-        "content": "If you have questions about this privacy policy, please contact us through our website."
+        "content": "Questions about privacy: email guysites1@gmail.com or use the Contact page."
       }
     ]
   },
@@ -95,8 +95,12 @@
     "title": "About Us",
     "sections": [
       {
+        "heading": "Who runs this site",
+        "content": "SwiftHerb is published by Guy Moyal (United States). You can reach us at guysites1@gmail.com or through the Contact page. We are an independent publisher, not owned by iHerb or any supplement brand."
+      },
+      {
         "heading": "Welcome to SwiftHerb",
-        "content": "SwiftHerb started as a simple idea: shopping for supplements online should take fewer open tabs. We wire together category pages, a handful of articles, and a chat that reacts to what you type. Nothing replaces reading the label on iHerb; we just try to get you there faster."
+        "content": "SwiftHerb started as a simple idea: shopping for supplements online should take fewer open tabs. We wire together category pages, a handful of articles, and an AI Advisor that reacts to what you type. Nothing replaces reading the label on iHerb; we just try to get you there faster."
       },
       {
         "heading": "Our Mission",
@@ -141,7 +145,7 @@
       },
       {
         "heading": "Email",
-        "content": "You can reach us using the contact options shown on our Contact page and in the site footer."
+        "content": "Email: guysites1@gmail.com (Guy Moyal, SwiftHerb). We read every message; replies usually go out within one or two business days."
       },
       {
         "heading": "Before You Contact",
@@ -159,7 +163,7 @@
       },
       {
         "heading": "How We Earn",
-        "content": "SwiftHerb is free to browse. Many outbound product and brand buttons pass through an Admitad tracking link (tatrck) that forwards to the same iHerb page or search you would open by hand, at no extra cost to you. If we add another network later, we will spell it out here."
+        "content": "SwiftHerb is free to browse. When you click a product link and buy on iHerb, we may earn an affiliate commission at no extra cost to you.\n\nToday some links use interim tracking through Admitad while we complete onboarding with Impact (our target platform for official API access to power the AI Advisor). When our Impact partnership is live, iHerb links on this site will use Impact tracking and this page will be updated.\n\nOptional tips via Buy Me a Coffee are separate from product commissions and do not change iHerb prices."
       },
       {
         "heading": "No Extra Cost to You",
@@ -167,7 +171,7 @@
       },
       {
         "heading": "Our Recommendations",
-        "content": "AI and catalog suggestions are informational. We aim for relevance and transparency. Outbound commerce links may use Admitad or other disclosed trackers; we keep this page updated when our setup changes."
+        "content": "AI Advisor and catalog suggestions are informational, not medical advice. We aim for helpful matches, not the highest commission. Commission rates do not decide which products the assistant shows."
       },
       {
         "heading": "Transparency",
