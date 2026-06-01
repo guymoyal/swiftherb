@@ -21,7 +21,7 @@
       },
       {
         "heading": "Third-Party Services",
-        "content": "We rely on outside services that have their own privacy rules:\n\n• iHerb: When you click a product link, you leave SwiftHerb. iHerb and any affiliate tracking partner in the link path may collect data under their own policies.\n• Affiliate networks: Outbound links may pass through a tracking redirect (for example Admitad or, once approved, Impact) before you reach iHerb.\n• AI providers: Chat messages may be sent to an AI API (such as DeepSeek) to generate replies. Read that provider's policy for retention and use.\n\nWe do not sell your chat text. We aim to keep server-side storage of conversations minimal."
+        "content": "We rely on outside services that have their own privacy rules:\n\n• iHerb: When you click a product link, you leave SwiftHerb. iHerb (and, once our Impact.com partnership is active, that network's tracking) may collect data under their own policies.\n• AI providers: Chat messages may be sent to an AI API (such as DeepSeek) to generate replies. Read that provider's policy for retention and use.\n\nWe do not sell your chat text. We aim to keep server-side storage of conversations minimal."
       },
       {
         "heading": "Cookies and Tracking",
@@ -67,7 +67,7 @@
       },
       {
         "heading": "Affiliate Links",
-        "content": "SwiftHerb may use affiliate tracking links (for example through Admitad) that forward you to iHerb. Details and the current link model are on our Affiliate Disclosure page. We may add or change networks when programs become active."
+        "content": "SwiftHerb may earn a commission when you buy on iHerb after clicking our links. We are onboarding with Impact.com for iHerb; details are on our Affiliate Disclosure page."
       },
       {
         "heading": "Limitation of Liability",
@@ -163,7 +163,7 @@
       },
       {
         "heading": "How We Earn",
-        "content": "SwiftHerb is free to browse. When you click a product link and buy on iHerb, we may earn an affiliate commission at no extra cost to you.\n\nToday some links use interim tracking through Admitad while we complete onboarding with Impact (our target platform for official API access to power the AI Advisor). When our Impact partnership is live, iHerb links on this site will use Impact tracking and this page will be updated.\n\nOptional tips via Buy Me a Coffee are separate from product commissions and do not change iHerb prices."
+        "content": "SwiftHerb is free to browse. When you click a product link and buy on iHerb, we may earn an affiliate commission at no extra cost to you.\n\nWe are applying to the iHerb program on Impact.com. Until tracking is live, product links go directly to iHerb. After approval, links will use Impact tracking and this page will be updated."
       },
       {
         "heading": "No Extra Cost to You",
@@ -197,7 +197,7 @@
       },
       {
         "heading": "How we monetize (now and later)",
-        "content": "We may apply to additional affiliate programs so tracked links can support the project. Product and brand CTAs may route through Admitad (tatrck) to iHerb while other programs are pending. This page and our Affiliate Disclosure stay updated as our status changes."
+        "content": "Our affiliate relationship is with iHerb via Impact.com. Product and brand buttons link to iHerb (direct URLs today; Impact-tracked URLs after program approval). This page is updated when our status changes."
       },
       {
         "heading": "Data sourcing",
@@ -218,7 +218,7 @@
       },
       {
         "heading": "Three Simple Steps",
-        "content": "1. Tell us what you need – Chat with our AI about your health goals, symptoms, or questions (e.g. sleep, energy, stress, immunity).\n\n2. Get your stack – Our AI recommends 5–10 products that work together, not just a single item. This personalized stack approach often leads to better results and higher value.\n\n3. Shop on iHerb – Click through from product cards; links may use Admitad tracking (tatrck) that forwards to iHerb so you can view details, compare, and purchase. See our Affiliate Disclosure for the current setup."
+        "content": "1. Tell us what you need – Chat with our AI about your health goals, symptoms, or questions (e.g. sleep, energy, stress, immunity).\n\n2. Get your stack – Our AI recommends 5–10 products that work together, not just a single item. This personalized stack approach often leads to better results and higher value.\n\n3. Shop on iHerb – Click through from product cards to open the listing on iHerb, compare options, and purchase. See our Affiliate Disclosure for how links work."
       },
       {
         "heading": "Why We Recommend Multiple Products",

@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import BuyMeACoffee from "@/components/BuyMeACoffee";
 import StructuredData from "@/components/StructuredData";
 import { getOrganizationSchema, getWebSiteSchema } from "@/lib/seo";
 
@@ -66,12 +65,6 @@ export const metadata: Metadata = {
       "max-snippet": -1,
     },
   },
-  verification: {
-    // Add Google Search Console verification when available
-    other: {
-      "verify-admitad": "53694d76ea",
-    },
-  },
   alternates: {
     canonical: SITE_URL,
   },
@@ -85,7 +78,6 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <meta name="verify-admitad" content="53694d76ea" />
         <link rel="alternate" type="text/plain" href="/llms.txt" title="SwiftHerb llms.txt" />
       </head>
       <body className="flex flex-col min-h-screen">
@@ -93,7 +85,6 @@ export default function RootLayout({
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />
-        <BuyMeACoffee />
       </body>
     </html>
   );

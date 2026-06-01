@@ -8,7 +8,7 @@ A low-latency AI pharmacist assistant that converts chat queries into high-value
 - **Backend Infrastructure:** Cloudflare Workers (Edge Computing)
 - **Data Persistence:** Cloudflare Workers KV (Key-Value Store)
 - **AI Model:** DeepSeek-V3 (via OpenRouter)
-- **Affiliate Integration:** Admitad (Deep Linking via `api.admitad.com/deeplink`)
+- **Affiliate Integration:** Impact.com (iHerb program; direct iHerb links until tracking is live)
 
 ## Getting Started
 
@@ -24,8 +24,7 @@ cp .env.example .env
 
 3. Fill in your environment variables in `.env`:
    - `DEEPSEEK_API_KEY`: Your DeepSeek API key
-   - `ADMITAD_CLIENT_ID` and `ADMITAD_CLIENT_SECRET`: Your Admitad API credentials
-   - `NEXT_PUBLIC_ADMITAD_W_ID` and `NEXT_PUBLIC_ADMITAD_C_ID`: Your Admitad affiliate IDs (when available)
+   - `IMPACT_ACCOUNT_SID` and `IMPACT_AUTH_TOKEN`: Impact.com API (server-side / scripts only)
    - `NEXT_PUBLIC_SITE_URL`: Your site URL (for development: `http://localhost:3000`)
 
 4. Run the development server:

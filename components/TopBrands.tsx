@@ -59,7 +59,7 @@ export default function TopBrands() {
                     iherb_url: brand.ctaHref,
                   })}
                   target="_blank"
-                  rel="noopener noreferrer"
+                  rel="sponsored noopener noreferrer"
                   className="inline-flex items-center justify-center rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm font-semibold text-gray-800 hover:bg-gray-50 transition-colors"
                 >
                   Shop iHerb

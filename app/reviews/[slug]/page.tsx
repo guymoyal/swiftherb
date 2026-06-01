@@ -119,7 +119,7 @@ export default async function BrandReviewPage({ params }: Props) {
             <a
               href={brandShopHref}
               target="_blank"
-              rel="noopener noreferrer"
+              rel="sponsored noopener noreferrer"
               className="mt-5 inline-flex items-center justify-center rounded-xl bg-green-600 px-6 py-3 text-base font-semibold text-white hover:bg-green-700 transition-colors shadow-md"
             >
               {brand.ctaLabel}

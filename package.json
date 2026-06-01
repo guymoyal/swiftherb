@@ -19,6 +19,7 @@
     "unsplash:batch": "tsx scripts/unsplash-cli.ts batch",
     "catalog:build-mock": "tsx scripts/build-catalog-from-mock.ts",
     "catalog:sync-apify": "tsx scripts/sync-catalog-apify.ts",
+    "catalog:probe-impact": "tsx scripts/probe-impact-catalog.ts",
     "cf:www-redirect": "tsx scripts/ensure-www-redirect-rule.ts"
   },
   "dependencies": {
