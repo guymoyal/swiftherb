@@ -30,7 +30,12 @@ export interface Product {
 const STORAGE_KEY = "swiftherb_chat_history";
 const LAST_CONVERSATION_KEY = "swiftherb_last_conversation";
 
-export default function ChatInterface() {
+type ChatInterfaceProps = {
+  /** Tighter layout for homepage (less empty-state copy). */
+  compact?: boolean;
+};
+
+export default function ChatInterface({ compact = false }: ChatInterfaceProps) {
   const [messages, setMessages] = useState<Message[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [comparisonProducts, setComparisonProducts] = useState<Product[] | undefined>(undefined);
@@ -232,20 +237,31 @@ export default function ChatInterface() {
   return (
     <div className="flex flex-col h-full min-h-0">
       {/* Centered container like Gemini */}
-      <div 
+      <div
         ref={chatContainerRef}
         className="flex-1 overflow-y-auto scroll-smooth min-h-0"
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div
+          className={`max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 ${compact ? "py-4" : "py-8"}`}
+        >
           {messages.length === 0 && (
-            <div className="text-center mt-16 mb-12 animate-fadeIn">
-              <h2 className="text-4xl font-semibold mb-3 text-gray-900">
-                What do you need?
-              </h2>
-              <p className="text-lg text-gray-600 mb-8">
-                Our AI helper suggests supplements on iHerb from your goals or questions—not medical
-                advice.
-              </p>
+            <div
+              className={`text-center animate-fadeIn ${compact ? "mt-2 mb-6" : "mt-16 mb-12"}`}
+            >
+              {!compact && (
+                <>
+                  <h2 className="text-4xl font-semibold mb-3 text-gray-900">What do you need?</h2>
+                  <p className="text-lg text-gray-600 mb-8">
+                    Our AI helper suggests supplements on iHerb from your goals or questions—not
+                    medical advice.
+                  </p>
+                </>
+              )}
+              {compact && (
+                <p className="text-sm text-gray-600 mb-4">
+                  Try a quick prompt below, or type your own question.
+                </p>
+              )}
               {hasPreviousConversation && (
                 <div className="mb-6">
                   <button

@@ -46,9 +46,13 @@ const getBestSellers = (): Product[] => {
     .filter((p): p is Product => p !== null);
 };
 
-export default function BestSellers() {
+type BestSellersProps = {
+  compact?: boolean;
+};
+
+export default function BestSellers({ compact = false }: BestSellersProps) {
   const [products] = useState<Product[]>(() => getBestSellers());
-  const [visibleCount, setVisibleCount] = useState(8);
+  const [visibleCount, setVisibleCount] = useState(compact ? 4 : 8);
   const productsToShow = products.slice(0, visibleCount);
   const hasMore = visibleCount < products.length;
 
@@ -70,17 +74,21 @@ export default function BestSellers() {
   }
 
   return (
-    <section className="py-12 bg-gradient-to-b from-white to-gray-50 border-t border-gray-200">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
-        <div className="text-center mb-10">
-          <p className="text-sm font-semibold uppercase tracking-wide text-green-700 mb-2">
-            Staff picks
-          </p>
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-3">Products people keep opening</h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
-            Photos come straight from iHerb. Tap a card, read the real listing, then decide if it belongs in your cabinet.
-          </p>
+    <section
+      className={`bg-white border-t border-gray-200 ${compact ? "py-8 sm:py-10" : "py-12 bg-gradient-to-b from-white to-gray-50"}`}
+    >
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className={compact ? "mb-6" : "text-center mb-10"}>
+          <h2
+            className={`font-bold text-gray-900 ${compact ? "text-xl sm:text-2xl" : "text-3xl sm:text-4xl mb-3"}`}
+          >
+            Products people keep opening
+          </h2>
+          {!compact && (
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
+              Photos come straight from iHerb. Tap a card, read the real listing, then decide.
+            </p>
+          )}
         </div>
 
         {/* Products Grid */}
@@ -102,12 +110,13 @@ export default function BestSellers() {
           </div>
         )}
 
-        {/* Footer Text */}
-        <div className="text-center mt-8">
-          <p className="text-sm text-gray-500">
-            Chat with our AI assistant to find more personalized recommendations
-          </p>
-        </div>
+        {!compact && (
+          <div className="text-center mt-8">
+            <p className="text-sm text-gray-500">
+              Chat with our AI assistant to find more personalized recommendations
+            </p>
+          </div>
+        )}
       </div>
     </section>
   );

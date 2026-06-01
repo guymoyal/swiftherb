@@ -9,17 +9,11 @@ export default function TopBrands() {
   const top = getTopThreeBrands();
 
   return (
-    <section className="border-b border-emerald-100/80 bg-white py-10 sm:py-12">
+    <section className="border-b border-gray-200 bg-gray-50/50 py-8 sm:py-10">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-2xl mx-auto mb-8">
-          <p className="text-xs font-semibold uppercase tracking-wide text-green-700 mb-2">
-            Brand notes
-          </p>
-          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">Three lines we are writing up first</h2>
-          <p className="mt-2 text-gray-600 text-sm sm:text-base leading-relaxed">
-            Short blurbs link out to iHerb the same way product cards do. Full reviews will roll in over time;
-            for now this is a layout you can grow into.
-          </p>
+        <div className="mb-6">
+          <h2 className="text-xl sm:text-2xl font-bold text-gray-900">Top brands</h2>
+          <p className="mt-1 text-sm text-gray-600">Quick notes — full reviews on each brand page.</p>
         </div>
 
         <div className="grid gap-5 md:grid-cols-3">
