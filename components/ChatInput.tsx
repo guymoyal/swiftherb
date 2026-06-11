@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, KeyboardEvent, useRef, useEffect } from "react";
+import Link from "next/link";
 
 interface ChatInputProps {
   onSend: (message: string) => void;
@@ -74,9 +75,9 @@ export default function ChatInput({ onSend, disabled }: ChatInputProps) {
         </div>
         <p className="text-xs text-gray-500 mt-2 px-1">
           AI-generated answers can be wrong. Not medical advice. Outbound links may earn a commission—see{" "}
-          <a href="/affiliate-disclosure/" className="text-green-700 hover:underline font-medium">
+          <Link href="/affiliate-disclosure/" className="text-green-700 hover:underline font-medium">
             Affiliate Disclosure
-          </a>
+          </Link>
           .
         </p>
         <div className="text-xs text-gray-400 mt-1 px-1">

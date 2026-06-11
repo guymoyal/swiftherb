@@ -5,6 +5,7 @@
 import { getAllArticles } from "./articles";
 import { getCatalogCategories } from "./catalog";
 import { getAllBrandSlugs } from "./brands";
+import { getPartnerLandings } from "./partnerLandings";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://swiftherb.com";
 const SITE_NAME = "SwiftHerb";
@@ -293,6 +294,24 @@ export function getSitemapUrls() {
       priority: "0.8",
     })),
   ];
+
+  const partnerLandings = getPartnerLandings();
+  if (partnerLandings.length > 0) {
+    urls.push({
+      loc: `${SITE_URL}/partners`,
+      lastmod: today,
+      changefreq: "weekly",
+      priority: "0.7",
+    });
+    urls.push(
+      ...partnerLandings.map((l) => ({
+        loc: `${SITE_URL}/${l.slug}`,
+        lastmod: today,
+        changefreq: "weekly",
+        priority: "0.7",
+      }))
+    );
+  }
   
   return urls;
 }

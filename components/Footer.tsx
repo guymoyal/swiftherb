@@ -61,9 +61,9 @@ export default function Footer() {
             </div>
             <p className="text-xs text-gray-500">
               Not medical advice.{" "}
-              <a href="/affiliate-disclosure/" className="text-green-700 hover:underline">
+              <Link href="/affiliate-disclosure/" className="text-green-700 hover:underline">
                 Affiliate disclosure
-              </a>
+              </Link>
               . Contact:{" "}
               <a href="mailto:guysites1@gmail.com" className="text-green-700 hover:underline">
                 guysites1@gmail.com
