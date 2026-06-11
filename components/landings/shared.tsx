@@ -1,6 +1,10 @@
 import Link from "next/link";
 import type { PartnerLanding } from "@/lib/partnerLandings";
 import { pickHeroImage, type HeroImage } from "@/lib/landingTemplates";
+import { SmartCtaButton } from "./SmartCtaButton";
+
+/** Experimental: slugs that use the client-side ad-blocker popup fallback CTA. */
+const SMART_CTA_SLUGS = new Set<string>(["sephora-sg"]);
 
 /** Pre-computed view model shared by every landing template. */
 export interface LandingView {
@@ -21,6 +25,7 @@ export interface LandingView {
   hero: HeroImage;
   officialDomain: string | null;
   categories: string[];
+  smartCta: boolean;
 }
 
 export function buildLandingView(landing: PartnerLanding): LandingView {
@@ -51,6 +56,7 @@ export function buildLandingView(landing: PartnerLanding): LandingView {
     hero: pickHeroImage(landing.slug, program.name, categories),
     officialDomain,
     categories,
+    smartCta: SMART_CTA_SLUGS.has(landing.slug),
   };
 }
 
@@ -59,27 +65,38 @@ export function CtaButton({
   label,
   variant = "solid",
   size = "lg",
+  smart = false,
 }: {
   href: string;
   label: string;
   variant?: "solid" | "inverse";
   size?: "lg" | "md";
+  /** Use the client-side popup-block fallback (experimental, opt-in per page). */
+  smart?: boolean;
 }) {
-  const palette =
-    variant === "inverse"
-      ? "bg-white text-green-700 hover:bg-green-50"
-      : "bg-green-600 text-white hover:bg-green-700";
-  const sizing = size === "lg" ? "px-8 py-4 text-lg" : "px-6 py-3 text-base";
+  const className = ctaClassName(variant, size);
+  if (smart) {
+    return <SmartCtaButton href={href} label={label} className={className} />;
+  }
   return (
     <a
       href={href}
       target="_blank"
       rel="sponsored nofollow noopener noreferrer"
-      className={`inline-block rounded-xl font-semibold shadow-md transition-colors ${palette} ${sizing}`}
+      className={className}
     >
       {label}
     </a>
   );
+}
+
+export function ctaClassName(variant: "solid" | "inverse", size: "lg" | "md"): string {
+  const palette =
+    variant === "inverse"
+      ? "bg-white text-green-700 hover:bg-green-50"
+      : "bg-green-600 text-white hover:bg-green-700";
+  const sizing = size === "lg" ? "px-8 py-4 text-lg" : "px-6 py-3 text-base";
+  return `inline-block rounded-xl font-semibold shadow-md transition-colors ${palette} ${sizing}`;
 }
 
 export function Disclosure() {
