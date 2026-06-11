@@ -6,6 +6,8 @@ import { pickHeroImage, type HeroImage } from "@/lib/landingTemplates";
 export interface LandingView {
   name: string;
   gotolink: string;
+  /** First-party redirect (/go/<slug>/) — ad blockers can't pattern-match the tracker domain. */
+  goHref: string;
   logo: string | null;
   kicker: string;
   headline: string;
@@ -35,6 +37,7 @@ export function buildLandingView(landing: PartnerLanding): LandingView {
   return {
     name: program.name,
     gotolink,
+    goHref: `/go/${landing.slug}/`,
     logo: program.image,
     kicker: categories[0] ?? "Partner offer",
     headline: content?.headline ?? program.name,

@@ -27,7 +27,7 @@ export function LandingClassic({ view }: { view: LandingView }) {
           {view.headline}
         </h1>
         <p className="mx-auto mb-8 max-w-2xl text-xl text-gray-600">{view.subheadline}</p>
-        <CtaButton href={view.gotolink} label={view.ctaLabel} />
+        <CtaButton href={view.goHref} label={view.ctaLabel} />
         <img
           src={unsplashUrl(view.hero.id, 1200)}
           srcSet={heroSrcSet(view.hero.id)}
@@ -79,7 +79,7 @@ export function LandingClassic({ view }: { view: LandingView }) {
         <p className="mx-auto mb-6 max-w-xl text-green-50">
           Browse the official range and current offers — it only takes a minute.
         </p>
-        <CtaButton href={view.gotolink} label={view.ctaLabel} variant="inverse" />
+        <CtaButton href={view.goHref} label={view.ctaLabel} variant="inverse" />
       </section>
 
       {/* How it works */}
@@ -103,7 +103,7 @@ export function LandingClassic({ view }: { view: LandingView }) {
 
       {/* Final CTA + disclosure */}
       <section className="mt-16 text-center">
-        <CtaButton href={view.gotolink} label={view.ctaLabel} />
+        <CtaButton href={view.goHref} label={view.ctaLabel} />
         <Disclosure />
       </section>
     </article>

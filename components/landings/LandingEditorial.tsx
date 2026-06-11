@@ -57,7 +57,7 @@ export function LandingEditorial({ view }: { view: LandingView }) {
 
       {/* Mid CTA */}
       <section className="my-12 text-center">
-        <CtaButton href={view.gotolink} label={view.ctaLabel} />
+        <CtaButton href={view.goHref} label={view.ctaLabel} />
         <p className="mt-3 text-sm text-gray-400">Opens the official {view.name} site.</p>
       </section>
 
@@ -104,7 +104,7 @@ export function LandingEditorial({ view }: { view: LandingView }) {
       <section className="mt-14 rounded-3xl border border-gray-200 bg-white p-8 text-center shadow-sm">
         <h2 className="mb-2 text-2xl font-bold text-gray-900">Take the next step</h2>
         <p className="mb-6 text-gray-600">{view.subheadline}</p>
-        <CtaButton href={view.gotolink} label={view.ctaLabel} />
+        <CtaButton href={view.goHref} label={view.ctaLabel} />
         <Disclosure />
       </section>
     </article>

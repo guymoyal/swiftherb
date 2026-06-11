@@ -28,7 +28,7 @@ export function LandingSplit({ view }: { view: LandingView }) {
             {view.headline}
           </h1>
           <p className="mb-7 text-xl text-gray-600">{view.subheadline}</p>
-          <CtaButton href={view.gotolink} label={view.ctaLabel} />
+          <CtaButton href={view.goHref} label={view.ctaLabel} />
           <p className="mt-3 text-sm text-gray-400">Opens the official {view.name} site.</p>
         </div>
         <img
@@ -91,7 +91,7 @@ export function LandingSplit({ view }: { view: LandingView }) {
         <p className="mb-6 text-gray-600">
           The full {view.name} range, prices, and current offers live on the official site.
         </p>
-        <CtaButton href={view.gotolink} label={view.ctaLabel} size="md" />
+        <CtaButton href={view.goHref} label={view.ctaLabel} size="md" />
       </section>
 
       {/* Steps */}
@@ -116,7 +116,7 @@ export function LandingSplit({ view }: { view: LandingView }) {
       {/* Final CTA band + disclosure */}
       <section className="mt-16 rounded-3xl bg-green-600 px-6 py-12 text-center">
         <h2 className="mb-6 text-2xl font-bold text-white sm:text-3xl">{view.headline}</h2>
-        <CtaButton href={view.gotolink} label={view.ctaLabel} variant="inverse" />
+        <CtaButton href={view.goHref} label={view.ctaLabel} variant="inverse" />
       </section>
       <div className="text-center">
         <Disclosure />

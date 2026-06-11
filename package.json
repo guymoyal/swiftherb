@@ -26,7 +26,8 @@
     "partners:harvest": "node scripts/harvestPartnerPrograms.js",
     "partners:manual": "node scripts/mergePartnerPrograms.js",
     "partners:copy": "node scripts/generateLandingCopy.js",
-    "partners:sync": "pnpm partners:manual && pnpm partners:copy"
+    "partners:redirects": "node scripts/generatePartnerRedirects.js",
+    "partners:sync": "pnpm partners:manual && pnpm partners:copy && pnpm partners:redirects"
   },
   "dependencies": {
     "next": "^15.0.0",
