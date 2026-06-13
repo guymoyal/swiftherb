@@ -3,9 +3,6 @@ import type { PartnerLanding } from "@/lib/partnerLandings";
 import { pickHeroImage, type HeroImage } from "@/lib/landingTemplates";
 import { SmartCtaButton } from "./SmartCtaButton";
 
-/** Experimental: slugs that use the client-side ad-blocker popup fallback CTA. */
-const SMART_CTA_SLUGS = new Set<string>(["sephora-sg"]);
-
 /** Pre-computed view model shared by every landing template. */
 export interface LandingView {
   name: string;
@@ -56,7 +53,8 @@ export function buildLandingView(landing: PartnerLanding): LandingView {
     hero: pickHeroImage(landing.slug, program.name, categories),
     officialDomain,
     categories,
-    smartCta: SMART_CTA_SLUGS.has(landing.slug),
+    // Every affiliate CTA uses the ad-blocker-resistant click handler.
+    smartCta: true,
   };
 }
 

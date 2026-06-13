@@ -61,3 +61,31 @@ export function getPartnerLandings(): PartnerLanding[] {
 export function getPartnerLandingBySlug(slug: string): PartnerLanding | undefined {
   return getPartnerLandings().find((e) => e.slug === slug);
 }
+
+/**
+ * Hand-picked supplement / nutrition / herbal / collagen brands — the partner
+ * programs closest to what people shop for on iHerb. Used to feature cards on
+ * the homepage. Order here is the display order; missing slugs are skipped.
+ */
+export const FEATURED_PARTNER_SLUGS: string[] = [
+  "xena-nutrition-us",
+  "cured-nutrition-us",
+  "novomins-uk",
+  "kapiva-cps-in-2",
+  "herb-and-root-us",
+  "garden-of-wellness-my",
+  "relief-factor-us",
+  "kinohimitsu-sg-cps",
+  "pai-wellness-cps-my",
+  "vitaminler-cpssatis-tr",
+  "usvidaglowcom",
+  "polskie-centrum-kolagenu",
+];
+
+export function getFeaturedPartnerLandings(
+  slugs: string[] = FEATURED_PARTNER_SLUGS,
+): PartnerLanding[] {
+  const all = getPartnerLandings();
+  const bySlug = new Map(all.map((l) => [l.slug, l] as const));
+  return slugs.map((s) => bySlug.get(s)).filter((l): l is PartnerLanding => Boolean(l));
+}

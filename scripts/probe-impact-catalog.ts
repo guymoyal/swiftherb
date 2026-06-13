@@ -4,14 +4,15 @@
  * Usage:
  *   pnpm exec tsx scripts/probe-impact-catalog.ts
  *   pnpm exec tsx scripts/probe-impact-catalog.ts --query "Category ~ 'Vitamins'"
+ *   pnpm catalog:probe-impact -- --limit=20 --out=data/catalog/impact-sample.json
  *
  * Env (from .env):
  *   IMPACT_ACCOUNT_SID
  *   IMPACT_AUTH_TOKEN
  */
 
-import { existsSync, readFileSync } from "fs";
-import { resolve } from "path";
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from "fs";
+import { dirname, resolve } from "path";
 
 const API_BASE = "https://api.impact.com";
 
@@ -112,9 +113,16 @@ function pickItemSummary(item: CatalogItem) {
   };
 }
 
+function argValue(flag: string): string | undefined {
+  const hit = process.argv.find((a) => a.startsWith(`${flag}=`));
+  return hit?.slice(flag.length + 1);
+}
+
 async function main() {
   const queryArg = process.argv.find((a) => a.startsWith("--query="));
   const customQuery = queryArg?.slice("--query=".length);
+  const pageSize = argValue("--limit") ?? "5";
+  const outPath = argValue("--out");
 
   console.log("Listing catalogs…\n");
   const catalogsRes = await impactGet<{ Catalogs?: CatalogRow[] }>(
@@ -189,7 +197,7 @@ async function main() {
         "@numpages"?: string;
       }>(`/Mediapartners/${sid}/Catalogs/ItemSearch`, {
         Query,
-        PageSize: "5",
+        PageSize: pageSize,
         Page: "1",
       });
 
@@ -199,6 +207,21 @@ async function main() {
 
       const summaries = items.map(pickItemSummary);
       console.log(JSON.stringify(summaries, null, 2));
+
+      if (outPath) {
+        const abs = resolve(process.cwd(), outPath);
+        mkdirSync(dirname(abs), { recursive: true });
+        writeFileSync(
+          abs,
+          JSON.stringify(
+            { fetchedAt: new Date().toISOString(), query: Query, items: summaries },
+            null,
+            2,
+          ),
+          "utf8",
+        );
+        console.log(`\nWrote ${summaries.length} item(s) to ${outPath}`);
+      }
       break;
     } catch (e) {
       console.error(String(e));

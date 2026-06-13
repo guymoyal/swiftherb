@@ -1,12 +1,13 @@
 "use client";
 
 /**
- * Experimental ad-blocker-resistant CTA.
+ * Ad-blocker-resistant affiliate CTA. See docs/adblocker-solution.md.
  *
  * Renders a normal affiliate anchor (crawlers and no-JS users get the plain
  * link). On click it tries to open the offer in a new tab; if a blocker using
  * a `$popup`-style rule kills that tab (window.open returns null, or the tab is
- * closed within ~700ms), it falls back to navigating the current tab instead.
+ * closed within 1s), it falls back to navigating the current tab instead — so
+ * the visitor still reaches the offer instead of nothing happening.
  *
  * Limitation: if the blocker blocks the tracker domain as a general network
  * request (not just popups), the same-tab navigation is blocked too — nothing
@@ -41,7 +42,8 @@ export function SmartCtaButton({
       return;
     }
 
-    // Some blockers open then immediately close the tab. Detect and recover.
+    // Some blockers open then immediately close the tab. Detect and recover:
+    // after 1s, if the opened window is closed, navigate the same tab instead.
     window.setTimeout(() => {
       let closed = false;
       try {
@@ -50,7 +52,7 @@ export function SmartCtaButton({
         closed = false; // cross-origin but alive — leave it open
       }
       if (closed) window.location.href = href;
-    }, 700);
+    }, 1000);
   }
 
   return (
